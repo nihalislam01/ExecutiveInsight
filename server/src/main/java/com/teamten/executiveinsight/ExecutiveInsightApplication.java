@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ExecutiveInsightApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(ExecutiveInsightApplication.class, args);
+		System.out.println("Nihal");
 	}
 
 }
