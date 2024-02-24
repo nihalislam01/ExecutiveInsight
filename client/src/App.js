@@ -1,12 +1,10 @@
 import './App.css';
-// import LoginComponent from './Components/LoginComponent';
-import LoginSignupComponent from './Components/LoginSingupComponent'
-// import HelloWorldComponent from './Components/HelloWorld'
+import ExecutiveInsightApp from './Components/ExecutiveInsightApp';
 
 function App() {
   return (
     <div className="App">
-      <LoginSignupComponent />
+      <ExecutiveInsightApp />
     </div>
   );
 }

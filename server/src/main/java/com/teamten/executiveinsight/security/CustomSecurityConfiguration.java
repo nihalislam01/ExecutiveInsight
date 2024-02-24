@@ -19,7 +19,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -39,14 +38,17 @@ import java.util.UUID;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+@RequiredArgsConstructor
 public class CustomSecurityConfiguration {
+
+    private final CustomUserDetailsService customUserDetailsService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, HandlerMappingIntrospector introspect) throws Exception {
 
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/home").hasAuthority("USER")
+                        .requestMatchers("/signup","/verify-email/**","/forgot-password","/reset-password").permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/authenticate")).permitAll()
                         .requestMatchers(PathRequest.toH2Console()).permitAll()
                         .anyRequest()
@@ -67,10 +69,10 @@ public class CustomSecurityConfiguration {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(
-            UserDetailsService userDetailsService) {
+    public AuthenticationManager authenticationManager() {
         var authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService);
+        authenticationProvider.setUserDetailsService(customUserDetailsService);
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
         return new ProviderManager(authenticationProvider);
     }
 

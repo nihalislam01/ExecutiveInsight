@@ -1,5 +1,6 @@
 package com.teamten.executiveinsight.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -12,13 +13,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class JwtTokenService {
 
     private final JwtEncoder jwtEncoder;
-
-    public JwtTokenService(JwtEncoder jwtEncoder) {
-        this.jwtEncoder = jwtEncoder;
-    }
 
     public String generateToken(Authentication authentication) {
 

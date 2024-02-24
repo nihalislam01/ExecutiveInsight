@@ -1,3 +1,5 @@
 package com.teamten.executiveinsight.security;
 
-public record JwtTokenResponse(String token) {}
+import com.teamten.executiveinsight.model.Users;
+
+public record JwtTokenResponse(String token, Users user) {}

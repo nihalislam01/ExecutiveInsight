@@ -1,6 +1,6 @@
 package com.teamten.executiveinsight.security;
 
-import com.teamten.executiveinsight.users.Manager;
+import com.teamten.executiveinsight.model.Users;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,11 +19,11 @@ public class CustomUserDetails implements UserDetails {
     private boolean isEnabled;
     private List<GrantedAuthority> authorities;
 
-    public CustomUserDetails(Manager manager) {
-        this.username = manager.getEmail();
-        this.password = manager.getPassword();
-        this.isEnabled = manager.isEnable();
-        this.authorities = Arrays.stream(manager.getRole()
+    public CustomUserDetails(Users users) {
+        this.username = users.getEmail();
+        this.password = users.getPassword();
+        this.isEnabled = users.isEnable();
+        this.authorities = Arrays.stream(users.getRole()
                 .split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());

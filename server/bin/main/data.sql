@@ -1,0 +1,1 @@
+insert into manager(id, email, name, password, role, is_enable) values(1, 'nihalislam2@gmail.com', 'Nihal Islam', '$2a$10$T16zWLV3ZfFKiwMw8y/9POiRhIXPCOhtujhCegTeXkg2rBGyM5H9O', 'USER', true);
