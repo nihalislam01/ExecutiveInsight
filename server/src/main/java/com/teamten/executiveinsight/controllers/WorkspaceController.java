@@ -19,10 +19,12 @@ import java.util.Optional;
 public class WorkspaceController {
     private final UserService userService;
     private final WorkspaceService workspaceService;
+    //Retrieve Workspaces I joined
     @GetMapping("/get-workspaces")
     public List<Workspace> retrieveWorkspaces(@RequestBody EmailRequest emailRequest) {
         return userService.retrieveWorkspaces(emailRequest.email());
     }
+    //Create My Workspace
     @PostMapping("/create-workspace")
     public ResponseEntity<?> createWorkspace(@RequestBody WorkspaceRequest workspaceRequest) {
         try {
@@ -31,5 +33,20 @@ public class WorkspaceController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+    //Join a new workspace
+    @PatchMapping("/join-workspace/{code}/{email}")
+    public ResponseEntity<?> joinWorkspace(@PathVariable String code, @PathVariable String email) {
+        Optional<Workspace> workspace = workspaceService.findByCode(code);
+        Optional<Users> user = userService.retrieveByEmail(email);
+        if (workspace.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Workspace with code does not exists");
+        } else if (user.get().getWorkspace()!=null) {
+            if (user.get().getWorkspace().getCode().equalsIgnoreCase(code)) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("You cannot join your own workspace");
+            }
+        }
+        workspaceService.joinWorkspace(user.get(), workspace.get());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

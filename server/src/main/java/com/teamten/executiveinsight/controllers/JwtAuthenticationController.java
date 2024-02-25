@@ -23,6 +23,7 @@ public class JwtAuthenticationController {
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
 
+    //Authentication using JwtToken
     @PostMapping("/authenticate")
     public ResponseEntity<JwtTokenResponse> generateToken(
             @RequestBody JwtTokenRequest jwtTokenRequest) {

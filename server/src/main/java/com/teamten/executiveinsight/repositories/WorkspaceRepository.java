@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface WorkspaceRepository extends JpaRepository<Workspace, Long> {
 
+    public Optional<Workspace> findByCode(String uniqueId);
 }

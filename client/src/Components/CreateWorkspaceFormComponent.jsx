@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createWorkspaceApi } from './api/ExecutiveInsightApiService';
@@ -7,7 +8,7 @@ export default function CreateWorkspaceFormComponent() {
 
     const [workspaceName, setWorkspaceName] = useState('');
     const authContext = useAuth();
-    const username = authContext.username;
+    const username = authContext.username();
     const navigate = useNavigate();
 
     function handleSubmit() {
@@ -21,7 +22,7 @@ export default function CreateWorkspaceFormComponent() {
     }
 
     function handleResponse(response) {
-        authContext.updateHasWorkspace();
+        Cookies.set('hasWorkspace', true, {expires: 1});
         var newMessage = "You have successfully created your own workspace";
         navigate("/message", { state: { newMessage } });
     }

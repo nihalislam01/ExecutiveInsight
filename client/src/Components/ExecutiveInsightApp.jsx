@@ -12,11 +12,12 @@ import CreateWorkspaceFormComponent from './CreateWorkspaceFormComponent';
 import EmailVerifiedComponent from './EmailVerifiedComponent';
 import ForgotPasswordComponent from './ForgotPasswordComponent';
 import ResetPasswordComponent from './ResetPasswordComponent'
+import CodeFormComponent from './CodeFormComponent';
 import AuthProvider, { useAuth } from './security/AuthContext';
 
 function AuthenticatedRoute({children}) {
     const authContext = useAuth();
-    if (authContext.isAuthenticated)
+    if (authContext.isAuthenticated())
         return children
     return <Navigate to="/" />
 }
@@ -55,12 +56,13 @@ export default function ExecutiveInsightApp() {
                             </AuthenticatedRoute>
                         } />
 
-                        <Route path='/logout' element={
+                        <Route path='/workspace-code' element={
                             <AuthenticatedRoute>
-                                <LogoutComponent />
+                                <CodeFormComponent />
                             </AuthenticatedRoute>
                         } />
 
+                        <Route path='/logout' element={<LogoutComponent />} />
                         <Route path='*' element={<ErrorComponent />} />
                     </Routes>
                 </BrowserRouter>

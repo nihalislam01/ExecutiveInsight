@@ -1,7 +1,7 @@
 import { Formik, Form, Field } from 'formik';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { forgotPasswordApi, retrieveUserApi } from './api/ExecutiveInsightApiService';
+import { forgotPasswordApi } from './api/ExecutiveInsightApiService';
 
 export default function ForgotPasswordComponent() {
 

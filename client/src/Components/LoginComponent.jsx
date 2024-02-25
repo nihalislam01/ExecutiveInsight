@@ -4,8 +4,8 @@ import { useAuth } from './security/AuthContext';
 
 export default function LoginComponent() {
 
-    const [username, setUsername] = useState('nihalislam2@gmail.com');
-    const [password, setPassword] = useState('dummy');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const [alertColor, setAlertColor] = useState('');
     const [alertMessage, setAlertMessage] = useState(false);
@@ -22,7 +22,7 @@ export default function LoginComponent() {
 
     async function handleSubmit() {
         if(await authContext.login(username, password)) {
-            navigate("/home")
+            window.location.href = '/home';
         }else{
             setAlertMessage(true);
             setAlertColor('alert alert-danger');

@@ -7,7 +7,7 @@ export default function HomeComponent() {
 
     // const [workspaces, setWorkspaces] = useState([]);
     const authContext = useAuth();
-    const username = authContext.username;
+    const username = authContext.username();
     // const navigate = useNavigate();
 
     // useEffect(() => refreshWorkspace(), [])

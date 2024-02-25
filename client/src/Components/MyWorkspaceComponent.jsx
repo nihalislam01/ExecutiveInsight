@@ -6,23 +6,21 @@ import { useAuth } from "./security/AuthContext";
 
 export default function MyWorkspaceComponent() {
 
-    const [workspace, setWorkspace] = useState({})
+    const [workspace, setWorkspace] = useState({});
     const authContext = useAuth();
+    const hasWorkspace = authContext.hasWorkspace();
+    const username = authContext.username();
     const navigate = useNavigate();
-    const hasWorkspace = authContext.hasWorkspace;
-    const username = authContext.username;
 
     useEffect(() => refreshPage(), [])
 
     function refreshPage() {
-        retrieveUserApi(username)
-            .then((response) => 
-            {
-                if (hasWorkspace) {
-                    setWorkspace(response.data.workspace)
-                }
-            })
-            .catch((error) => navigate('/error'))
+        authContext.refresh()
+        if (hasWorkspace) {
+            retrieveUserApi(username)
+                .then((response) => setWorkspace(response.data.workspace))
+                .catch((error) => console.log(error))
+        }
     }
 
     function goToCreateWorkspace() {
@@ -34,6 +32,7 @@ export default function MyWorkspaceComponent() {
             {!hasWorkspace && <h1>Start your business journey by creating your own workspace</h1>}
             {!hasWorkspace && <div><button className="btn btn-success" onClick={goToCreateWorkspace}>Create Your Workspace</button></div>}
             {hasWorkspace && <h1>{workspace.name}</h1>}
+            {hasWorkspace && <h1>{workspace.code}</h1>}
         </div>
     )
 }

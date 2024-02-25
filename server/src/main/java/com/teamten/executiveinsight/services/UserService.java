@@ -17,10 +17,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     public Users userSignup(UserRequest userRequest) {
-        Optional<Users> user = userRepository.findByEmail(userRequest.email());
-        if (user.isPresent()) {
-            return new Users();
-        }
         Users newUser = new Users();
         newUser.setName(userRequest.name());
         newUser.setEmail(userRequest.email());
