@@ -38,8 +38,7 @@ public class JwtAuthenticationController {
 
         var token = tokenService.generateToken(authentication);
 
-        Optional<Users> theUser = userService.retrieveByEmail(jwtTokenRequest.username());
-        Users user = theUser.get();
+        Users user = userService.retrieveByEmail(jwtTokenRequest.username());
 
         return ResponseEntity.ok(new JwtTokenResponse(token, user));
     }

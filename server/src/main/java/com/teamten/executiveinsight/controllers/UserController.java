@@ -1,9 +1,11 @@
 package com.teamten.executiveinsight.controllers;
 
-import com.teamten.executiveinsight.email.EmailCompleteEvent;
-import com.teamten.executiveinsight.email.EmailRequest;
+import com.teamten.executiveinsight.events.email.EmailCompleteEvent;
+import com.teamten.executiveinsight.events.email.EmailRequest;
+import com.teamten.executiveinsight.events.notification.SendNotificationEvent;
 import com.teamten.executiveinsight.model.UserRequest;
 import com.teamten.executiveinsight.model.Users;
+import com.teamten.executiveinsight.repositories.UserRepository;
 import com.teamten.executiveinsight.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -19,27 +21,27 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ApplicationEventPublisher publisher;
     //Retrieving user information
     @GetMapping("/get-user/{email}")
     public Users getUser(@PathVariable String email) {
-        Optional<Users> user = userService.retrieveByEmail(email);
-        return user.get();
+        return userService.retrieveByEmail(email);
     }
     //Updating user information
     @PatchMapping("/update-user")
     public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest) {
-        Optional<Users> user = userService.retrieveByEmail(userRequest.email());
-        user.get().setName(userRequest. name());
-        user.get().setPassword(passwordEncoder.encode(userRequest.password()));
-        userService.updateUser(user.get());
+        Users user = userService.retrieveByEmail(userRequest.email());
+        user.setName(userRequest. name());
+        user.setPassword(passwordEncoder.encode(userRequest.password()));
+        userService.updateUser(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     //Step01: Change password
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@RequestBody EmailRequest emailRequest) {
-        Optional<Users> user = userService.retrieveByEmail(emailRequest.email());
+        Optional<Users> user = userRepository.findByEmail(emailRequest.email());
         if(user.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else if (!user.get().isEnable()) {
@@ -51,9 +53,10 @@ public class UserController {
     //Step02: Change password
     @PatchMapping("/reset-password")
     public ResponseEntity<?> resetPassword(@RequestBody UserRequest userRequest) {
-        Optional<Users> user = userService.retrieveByEmail(userRequest.email());
-        user.get().setPassword(passwordEncoder.encode(userRequest.password()));
-        userService.updateUser(user.get());
+        Users user = userService.retrieveByEmail(userRequest.email());
+        user.setPassword(passwordEncoder.encode(userRequest.password()));
+        userService.updateUser(user);
+        publisher.publishEvent(new SendNotificationEvent(userRequest.email(), "Your password has been changed"));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

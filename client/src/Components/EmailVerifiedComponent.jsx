@@ -14,7 +14,10 @@ export default function EmailVerifiedComponent() {
 
     function verifyEmail() {
         verifyEmailApi(token, isForgotPassword)
-            .then((response) => setStatus(response))
+            .then((response) => {
+                setStatus(response)
+                console.log(response)
+            })
             .catch((error) => setStatus(error))
     }
 

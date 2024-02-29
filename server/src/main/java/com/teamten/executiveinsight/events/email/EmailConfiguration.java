@@ -1,4 +1,4 @@
-package com.teamten.executiveinsight.email;
+package com.teamten.executiveinsight.events.email;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

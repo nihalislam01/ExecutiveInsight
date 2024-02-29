@@ -1,10 +1,14 @@
 package com.teamten.executiveinsight.services;
 
+import com.teamten.executiveinsight.model.Notification;
 import com.teamten.executiveinsight.model.UserRequest;
 import com.teamten.executiveinsight.model.Users;
 import com.teamten.executiveinsight.model.Workspace;
+import com.teamten.executiveinsight.repositories.NotificationRepository;
 import com.teamten.executiveinsight.repositories.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +29,9 @@ public class UserService {
         newUser.setEnable(false);
         return userRepository.save(newUser);
     }
-    public Optional<Users> retrieveByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public Users retrieveByEmail(String email) {
+
+        return userRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
     }
     public void removeUser(Users user) {
         userRepository.delete(user);
@@ -34,9 +39,8 @@ public class UserService {
     public void updateUser(Users user) {
         userRepository.save(user);
     }
-
-    public List<Workspace> retrieveWorkspaces(String email) {
-        Optional<Users> user = userRepository.findByEmail(email);
-        return user.get().getWorkspaces();
+    public List<Notification> retrieveNotifications(String email) {
+        Users user = userRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
+        return user.getNotifications();
     }
 }

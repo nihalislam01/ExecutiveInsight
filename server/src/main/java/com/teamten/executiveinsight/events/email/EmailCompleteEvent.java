@@ -1,4 +1,4 @@
-package com.teamten.executiveinsight.email;
+package com.teamten.executiveinsight.events.email;
 
 import com.teamten.executiveinsight.model.Users;
 import lombok.Getter;

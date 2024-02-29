@@ -1,7 +1,7 @@
-package com.teamten.executiveinsight.email;
+package com.teamten.executiveinsight.events.email;
 
 import com.teamten.executiveinsight.model.Users;
-import com.teamten.executiveinsight.services.TokenService;
+import com.teamten.executiveinsight.services.VerificationTokenService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class EmailCompleteEventListener implements ApplicationListener<EmailCompleteEvent> {
 
-    private final TokenService tokenService;
+    private final VerificationTokenService verificationTokenService;
     private final JavaMailSender mailSender;
     private final EmailConfiguration emailConfiguration;
     private Users theUser;
@@ -27,7 +27,7 @@ public class EmailCompleteEventListener implements ApplicationListener<EmailComp
     public void onApplicationEvent(EmailCompleteEvent event) {
         theUser = event.getUser();
         String verificationToken = UUID.randomUUID().toString();
-        tokenService.saveToken(theUser, verificationToken);
+        verificationTokenService.saveToken(theUser, verificationToken);
         try {
             if (event.isDidForgetPassword()) {
                 String url = event.getApplicationUrl()+"/verify-email/" + verificationToken + "/true";
@@ -41,7 +41,7 @@ public class EmailCompleteEventListener implements ApplicationListener<EmailComp
         }
     }
     public void sendVerificationEmail(String url) throws MessagingException, UnsupportedEncodingException {
-        String subject = "Reset Password";
+        String subject = "Email Verification";
         String senderName = "Executive Insight";
         String mailContent = "<p> Hello "+ theUser.getName()+ ", </p>"+
                 "<p>Embark on your journey in development management with us. "+
@@ -57,7 +57,7 @@ public class EmailCompleteEventListener implements ApplicationListener<EmailComp
         mailSender.send(message);
     }
     public void sendForgotPasswordEmail(String url) throws MessagingException, UnsupportedEncodingException {
-        String subject = "Email Verification";
+        String subject = "Reset Password";
         String senderName = "Executive Insight";
         String mailContent = "<p> Hello "+ theUser.getName()+ ", </p>"+
                 "<p>Please, follow the link below to reset your password</p>"+

@@ -32,7 +32,7 @@ export default function CodeFormComponent() {
     }
 
     return (
-        <div className="FormComponent">
+        <div className="CodeFormComponent">
             <div className='row justify-content-center'>
                 <div className='col-md-6'>
                     {showAlert && <div className='alert alert-warning'>{message}</div>}

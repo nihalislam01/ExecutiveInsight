@@ -22,10 +22,7 @@ export default function HeaderComponent() {
                                     {isAuthenticated && <Link className='nav-link' to="/home">Home</Link>}
                                 </li>
                                 <li className='nav-item'>
-                                    {isAuthenticated && <Link className='nav-link' to="/my-workspace">My Workspace</Link>}
-                                </li>
-                                <li className='nav-item'>
-                                    {isAuthenticated && <Link className='nav-link' to="/home">Notification</Link>}
+                                    {isAuthenticated && <Link className='nav-link' to="/notification">Notification</Link>}
                                 </li>
                             </ul>
                         </div>
@@ -37,7 +34,10 @@ export default function HeaderComponent() {
                                 {!isAuthenticated && <Link className='nav-link' to="/signup">Signup</Link>}
                             </li>
                             <li className='nav-item'>
-                                {isAuthenticated && <Link className='nav-link' to="/workspace-code"><span>+</span></Link>}
+                                {isAuthenticated && <Link className='nav-link' to="/join-workspace"><span>+</span></Link>}
+                            </li>
+                            <li className='nav-item'>
+                                {isAuthenticated && <a className='nav-link' href="/my-workspace">My Workspace</a>}
                             </li>
                             <li className='nav-item'>
                                 {isAuthenticated && <a className='nav-link' href="/logout" onClick={logout}>Logout</a>}

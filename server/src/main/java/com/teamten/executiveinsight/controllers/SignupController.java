@@ -1,12 +1,12 @@
 package com.teamten.executiveinsight.controllers;
 
-import com.teamten.executiveinsight.email.EmailCompleteEvent;
+import com.teamten.executiveinsight.events.email.EmailCompleteEvent;
 import com.teamten.executiveinsight.model.UserRequest;
 import com.teamten.executiveinsight.model.Users;
 import com.teamten.executiveinsight.model.VerificationToken;
-import com.teamten.executiveinsight.services.TokenService;
+import com.teamten.executiveinsight.repositories.UserRepository;
+import com.teamten.executiveinsight.services.VerificationTokenService;
 import com.teamten.executiveinsight.services.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -20,14 +20,15 @@ import java.util.Optional;
 public class SignupController {
 
     private final UserService userService;
-    private final TokenService tokenService;
+    private final UserRepository userRepository;
+    private final VerificationTokenService verificationTokenService;
     private final ApplicationEventPublisher publisher;
 
     // Signup step01: Sending signup information
     @PostMapping("/signup")
     public ResponseEntity<?> userSignup(@RequestBody UserRequest userRequest) {
         try {
-            Optional<Users> user = userService.retrieveByEmail(userRequest.email());
+            Optional<Users> user = userRepository.findByEmail(userRequest.email());
             if (user.isPresent()) {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
@@ -44,14 +45,14 @@ public class SignupController {
     // Signup step04: Verifying the token
     @GetMapping("/verify-email/{token}/{isForgotPassword}")
     public ResponseEntity<?> verifyEmail(@PathVariable String token, @PathVariable String isForgotPassword){
-        Optional<VerificationToken> verificationToken = tokenService.findByToken(token);
+        Optional<VerificationToken> verificationToken = verificationTokenService.findByToken(token);
         if (verificationToken.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid Token");
         }  else if (isForgotPassword.equalsIgnoreCase("true")) {
             return ResponseEntity.ok(verificationToken.get().getUser().getEmail());
         }
         // Signup step05: Validating the token
-        String verificationResult = tokenService.validateToken(token);
+        String verificationResult = verificationTokenService.validateToken(token);
         if (verificationResult.equalsIgnoreCase("valid")){
             return ResponseEntity.ok("User been verified. Please login");
         } else if (verificationResult.equalsIgnoreCase("expired")) {

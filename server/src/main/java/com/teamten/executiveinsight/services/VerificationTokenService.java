@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class TokenService {
+public class VerificationTokenService {
     private final TokenRepository tokenRepository;
     private final UserService userService;
     public Optional<VerificationToken> findByToken(String token) {

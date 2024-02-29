@@ -7,12 +7,15 @@ import SignupComponent from './SignupComponent';
 import ErrorComponent from './ErrorComponent';
 import MessageComponent from './MessageComponent';
 import HomeComponent from './HomeComponent';
-import MyWorkspaceComponent from './MyWorkspaceComponent';
+import WorkspaceComponent from './MyWorkspace/WorkspaceComponent';
 import CreateWorkspaceFormComponent from './CreateWorkspaceFormComponent';
 import EmailVerifiedComponent from './EmailVerifiedComponent';
 import ForgotPasswordComponent from './ForgotPasswordComponent';
 import ResetPasswordComponent from './ResetPasswordComponent'
 import CodeFormComponent from './CodeFormComponent';
+import NotificationComponent from './NotificationComponent';
+import SidebarComponent from './MyWorkspace/SidebarComponent';
+import EmployeesComponent from './MyWorkspace/EmployeesComponent'
 import AuthProvider, { useAuth } from './security/AuthContext';
 
 function AuthenticatedRoute({children}) {
@@ -20,6 +23,13 @@ function AuthenticatedRoute({children}) {
     if (authContext.isAuthenticated())
         return children
     return <Navigate to="/" />
+}
+
+function AdminRoute({children}) {
+    const authContext = useAuth();
+    if (authContext.hasWorkspace())
+        return children
+    return <Navigate to="/home" />
 }
 
 export default function ExecutiveInsightApp() {
@@ -43,9 +53,31 @@ export default function ExecutiveInsightApp() {
                             </AuthenticatedRoute>
                         } />
 
+                        <Route path='/notification' element={
+                            <AuthenticatedRoute>
+                                <NotificationComponent />
+                            </AuthenticatedRoute>
+                        } />
+
                         <Route path='/my-workspace' element={
                             <AuthenticatedRoute>
-                                <MyWorkspaceComponent />
+                                <SidebarComponent />
+                                <WorkspaceComponent />
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/employees/:id' element={
+                            <AuthenticatedRoute>
+                                <AdminRoute>
+                                    <SidebarComponent />
+                                    <EmployeesComponent />
+                                </AdminRoute>
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/workspace-profile/:id' element={
+                            <AuthenticatedRoute>
+                                <WorkspaceComponent />
                             </AuthenticatedRoute>
                         } />
 
@@ -56,7 +88,7 @@ export default function ExecutiveInsightApp() {
                             </AuthenticatedRoute>
                         } />
 
-                        <Route path='/workspace-code' element={
+                        <Route path='/join-workspace' element={
                             <AuthenticatedRoute>
                                 <CodeFormComponent />
                             </AuthenticatedRoute>
