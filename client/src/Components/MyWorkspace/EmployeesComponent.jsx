@@ -44,19 +44,24 @@ export default function EmployeesComponent() {
     function sendInvite() {
         setShowAlert(true);
         sendInviteApi(email, workspaceCode)
-            .then((response) => handleResponse(response))
-            .catch((error) => handleResponse(error));
+            .then((response) => {
+                handleResponse(response)
+            })
+            .catch((error) => {
+                console.log(error)
+                handleResponse(error)
+            });
     }
 
     function handleResponse(response) {
         if (response.status===200) {
             setAlertColor('success')
             setMessage(response.data)
-        } else if (response.response.status===404) {
-            setAlertColor('danger')
+        } else if (response.response.status===409) {
+            setAlertColor('warning')
             setMessage(response.response.data)
         } else {
-            setAlertColor('warning')
+            setAlertColor('danger')
             setMessage(response.response.data)
         }
     }
