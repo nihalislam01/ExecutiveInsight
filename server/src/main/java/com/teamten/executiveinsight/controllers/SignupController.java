@@ -19,9 +19,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SignupController {
 
+    //Services
     private final UserService userService;
-    private final UserRepository userRepository;
     private final VerificationTokenService verificationTokenService;
+
+    //Repositories
+    private final UserRepository userRepository;
+
     private final ApplicationEventPublisher publisher;
 
     // Signup step01: Sending signup information

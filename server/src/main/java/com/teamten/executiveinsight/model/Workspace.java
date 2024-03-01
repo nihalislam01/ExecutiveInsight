@@ -31,4 +31,8 @@ public class Workspace {
     @JsonIgnore
     @ManyToMany(mappedBy = "workspaces")
     private List<Users> users = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Notification> invitations = new ArrayList<>();
 }

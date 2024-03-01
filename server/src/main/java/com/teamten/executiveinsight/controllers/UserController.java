@@ -2,10 +2,10 @@ package com.teamten.executiveinsight.controllers;
 
 import com.teamten.executiveinsight.events.email.EmailCompleteEvent;
 import com.teamten.executiveinsight.events.email.EmailRequest;
-import com.teamten.executiveinsight.events.notification.SendNotificationEvent;
 import com.teamten.executiveinsight.model.UserRequest;
 import com.teamten.executiveinsight.model.Users;
 import com.teamten.executiveinsight.repositories.UserRepository;
+import com.teamten.executiveinsight.services.NotificationService;
 import com.teamten.executiveinsight.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -20,8 +20,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
 
+    //Services
     private final UserService userService;
+    private final NotificationService notificationService;
+
+    //Repositories
     private final UserRepository userRepository;
+
     private final PasswordEncoder passwordEncoder;
     private final ApplicationEventPublisher publisher;
     //Retrieving user information
@@ -56,7 +61,7 @@ public class UserController {
         Users user = userService.retrieveByEmail(userRequest.email());
         user.setPassword(passwordEncoder.encode(userRequest.password()));
         userService.updateUser(user);
-        publisher.publishEvent(new SendNotificationEvent(userRequest.email(), "Your password has been changed"));
+        notificationService.sendNotification(user, "Your password has been changed");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

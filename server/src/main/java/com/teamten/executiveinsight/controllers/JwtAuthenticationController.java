@@ -19,9 +19,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JwtAuthenticationController {
 
+    //Services
     private final JwtTokenService tokenService;
-    private final AuthenticationManager authenticationManager;
     private final UserService userService;
+
+    private final AuthenticationManager authenticationManager;
 
     //Authentication using JwtToken
     @PostMapping("/authenticate")

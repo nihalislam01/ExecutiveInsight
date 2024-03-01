@@ -1,16 +1,11 @@
 package com.teamten.executiveinsight.services;
 
-import com.teamten.executiveinsight.model.BusinessTitle;
-import com.teamten.executiveinsight.model.Users;
-import com.teamten.executiveinsight.model.Workspace;
-import com.teamten.executiveinsight.model.WorkspaceRequest;
+import com.teamten.executiveinsight.model.*;
 import com.teamten.executiveinsight.repositories.BusinessTitleRepository;
 import com.teamten.executiveinsight.repositories.UserRepository;
 import com.teamten.executiveinsight.repositories.WorkspaceRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationEvent;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,10 +14,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class WorkspaceService {
     private final WorkspaceRepository workspaceRepository;
-    public final BusinessTitleRepository businessTitleRepository;
+    private final BusinessTitleRepository businessTitleRepository;
     private final UserRepository userRepository;
     private final UniqueIdGenerator uniqueIdGenerator;
-    private final UserService userService;
+    private final  UserService userService;
+    private final NotificationService notificationService;
     public void createWorkspace(WorkspaceRequest workspaceRequest) {
         Users user =  userService.retrieveByEmail(workspaceRequest.email());
         if (user.getRole().equalsIgnoreCase("USER")) {
@@ -35,6 +31,8 @@ public class WorkspaceService {
             user.setWorkspace(newWorkspace);
             user.setRole("ADMIN");
             userRepository.save(user);
+            String description = "Your very own workspace " + workspaceRequest.name() + " has been created";
+            notificationService.sendNotification(user, description);
         }
     }
     public Workspace findByCode(String code) {

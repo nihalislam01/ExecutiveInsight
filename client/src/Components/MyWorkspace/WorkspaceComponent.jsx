@@ -79,7 +79,7 @@ export default function WorkspaceComponent() {
                     <div className="col-md-2">
                     </div>
                     <div className="col-md-10 text-end">
-                        Hello
+                        <h1>{workspaceName}</h1>
                     </div>
                 </div>
             }
