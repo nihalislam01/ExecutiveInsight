@@ -7,13 +7,13 @@ import SignupComponent from './SignupComponent';
 import ErrorComponent from './ErrorComponent';
 import MessageComponent from './MessageComponent';
 import HomeComponent from './HomeComponent';
-import NotificationComponent from './NotificationComponent';
 import WorkspaceComponent from './MyWorkspace/WorkspaceComponent';
 import CreateWorkspaceFormComponent from './CreateWorkspaceFormComponent';
 import EmailVerifiedComponent from './EmailVerifiedComponent';
 import ForgotPasswordComponent from './ForgotPasswordComponent';
 import ResetPasswordComponent from './ResetPasswordComponent'
 import CodeFormComponent from './CodeFormComponent';
+import NotificationComponent from './NotificationComponent';
 import SidebarComponent from './MyWorkspace/SidebarComponent';
 import EmployeesComponent from './MyWorkspace/EmployeesComponent'
 import AuthProvider, { useAuth } from './security/AuthContext';

@@ -9,6 +9,8 @@ import com.teamten.executiveinsight.repositories.UserRepository;
 import com.teamten.executiveinsight.repositories.WorkspaceRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,7 +23,6 @@ public class WorkspaceService {
     private final UserRepository userRepository;
     private final UniqueIdGenerator uniqueIdGenerator;
     private final UserService userService;
-    private final NotificationService notificationService;
     public void createWorkspace(WorkspaceRequest workspaceRequest) {
         Users user =  userService.retrieveByEmail(workspaceRequest.email());
         if (user.getRole().equalsIgnoreCase("USER")) {
@@ -34,8 +35,6 @@ public class WorkspaceService {
             user.setWorkspace(newWorkspace);
             user.setRole("ADMIN");
             userRepository.save(user);
-            String description = "Your very own workspace " + workspaceRequest.name() + " has been created";
-            notificationService.sendNotification(user, description);
         }
     }
     public Workspace findByCode(String code) {

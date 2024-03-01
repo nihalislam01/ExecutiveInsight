@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { joinWorkspaceApi, retrieveUserApi, updateNotificationApi } from './api/ExecutiveInsightApiService';
+import { joinWorkspaceApi, retrieveUserApi, retrieveWorkspaceByCodeApi, updateNotificationApi } from './api/ExecutiveInsightApiService';
 import { useAuth } from './security/AuthContext';
 
 export default function NotificationComponent() {
 
     const [notifications, setNotifications] = useState(null);
     const [hasNotifications, setHasNotifications] = useState(false)
+    const [workspaceName, setWorkspaceName] = useState('')
+    var staticWorkspaceCode = ''
+    var isInvited = false;
     const authContext = useAuth();
     const username = authContext.username();
     const navigate = useNavigate();
@@ -27,9 +30,23 @@ export default function NotificationComponent() {
         setNotifications(response.data.notifications)
         setHasNotifications(response.data.notifications.length > 0)
     }
+    function setNotification(description) {
+        if (description.length===6) {
+            isInvited = true;
+            staticWorkspaceCode = description
+            retrieveWorkspaceByCodeApi(description)
+            .then((response) => {
+                setWorkspaceName(response.data.name)
+            })
+            .catch((error) => navigate('/error'))
+            return `You have been invited to the workspace ${workspaceName}`
+        } else {
+            return description
+        }
+    }
 
-    function handleReject(id, name) {
-        var message =  `You have rejected the invitation to join ${name}`
+    function handleReject(id) {
+        var message =  `You have rejected the invitation to join ${workspaceName}`
         const notification = {
             notificationId: id,
             description: message
@@ -39,13 +56,14 @@ export default function NotificationComponent() {
             .catch((error) => navigate('/error'))
     }
 
-    function handleAccept(id, code, name) {
-        var message = `You have successfully joined ${name}`
+    function handleAccept(id) {
+        var message = `You have successfully joined ${workspaceName}`
         const notification = {
             notificationId: id,
             description: message
         }
-        joinWorkspaceApi(code, username)
+        joinWorkspaceApi(staticWorkspaceCode, username)
+            .then((response) => console.log(response))
             .catch((error) => navigate('/error'))
         updateNotificationApi(notification)
             .then((response) => window.location.href = "/notification")
@@ -66,12 +84,12 @@ export default function NotificationComponent() {
                                     notification => (
                                         <tr key={notification.notificationId}>
                                             <td>
-                                                <div className="text-start pt-3 pb-3">{notification.description}</div>
+                                                <div className="text-start pt-3 pb-3">{setNotification(notification.description)}</div>
                                             </td>
-                                            {notification.invitation &&
-                                                <td className='text-end'>
-                                                    <button className='btn btn-outline-secondary mx-2 px-4' onClick={() => handleReject(notification.notificationId, notification.workspace.name)}>Reject</button>
-                                                    <button className='btn btn-outline-primary px-4' onClick={() => handleAccept(notification.notificationId, notification.workspace.code, notification.workspace.name)}>Accept</button>
+                                            {isInvited &&
+                                                <td>
+                                                    <button className='btn btn-outline-secondary mx-2 px-4' onClick={() => handleReject(notification.notificationId)}>Reject</button>
+                                                    <button className='btn btn-outline-primary px-4' onClick={() => handleAccept(notification.notificationId)}>Accept</button>
                                                 </td>
                                             }
                                         </tr>

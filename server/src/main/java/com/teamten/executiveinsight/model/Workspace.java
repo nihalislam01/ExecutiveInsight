@@ -1,6 +1,9 @@
 package com.teamten.executiveinsight.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,10 +27,6 @@ public class Workspace {
 
     @NaturalId(mutable = true)
     private String code;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Notification> invitations = new ArrayList<>();
 
     @JsonIgnore
     @ManyToMany(mappedBy = "workspaces")
