@@ -32,10 +32,6 @@ public class WorkspaceController {
     public Workspace retrieveWorkspaceById(@PathVariable Long id) {
         return workspaceService.findById(id);
     }
-    @GetMapping("/get-workspace-by-code/{code}")
-    public Workspace retrieveWorkspaceByCode(@PathVariable String code) {
-        return workspaceService.findByCode(code);
-    }
     @PatchMapping("/update-notification")
     public void updateNotification(@RequestBody NotificationRequest notificationRequest) {
         notificationService.updateNotification(notificationRequest);
@@ -43,6 +39,10 @@ public class WorkspaceController {
     @GetMapping("/get-users/{id}")
     public List<Users> retrieveUsers(@PathVariable Long id) {
         return userRepository.findUsersByWorkspaceId(id);
+    }
+    @GetMapping("/get-business-title")
+    public List<BusinessTitle> retrieveBusinessTitle() {
+        return businessTitleRepository.findAll();
     }
     //Create My Workspace
     @PostMapping("/create-workspace")
@@ -70,10 +70,6 @@ public class WorkspaceController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).body("You have already joined the workspace");
-    }
-    @GetMapping("/get-business-title")
-    public List<BusinessTitle> retrieveBusinessTitle() {
-        return businessTitleRepository.findAll();
     }
     @PostMapping("/send-invite/{code}/{email}")
     public ResponseEntity<String> sendInvite(@PathVariable String code, @PathVariable String email) {

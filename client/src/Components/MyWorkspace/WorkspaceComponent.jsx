@@ -75,11 +75,11 @@ export default function WorkspaceComponent() {
              }
 
             {hasWorkspace && !isWorkspaceProfile && 
-                <div className="row container">
+                <div className="row">
                     <div className="col-md-2">
                     </div>
-                    <div className="col-md-10 text-end">
-                        <h1>{workspaceName}</h1>
+                    <div className="col-md-10">
+                        <h1 className="text-start px-4">{workspaceName}</h1>
                     </div>
                 </div>
             }

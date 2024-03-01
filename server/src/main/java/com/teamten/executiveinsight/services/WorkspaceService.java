@@ -35,9 +35,6 @@ public class WorkspaceService {
             notificationService.sendNotification(user, description);
         }
     }
-    public Workspace findByCode(String code) {
-        return workspaceRepository.findByCode(code).orElseThrow(EntityNotFoundException::new);
-    }
     public void updateWorkspace(Workspace workspace) {
         workspaceRepository.save(workspace);
     }

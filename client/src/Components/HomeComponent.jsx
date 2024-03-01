@@ -19,7 +19,7 @@ export default function HomeComponent() {
         retrieveUserApi(username)
             .then((response) => {
                 setWorkspaces(response.data.workspaces)
-                setHasWorkspaces(workspaces.length > 0)
+                setHasWorkspaces(response.data.workspaces.length > 0)
             })
             .catch((error) => navigate('/error'))
     }
@@ -41,6 +41,8 @@ export default function HomeComponent() {
     return (
         <div className="HomeComponent">
             <div className='container'>
+                {hasWorkspaces && <h2 className='text-start'>Workspaces</h2>}
+                {!hasWorkspaces && <p>You haven't joined any workspaces yet</p>}
                 <table className='table'>
                     <tbody>
                         {
