@@ -4,6 +4,7 @@ import com.teamten.executiveinsight.events.email.EmailCompleteEvent;
 import com.teamten.executiveinsight.model.UserRequest;
 import com.teamten.executiveinsight.model.Users;
 import com.teamten.executiveinsight.model.VerificationToken;
+import com.teamten.executiveinsight.repositories.TokenRepository;
 import com.teamten.executiveinsight.repositories.UserRepository;
 import com.teamten.executiveinsight.services.VerificationTokenService;
 import com.teamten.executiveinsight.services.UserService;
@@ -25,6 +26,7 @@ public class SignupController {
 
     //Repositories
     private final UserRepository userRepository;
+    private final TokenRepository tokenRepository;
 
     private final ApplicationEventPublisher publisher;
 
@@ -49,7 +51,7 @@ public class SignupController {
     // Signup step04: Verifying the token
     @GetMapping("/verify-email/{token}/{isForgotPassword}")
     public ResponseEntity<?> verifyEmail(@PathVariable String token, @PathVariable String isForgotPassword){
-        Optional<VerificationToken> verificationToken = verificationTokenService.findByToken(token);
+        Optional<VerificationToken> verificationToken = tokenRepository.findByToken(token);
         if (verificationToken.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid Token");
         }  else if (isForgotPassword.equalsIgnoreCase("true")) {

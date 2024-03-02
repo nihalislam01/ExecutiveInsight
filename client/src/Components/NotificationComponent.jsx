@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { joinWorkspaceApi, retrieveUserApi, updateNotificationApi } from './api/ExecutiveInsightApiService';
+import { joinWorkspaceApi, retrieveNotificationByUserApi, updateNotificationApi } from './api/ExecutiveInsightApiService';
 import { useAuth } from './security/AuthContext';
 
 export default function NotificationComponent() {
@@ -16,7 +16,7 @@ export default function NotificationComponent() {
 
     function refreshPage() {
         authContext.refresh()
-        retrieveUserApi(username)
+        retrieveNotificationByUserApi(username)
             .then((response) => {
                 handleResponse(response)
             })
@@ -24,8 +24,8 @@ export default function NotificationComponent() {
     }
 
     function handleResponse(response) {
-        setNotifications(response.data.notifications)
-        setHasNotifications(response.data.notifications.length > 0)
+        setNotifications(response.data)
+        setHasNotifications(response.data.length > 0)
     }
 
     function handleReject(id, name) {

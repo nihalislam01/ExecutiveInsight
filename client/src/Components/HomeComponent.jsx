@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { retrieveUserApi } from './api/ExecutiveInsightApiService';
+import { retrieveWorkspacesByUserApi } from './api/ExecutiveInsightApiService';
 import { useAuth } from './security/AuthContext';
 
 export default function HomeComponent() {
@@ -16,10 +16,10 @@ export default function HomeComponent() {
 
     function refreshWorkspace() {
         authContext.refresh()
-        retrieveUserApi(username)
+        retrieveWorkspacesByUserApi(username)
             .then((response) => {
-                setWorkspaces(response.data.workspaces)
-                setHasWorkspaces(response.data.workspaces.length > 0)
+                setWorkspaces(response.data)
+                setHasWorkspaces(response.data.length > 0)
             })
             .catch((error) => navigate('/error'))
     }

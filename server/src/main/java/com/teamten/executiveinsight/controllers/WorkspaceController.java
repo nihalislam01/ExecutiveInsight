@@ -5,8 +5,8 @@ import com.teamten.executiveinsight.repositories.BusinessTitleRepository;
 import com.teamten.executiveinsight.repositories.UserRepository;
 import com.teamten.executiveinsight.repositories.WorkspaceRepository;
 import com.teamten.executiveinsight.services.NotificationService;
-import com.teamten.executiveinsight.services.UserService;
 import com.teamten.executiveinsight.services.WorkspaceService;
+import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,6 @@ import java.util.Optional;
 public class WorkspaceController {
 
     //Service
-    private final UserService userService;
     private final WorkspaceService workspaceService;
     private final NotificationService notificationService;
 
@@ -28,13 +27,13 @@ public class WorkspaceController {
     private final UserRepository userRepository;
     private final WorkspaceRepository workspaceRepository;
     private final BusinessTitleRepository businessTitleRepository;
-    @GetMapping("/get-workspace-by-id/{id}")
+    @GetMapping("/get-workspace/{id}")
     public Workspace retrieveWorkspaceById(@PathVariable Long id) {
-        return workspaceService.findById(id);
+        return workspaceRepository.findById(id).orElseThrow(EntityExistsException::new);
     }
-    @PatchMapping("/update-notification")
-    public void updateNotification(@RequestBody NotificationRequest notificationRequest) {
-        notificationService.updateNotification(notificationRequest);
+    @GetMapping("/get-workspaces/{email}")
+    public List<Workspace> retrieveWorkspaces(@PathVariable String email) {
+        return userRepository.findWorkspacesByUser(email);
     }
     @GetMapping("/get-users/{id}")
     public List<Users> retrieveUsers(@PathVariable Long id) {
@@ -48,7 +47,9 @@ public class WorkspaceController {
     @PostMapping("/create-workspace")
     public ResponseEntity<?> createWorkspace(@RequestBody WorkspaceRequest workspaceRequest) {
         try {
-            workspaceService.createWorkspace(workspaceRequest);
+            Users user = workspaceService.createWorkspace(workspaceRequest);
+            String description = "Your very own workspace " + workspaceRequest.name() + " has been created";
+            notificationService.sendNotification(user, description);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -58,7 +59,7 @@ public class WorkspaceController {
     @PatchMapping("/join-workspace/{code}/{email}")
     public ResponseEntity<?> joinWorkspace(@PathVariable String code, @PathVariable String email) {
         Optional<Workspace> workspace = workspaceRepository.findByCode(code);
-        Users user = userService.retrieveByEmail(email);
+        Users user = userRepository.findByEmail(email).orElseThrow(EntityExistsException::new);
         if (workspace.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Workspace with code does not exists");
         } else if (user.getWorkspace()!=null) {
@@ -70,22 +71,5 @@ public class WorkspaceController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).body("You have already joined the workspace");
-    }
-    @PostMapping("/send-invite/{code}/{email}")
-    public ResponseEntity<String> sendInvite(@PathVariable String code, @PathVariable String email) {
-        Optional<Users> user = userRepository.findByEmail(email);
-        if (user.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User does not exists");
-        } else if (user.get().getWorkspace()!=null) {
-            if (user.get().getWorkspace().getCode().equalsIgnoreCase(code)) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You cannot join your own workspace");
-            }
-        }
-        Optional<Users> theUser = userRepository.findUserByWorkspaceCode(code, user.get().getUserId());
-        if (theUser.isPresent()) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("User already joined the workspace");
-        }
-        notificationService.sendInvitation(user.get(), code);
-        return ResponseEntity.ok("Invitation send. Please ask your employee to check their notification");
     }
 }

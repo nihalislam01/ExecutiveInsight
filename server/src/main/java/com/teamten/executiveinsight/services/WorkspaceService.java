@@ -13,14 +13,14 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class WorkspaceService {
+    //Repositories
     private final WorkspaceRepository workspaceRepository;
     private final BusinessTitleRepository businessTitleRepository;
     private final UserRepository userRepository;
+
     private final UniqueIdGenerator uniqueIdGenerator;
-    private final  UserService userService;
-    private final NotificationService notificationService;
-    public void createWorkspace(WorkspaceRequest workspaceRequest) {
-        Users user =  userService.retrieveByEmail(workspaceRequest.email());
+    public Users createWorkspace(WorkspaceRequest workspaceRequest) {
+        Users user =  userRepository.findByEmail(workspaceRequest.email()).orElseThrow(EntityNotFoundException::new);
         if (user.getRole().equalsIgnoreCase("USER")) {
             BusinessTitle businessTitle = businessTitleRepository.findByTitle(workspaceRequest.title());
             Workspace newWorkspace = new Workspace();
@@ -30,13 +30,9 @@ public class WorkspaceService {
             workspaceRepository.save(newWorkspace);
             user.setWorkspace(newWorkspace);
             user.setRole("ADMIN");
-            userRepository.save(user);
-            String description = "Your very own workspace " + workspaceRequest.name() + " has been created";
-            notificationService.sendNotification(user, description);
+            return userRepository.save(user);
         }
-    }
-    public void updateWorkspace(Workspace workspace) {
-        workspaceRepository.save(workspace);
+        return null;
     }
     public boolean joinWorkspace(Users user, Workspace workspace) {
         Optional<Users> theUser = userRepository.findUserByWorkspaceCode(workspace.getCode(), user.getUserId());
@@ -44,12 +40,8 @@ public class WorkspaceService {
             return false;
         }
         user.getWorkspaces().add(workspace);
-        userService.updateUser(user);
-        updateWorkspace(workspace);
+        userRepository.save(user);
+        workspaceRepository.save(workspace);
         return true;
-    }
-
-    public Workspace findById(Long id) {
-        return workspaceRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 }

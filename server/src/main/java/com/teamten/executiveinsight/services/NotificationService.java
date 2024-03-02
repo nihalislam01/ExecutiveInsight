@@ -1,6 +1,5 @@
 package com.teamten.executiveinsight.services;
 
-import com.sun.tools.jconsole.JConsoleContext;
 import com.teamten.executiveinsight.model.Notification;
 import com.teamten.executiveinsight.model.NotificationRequest;
 import com.teamten.executiveinsight.model.Users;
@@ -9,7 +8,6 @@ import com.teamten.executiveinsight.repositories.NotificationRepository;
 import com.teamten.executiveinsight.repositories.WorkspaceRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

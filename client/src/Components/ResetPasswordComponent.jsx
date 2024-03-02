@@ -25,14 +25,18 @@ export default function ResetPasswordComponent() {
     }
 
     function handleSubmit() {
-        const user = {
-            name: '',
-            email: username,
-            password: password
+        if (password===matchPassword) {
+            const user = {
+                name: '',
+                email: username,
+                password: password
+            }
+            resetPasswordApi(user)
+                .then((response) => handleResponse(response))
+                .catch((error) => navigate("/error"))
+        } else {
+            setAlertColor('alert alert-danger');
         }
-        resetPasswordApi(user)
-            .then((response) => handleResponse(response))
-            .catch((error) => navigate("/error"))
     }
 
     function handleResponse(response) {

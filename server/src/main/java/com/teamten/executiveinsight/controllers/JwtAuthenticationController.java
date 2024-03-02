@@ -1,10 +1,11 @@
 package com.teamten.executiveinsight.controllers;
 
 import com.teamten.executiveinsight.model.Users;
+import com.teamten.executiveinsight.repositories.UserRepository;
 import com.teamten.executiveinsight.security.JwtTokenRequest;
 import com.teamten.executiveinsight.security.JwtTokenResponse;
 import com.teamten.executiveinsight.security.JwtTokenService;
-import com.teamten.executiveinsight.services.UserService;
+import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +22,7 @@ public class JwtAuthenticationController {
 
     //Services
     private final JwtTokenService tokenService;
-    private final UserService userService;
+    private final UserRepository userRepository;
 
     private final AuthenticationManager authenticationManager;
 
@@ -40,7 +41,7 @@ public class JwtAuthenticationController {
 
         var token = tokenService.generateToken(authentication);
 
-        Users user = userService.retrieveByEmail(jwtTokenRequest.username());
+        Users user = userRepository.findByEmail(jwtTokenRequest.username()).orElseThrow(EntityExistsException::new);
 
         return ResponseEntity.ok(new JwtTokenResponse(token, user));
     }

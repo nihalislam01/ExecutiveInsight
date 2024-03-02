@@ -7,6 +7,7 @@ import com.teamten.executiveinsight.model.Users;
 import com.teamten.executiveinsight.repositories.UserRepository;
 import com.teamten.executiveinsight.services.NotificationService;
 import com.teamten.executiveinsight.services.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -32,15 +33,12 @@ public class UserController {
     //Retrieving user information
     @GetMapping("/get-user/{email}")
     public Users getUser(@PathVariable String email) {
-        return userService.retrieveByEmail(email);
+        return userRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
     }
     //Updating user information
     @PatchMapping("/update-user")
     public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest) {
-        Users user = userService.retrieveByEmail(userRequest.email());
-        user.setName(userRequest. name());
-        user.setPassword(passwordEncoder.encode(userRequest.password()));
-        userService.updateUser(user);
+        userService.updateUser(userRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     //Step01: Change password
@@ -58,9 +56,9 @@ public class UserController {
     //Step02: Change password
     @PatchMapping("/reset-password")
     public ResponseEntity<?> resetPassword(@RequestBody UserRequest userRequest) {
-        Users user = userService.retrieveByEmail(userRequest.email());
+        Users user = userRepository.findByEmail(userRequest.email()).orElseThrow(EntityNotFoundException::new);
         user.setPassword(passwordEncoder.encode(userRequest.password()));
-        userService.updateUser(user);
+        userRepository.save(user);
         notificationService.sendNotification(user, "Your password has been changed");
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -10,7 +10,6 @@ export default function WorkspaceComponent() {
     var staticIsWorkspaceProfile = false;
     const [workspaceName, setWorkspaceName] = useState('');
     const [workspaceTitle, setWorkspaceTitle] = useState('');
-    const [workspaceCode, setWorkspaceCode] = useState('');
     const [isWorkspaceProfile, setIsWorkspaceProfile] = useState(false);
     const authContext = useAuth();
     const hasWorkspace = authContext.hasWorkspace();
@@ -30,7 +29,6 @@ export default function WorkspaceComponent() {
                     workspace = response.data
                     setWorkspaceName(workspace.name)
                     setWorkspaceTitle(workspace.businessTitle.title)
-                    setWorkspaceCode(workspace.code)
                 })
                 .catch((error) => {
                     console.log(error)
@@ -42,7 +40,6 @@ export default function WorkspaceComponent() {
                     workspace = response.data.workspace
                     setWorkspaceName(workspace.name)
                     setWorkspaceTitle(workspace.businessTitle.title)
-                    setWorkspaceCode(workspace.code)
                 })
                 .catch((error) => {
                     console.log(error)
