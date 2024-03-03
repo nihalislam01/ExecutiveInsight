@@ -2,17 +2,19 @@ package com.teamten.executiveinsight.controllers;
 
 import com.teamten.executiveinsight.events.email.EmailCompleteEvent;
 import com.teamten.executiveinsight.events.email.EmailRequest;
-import com.teamten.executiveinsight.events.notification.SendNotificationEvent;
 import com.teamten.executiveinsight.model.UserRequest;
 import com.teamten.executiveinsight.model.Users;
 import com.teamten.executiveinsight.repositories.UserRepository;
+import com.teamten.executiveinsight.services.NotificationService;
 import com.teamten.executiveinsight.services.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -20,22 +22,24 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
 
+    //Services
     private final UserService userService;
+    private final NotificationService notificationService;
+
+    //Repositories
     private final UserRepository userRepository;
+
     private final PasswordEncoder passwordEncoder;
     private final ApplicationEventPublisher publisher;
     //Retrieving user information
     @GetMapping("/get-user/{email}")
     public Users getUser(@PathVariable String email) {
-        return userService.retrieveByEmail(email);
+        return userRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
     }
     //Updating user information
     @PatchMapping("/update-user")
     public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest) {
-        Users user = userService.retrieveByEmail(userRequest.email());
-        user.setName(userRequest. name());
-        user.setPassword(passwordEncoder.encode(userRequest.password()));
-        userService.updateUser(user);
+        userService.updateUser(userRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     //Step01: Change password
@@ -53,11 +57,15 @@ public class UserController {
     //Step02: Change password
     @PatchMapping("/reset-password")
     public ResponseEntity<?> resetPassword(@RequestBody UserRequest userRequest) {
-        Users user = userService.retrieveByEmail(userRequest.email());
+        Users user = userRepository.findByEmail(userRequest.email()).orElseThrow(EntityNotFoundException::new);
         user.setPassword(passwordEncoder.encode(userRequest.password()));
-        userService.updateUser(user);
-        publisher.publishEvent(new SendNotificationEvent(userRequest.email(), "Your password has been changed"));
+        userRepository.save(user);
+        notificationService.sendNotification(user, "Your password has been changed");
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    @PostMapping("/upload-photo/{email}")
+    public ResponseEntity<String> uploadPhoto(@PathVariable String email, @RequestParam("file") MultipartFile file) {
+        userService.uploadPhoto(email, file);
+        return ResponseEntity.ok("Your profile photo has been uploaded successfully");
+    }
 }

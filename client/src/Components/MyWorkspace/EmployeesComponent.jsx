@@ -52,11 +52,11 @@ export default function EmployeesComponent() {
         if (response.status===200) {
             setAlertColor('success')
             setMessage(response.data)
-        } else if (response.response.status===404) {
-            setAlertColor('danger')
+        } else if (response.response.status===409) {
+            setAlertColor('warning')
             setMessage(response.response.data)
         } else {
-            setAlertColor('warning')
+            setAlertColor('danger')
             setMessage(response.response.data)
         }
     }

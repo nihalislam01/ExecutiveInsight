@@ -1,9 +1,6 @@
 package com.teamten.executiveinsight.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +18,7 @@ public class Workspace {
     private Long workspaceId;
     private String name;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "business_title_id")
     private BusinessTitle businessTitle;
 
@@ -31,4 +28,12 @@ public class Workspace {
     @JsonIgnore
     @ManyToMany(mappedBy = "workspaces")
     private List<Users> users = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "workspaces")
+    private List<Post> posts = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Notification> invitations = new ArrayList<>();
+
 }

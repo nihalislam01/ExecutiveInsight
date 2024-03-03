@@ -39,6 +39,7 @@ export default function SidebarComponent() {
                             <tr><td><Link className="nav-link" to="/my-workspace">Main Dashboard</Link></td></tr>
                             <tr><td><Link className="nav-link" to="/my-workspace">Teams</Link></td></tr>
                             <tr><td><Link className="nav-link" to={`/employees/${workspaceId}`}>Employees</Link></td></tr>
+                            <tr><td><Link className="nav-link" to={`/posts/${workspaceId}`}>Employee Posts</Link></td></tr>
                             <tr><td><Link className="nav-link" to="/my-workspace">Products</Link></td></tr>
                             <tr><td><Link className="nav-link" to="/my-workspace">Sales</Link></td></tr>
                             <tr><td><Link className="nav-link" to="/my-workspace">Orders</Link></td></tr>

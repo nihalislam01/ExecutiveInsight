@@ -1,21 +1,29 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './styles/ExecutiveInsightApp.css'
+//Unauthorized Components
 import HeaderComponent from './HeaderComponent';
+import SignupComponent from './SignupComponent';
+import EmailVerifiedComponent from './EmailVerifiedComponent';
 import LoginComponent from './LoginComponent';
 import LogoutComponent from './LogoutComponent';
-import SignupComponent from './SignupComponent';
-import ErrorComponent from './ErrorComponent';
-import MessageComponent from './MessageComponent';
-import HomeComponent from './HomeComponent';
-import WorkspaceComponent from './MyWorkspace/WorkspaceComponent';
-import CreateWorkspaceFormComponent from './CreateWorkspaceFormComponent';
-import EmailVerifiedComponent from './EmailVerifiedComponent';
 import ForgotPasswordComponent from './ForgotPasswordComponent';
-import ResetPasswordComponent from './ResetPasswordComponent'
-import CodeFormComponent from './CodeFormComponent';
+import ResetPasswordComponent from './ResetPasswordComponent';
+import MessageComponent from './MessageComponent';
+import ErrorComponent from './ErrorComponent';
+
+//Authorized Components
+import HomeComponent from './HomeComponent';
 import NotificationComponent from './NotificationComponent';
+import CodeFormComponent from './CodeFormComponent';
+import CreateWorkspaceFormComponent from './CreateWorkspaceFormComponent';
+import UserProfileComponent from './UserProfileComponent';
+
+//Admin Components
+import WorkspaceComponent from './MyWorkspace/WorkspaceComponent';
 import SidebarComponent from './MyWorkspace/SidebarComponent';
-import EmployeesComponent from './MyWorkspace/EmployeesComponent'
+import EmployeesComponent from './MyWorkspace/EmployeesComponent';
+import PostComponent from './MyWorkspace/PostComponent';
+
 import AuthProvider, { useAuth } from './security/AuthContext';
 
 function AuthenticatedRoute({children}) {
@@ -75,6 +83,15 @@ export default function ExecutiveInsightApp() {
                             </AuthenticatedRoute>
                         } />
 
+                        <Route path='/posts/:id' element={
+                            <AuthenticatedRoute>
+                                <AdminRoute>
+                                    <SidebarComponent />
+                                    <PostComponent />
+                                </AdminRoute>
+                            </AuthenticatedRoute>
+                        } />
+
                         <Route path='/workspace-profile/:id' element={
                             <AuthenticatedRoute>
                                 <WorkspaceComponent />
@@ -91,6 +108,12 @@ export default function ExecutiveInsightApp() {
                         <Route path='/join-workspace' element={
                             <AuthenticatedRoute>
                                 <CodeFormComponent />
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/user-profile' element={
+                            <AuthenticatedRoute>
+                                <UserProfileComponent />
                             </AuthenticatedRoute>
                         } />
 
