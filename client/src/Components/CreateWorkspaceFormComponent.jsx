@@ -27,15 +27,18 @@ export default function CreateWorkspaceFormComponent() {
             .catch((error) => navigate("/error"))
     }
 
-    function handleSubmit() {
+    async function handleSubmit() {
         const workspace = {
             name: workspaceName,
             email: username,
             title: businessTitle
         }
-        createWorkspaceApi(workspace)
+        await createWorkspaceApi(workspace)
             .then((response) => handleResponse(response))
-            .catch((error) => navigate("/error"))
+            .catch((error) => {
+                console.log(error)
+                navigate("/error")
+            })
     }
 
     function handleResponse(response) {

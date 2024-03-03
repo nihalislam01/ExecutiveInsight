@@ -1,3 +1,5 @@
+import { faBell, faBriefcase, faHouse, faPlus, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { useAuth } from './security/AuthContext';
 
@@ -19,10 +21,10 @@ export default function HeaderComponent() {
                         <div className='collapse navbar-collapse'>
                             <ul className='navbar-nav'>
                                 <li className='nav-item'>
-                                    {isAuthenticated && <Link className='nav-link' to="/home">Home</Link>}
+                                    {isAuthenticated && <Link className='nav-link mx-2' to="/home"><FontAwesomeIcon icon={faHouse} /></Link>}
                                 </li>
                                 <li className='nav-item'>
-                                    {isAuthenticated && <Link className='nav-link' to="/notification">Notification</Link>}
+                                    {isAuthenticated && <Link className='nav-link mx-2' to="/notification"><FontAwesomeIcon icon={faBell} /></Link>}
                                 </li>
                             </ul>
                         </div>
@@ -34,13 +36,16 @@ export default function HeaderComponent() {
                                 {!isAuthenticated && <Link className='nav-link' to="/signup">Signup</Link>}
                             </li>
                             <li className='nav-item'>
-                                {isAuthenticated && <Link className='nav-link' to="/join-workspace"><span>+</span></Link>}
+                                {isAuthenticated && <Link className='nav-link mx-2' to="/join-workspace"><FontAwesomeIcon icon={faPlus} /></Link>}
                             </li>
                             <li className='nav-item'>
-                                {isAuthenticated && <a className='nav-link' href="/my-workspace">My Workspace</a>}
+                                {isAuthenticated && <a className='nav-link mx-2' href="/my-workspace"><FontAwesomeIcon icon={faBriefcase} /></a>}
                             </li>
                             <li className='nav-item'>
-                                {isAuthenticated && <a className='nav-link' href="/logout" onClick={logout}>Logout</a>}
+                                {isAuthenticated && <a className='nav-link mx-2' href="/user-profile"><FontAwesomeIcon icon={faUser} /></a>}
+                            </li>
+                            <li className='nav-item'>
+                                {isAuthenticated && <a className='nav-link mx-2' href="/logout" onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>}
                             </li>
                         </ul>
                     </nav>

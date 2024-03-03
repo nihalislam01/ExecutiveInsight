@@ -21,3 +21,7 @@ export const retrieveUsersByWorkspaceIdApi = (id) => apiClient.get(`/get-users/$
 export const retrieveNotificationByUserApi = (email) => apiClient(`/get-notifications/${email}`);
 export const sendInviteApi = (email, code) => apiClient.post(`/send-invite/${code}/${email}`);
 export const updateNotificationApi = (notification) => apiClient.patch("/update-notification", notification);
+
+//Post API
+export const addCustomPostApi = (post) => apiClient.post("/add-custom-post", post);
+export const deletePostApi = (id, title) => apiClient.delete(`/delete-post/${id}/${title}`);

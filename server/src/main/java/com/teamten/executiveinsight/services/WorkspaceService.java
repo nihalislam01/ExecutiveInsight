@@ -26,6 +26,9 @@ public class WorkspaceService {
             Workspace newWorkspace = new Workspace();
             newWorkspace.setName(workspaceRequest.name());
             newWorkspace.setBusinessTitle(businessTitle);
+            for (int i = 0; i < businessTitle.getPosts().size(); i++) {
+                businessTitle.getPosts().get(i).getWorkspaces().add(newWorkspace);
+            }
             newWorkspace.setCode(uniqueIdGenerator.generateUniqueId());
             workspaceRepository.save(newWorkspace);
             user.setWorkspace(newWorkspace);

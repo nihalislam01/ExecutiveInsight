@@ -1,11 +1,12 @@
 package com.teamten.executiveinsight.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,6 +16,13 @@ public class BusinessTitle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long businessTitleId;
     private String title;
+
+    @OneToMany(mappedBy = "businessTitle", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Post> posts = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "businessTitle", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Workspace> workspaces = new ArrayList<>();
     public BusinessTitle(String title) {
         this.title = title;
     }

@@ -21,11 +21,22 @@ public class Users {
     private String email;
     private String password;
     private String role;
+    private String bio;
     private boolean isEnable;
+
+    @Lob
+    private byte[] photo;
+
+    @Lob
+    private byte[] badge;
 
     @OneToOne
     @JoinColumn(name = "workspace_id")
     private Workspace workspace;
+
+    @OneToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Notification> notifications = new ArrayList<>();

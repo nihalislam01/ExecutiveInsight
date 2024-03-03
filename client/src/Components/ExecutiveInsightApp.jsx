@@ -16,11 +16,13 @@ import HomeComponent from './HomeComponent';
 import NotificationComponent from './NotificationComponent';
 import CodeFormComponent from './CodeFormComponent';
 import CreateWorkspaceFormComponent from './CreateWorkspaceFormComponent';
+import UserProfileComponent from './UserProfileComponent';
 
 //Admin Components
 import WorkspaceComponent from './MyWorkspace/WorkspaceComponent';
 import SidebarComponent from './MyWorkspace/SidebarComponent';
 import EmployeesComponent from './MyWorkspace/EmployeesComponent';
+import PostComponent from './MyWorkspace/PostComponent';
 
 import AuthProvider, { useAuth } from './security/AuthContext';
 
@@ -81,6 +83,15 @@ export default function ExecutiveInsightApp() {
                             </AuthenticatedRoute>
                         } />
 
+                        <Route path='/posts/:id' element={
+                            <AuthenticatedRoute>
+                                <AdminRoute>
+                                    <SidebarComponent />
+                                    <PostComponent />
+                                </AdminRoute>
+                            </AuthenticatedRoute>
+                        } />
+
                         <Route path='/workspace-profile/:id' element={
                             <AuthenticatedRoute>
                                 <WorkspaceComponent />
@@ -97,6 +108,12 @@ export default function ExecutiveInsightApp() {
                         <Route path='/join-workspace' element={
                             <AuthenticatedRoute>
                                 <CodeFormComponent />
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/user-profile' element={
+                            <AuthenticatedRoute>
+                                <UserProfileComponent />
                             </AuthenticatedRoute>
                         } />
 
