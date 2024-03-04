@@ -5,24 +5,23 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Data
 @NoArgsConstructor
-public class Notification {
-
+public class UserJoinWorkspace {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long notificationId;
-    private String description;
-    private LocalDateTime time = LocalDateTime.now();
-    private String workspaceCode;
-    private String userEmail;
-    private boolean isInvitation = false;
+    private Long userJoinWorkspaceId;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
+
+    @ManyToOne
+    @JoinColumn(name = "workspace_id")
+    private Workspace workspace;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 }

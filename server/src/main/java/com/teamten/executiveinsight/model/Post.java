@@ -23,6 +23,10 @@ public class Post {
     private BusinessTitle businessTitle;
 
     @JsonIgnore
+    @OneToMany(mappedBy = "post")
+    private List<UserJoinWorkspace> userJoinWorkspaces = new ArrayList<>();
+
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "post_add_workspace",

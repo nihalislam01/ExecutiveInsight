@@ -28,8 +28,12 @@ export default function NotificationComponent() {
         setHasNotifications(response.data.length > 0)
     }
 
-    function handleReject(id, name) {
-        var message =  `You have rejected the invitation to join ${name}`
+    function handleReject(id, email) {
+        if (email===username) {
+            var message = `You have rejected the invitation`
+        } else {
+            message = `You have rejected the request`
+        }
         const notification = {
             notificationId: id,
             description: message
@@ -39,13 +43,17 @@ export default function NotificationComponent() {
             .catch((error) => navigate('/error'))
     }
 
-    function handleAccept(id, code, name) {
-        var message = `You have successfully joined ${name}`
+    function handleAccept(id, code, email) {
+        if (email===username) {
+            var message = `You have successfully joined the workspace`
+        } else {
+            message = `User has successfully joined your workspace`
+        }
         const notification = {
             notificationId: id,
             description: message
         }
-        joinWorkspaceApi(code, username)
+        joinWorkspaceApi(code, email)
             .catch((error) => navigate('/error'))
         updateNotificationApi(notification)
             .then((response) => window.location.href = "/notification")
@@ -73,8 +81,8 @@ export default function NotificationComponent() {
                                                     </div>
                                                 {notification.invitation &&
                                                     <div className='text-end col-md-6'>
-                                                        <button className='btn btn-outline-secondary mx-2 px-4' onClick={() => handleReject(notification.notificationId, notification.workspace.name)}>Reject</button>
-                                                        <button className='btn btn-outline-primary px-4' onClick={() => handleAccept(notification.notificationId, notification.workspace.code, notification.workspace.name)}>Accept</button>
+                                                        <button className='btn btn-outline-secondary mx-2 px-4' onClick={() => handleReject(notification.notificationId, notification.userEmail )}>Reject</button>
+                                                        <button className='btn btn-outline-primary px-4' onClick={() => handleAccept(notification.notificationId, notification.workspaceCode, notification.userEmail)}>Accept</button>
                                                     </div>
                                                 }
                                                 </div>                                                      

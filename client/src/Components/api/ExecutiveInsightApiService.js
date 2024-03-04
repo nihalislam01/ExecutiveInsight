@@ -12,14 +12,15 @@ export const resetPasswordApi = (user) => apiClient.patch("/reset-password", use
 //Workspace API
 export const retrieveBusinessTitlesApi = () => apiClient.get("/get-business-title");
 export const createWorkspaceApi = (workspace) => apiClient.post("/create-workspace", workspace);
+export const joinWorkspaceApi = (code, email) => apiClient.post(`/join-workspace/${code}/${email}`);
 export const retrieveWorkspaceByIdApi = (id) => apiClient.get(`/get-workspace/${id}`);
 export const retrieveWorkspacesByUserApi = (email) => apiClient(`/get-workspaces/${email}`);
-export const joinWorkspaceApi = (code, email) => apiClient.patch(`/join-workspace/${code}/${email}`);
 export const retrieveUsersByWorkspaceIdApi = (id) => apiClient.get(`/get-users/${id}`);
 
 //Notification API
 export const retrieveNotificationByUserApi = (email) => apiClient(`/get-notifications/${email}`);
-export const sendInviteApi = (email, code) => apiClient.post(`/send-invite/${code}/${email}`);
+export const requestJoinApi = (userJoinWorkspace) => apiClient.post("/request-join", userJoinWorkspace);
+export const inviteJoinApi = (userJoinWorkspace) => apiClient.post("/invite-join", userJoinWorkspace);
 export const updateNotificationApi = (notification) => apiClient.patch("/update-notification", notification);
 
 //Post API

@@ -2,10 +2,13 @@ package com.teamten.executiveinsight.services;
 
 import com.teamten.executiveinsight.model.*;
 import com.teamten.executiveinsight.repositories.BusinessTitleRepository;
+import com.teamten.executiveinsight.repositories.UserJoinWorkspaceRepository;
 import com.teamten.executiveinsight.repositories.UserRepository;
 import com.teamten.executiveinsight.repositories.WorkspaceRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,10 +17,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class WorkspaceService {
     //Repositories
+    private final UserRepository userRepository;
     private final WorkspaceRepository workspaceRepository;
     private final BusinessTitleRepository businessTitleRepository;
-    private final UserRepository userRepository;
+    private final UserJoinWorkspaceRepository userJoinWorkspaceRepository;
 
+    //Others
     private final UniqueIdGenerator uniqueIdGenerator;
     public Users createWorkspace(WorkspaceRequest workspaceRequest) {
         Users user =  userRepository.findByEmail(workspaceRequest.email()).orElseThrow(EntityNotFoundException::new);
@@ -26,6 +31,7 @@ public class WorkspaceService {
             Workspace newWorkspace = new Workspace();
             newWorkspace.setName(workspaceRequest.name());
             newWorkspace.setBusinessTitle(businessTitle);
+            newWorkspace.setUser(user);
             for (int i = 0; i < businessTitle.getPosts().size(); i++) {
                 businessTitle.getPosts().get(i).getWorkspaces().add(newWorkspace);
             }
@@ -37,14 +43,27 @@ public class WorkspaceService {
         }
         return null;
     }
-    public boolean joinWorkspace(Users user, Workspace workspace) {
-        Optional<Users> theUser = userRepository.findUserByWorkspaceCode(workspace.getCode(), user.getUserId());
-        if (theUser.isPresent()) {
-            return false;
+    public ResponseEntity<String> joinWorkspace(String code, String email) {
+        Optional<Users> user = userRepository.findByEmail(email);
+        if (user.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
-        user.getWorkspaces().add(workspace);
-        userRepository.save(user);
-        workspaceRepository.save(workspace);
-        return true;
+        Optional<Workspace> workspace = workspaceRepository.findByCode(code);
+        if (workspace.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Workspace not found");
+        }
+        Optional<UserJoinWorkspace> isExists = userJoinWorkspaceRepository.findByUserAndWorkspace(email, code);
+        if (isExists.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists in the workspace");
+        }
+        try {
+            UserJoinWorkspace newUserJoinWorkspace = new UserJoinWorkspace();
+            newUserJoinWorkspace.setUser(user.get());
+            newUserJoinWorkspace.setWorkspace(workspace.get());
+            userJoinWorkspaceRepository.save(newUserJoinWorkspace);
+            return ResponseEntity.ok("User has been joined successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Something went wrong");
+        }
     }
 }

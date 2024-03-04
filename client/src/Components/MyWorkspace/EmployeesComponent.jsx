@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { retrieveUsersByWorkspaceIdApi, retrieveWorkspaceByIdApi, sendInviteApi } from "../api/ExecutiveInsightApiService";
+import { inviteJoinApi, retrieveUsersByWorkspaceIdApi, retrieveWorkspaceByIdApi, sendInviteApi } from "../api/ExecutiveInsightApiService";
 
 export default function EmployeesComponent() {
 
@@ -11,7 +11,7 @@ export default function EmployeesComponent() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [alertColor, setAlertColor] = useState('success');
-    const [showAlert, setShowAlert] = useState(false);
+    const [showAlert, setAlert] = useState(false);
     const [workspaceCode, setWorkspaceCode] = useState('');
     const [hasUsers, setHasUsers] = useState(false);
     const navigate = useNavigate();
@@ -38,27 +38,33 @@ export default function EmployeesComponent() {
     }
 
     function setNotShow() {
+        setAlert(false);
         setShow(false);
     }
 
     function sendInvite() {
-        setShowAlert(true);
-        sendInviteApi(email, workspaceCode)
-            .then((response) => handleResponse(response))
-            .catch((error) => handleResponse(error));
-    }
-
-    function handleResponse(response) {
-        if (response.status===200) {
-            setAlertColor('success')
-            setMessage(response.data)
-        } else if (response.response.status===409) {
-            setAlertColor('warning')
-            setMessage(response.response.data)
-        } else {
-            setAlertColor('danger')
-            setMessage(response.response.data)
+        console.log("Hello")
+        const userJoinWorkspace = {
+            email: email,
+            code: workspaceCode
         }
+        inviteJoinApi(userJoinWorkspace)
+            .then((response) => {
+                if (response.status===200) {
+                    setAlertColor('success');
+                    setMessage(response.data);
+                    setAlert(true);
+                } else {
+                    setAlertColor('warning')
+                    setMessage(response.data);
+                    setAlert(true);
+                }
+            })
+            .catch((error) => {
+                setAlertColor('danger')
+                setMessage(error.response.data);
+                setAlert(true);
+            });
     }
 
     function handleEmailChange(event) {

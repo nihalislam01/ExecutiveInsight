@@ -4,6 +4,7 @@ import com.teamten.executiveinsight.events.email.EmailCompleteEvent;
 import com.teamten.executiveinsight.events.email.EmailRequest;
 import com.teamten.executiveinsight.model.UserRequest;
 import com.teamten.executiveinsight.model.Users;
+import com.teamten.executiveinsight.repositories.UserJoinWorkspaceRepository;
 import com.teamten.executiveinsight.repositories.UserRepository;
 import com.teamten.executiveinsight.services.NotificationService;
 import com.teamten.executiveinsight.services.UserService;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -28,6 +30,7 @@ public class UserController {
 
     //Repositories
     private final UserRepository userRepository;
+    private final UserJoinWorkspaceRepository userJoinWorkspaceRepository;
 
     private final PasswordEncoder passwordEncoder;
     private final ApplicationEventPublisher publisher;
@@ -35,6 +38,10 @@ public class UserController {
     @GetMapping("/get-user/{email}")
     public Users getUser(@PathVariable String email) {
         return userRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
+    }
+    @GetMapping("/get-users/{id}")
+    public List<Users> retrieveUsers(@PathVariable Long id) {
+        return userJoinWorkspaceRepository.findUsersByWorkspaceId(id);
     }
     //Updating user information
     @PatchMapping("/update-user")

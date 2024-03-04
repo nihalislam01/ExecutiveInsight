@@ -22,7 +22,7 @@ export default function AuthProvider({ children }) {
                     config.headers.Authorization = jwtToken
                     return config
                 })
-                if (response.data.user.role=='ADMIN') {
+                if (response.data.user.role==='ADMIN') {
                     Cookies.set('hasWorkspace', true, {expires: 1});
                 }
                 return true;

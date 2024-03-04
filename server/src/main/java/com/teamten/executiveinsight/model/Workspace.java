@@ -18,6 +18,11 @@ public class Workspace {
     private Long workspaceId;
     private String name;
 
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private Users user;
+
     @ManyToOne
     @JoinColumn(name = "business_title_id")
     private BusinessTitle businessTitle;
@@ -26,14 +31,9 @@ public class Workspace {
     private String code;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "workspaces")
-    private List<Users> users = new ArrayList<>();
+    @OneToMany(mappedBy = "workspace")
+    private List<UserJoinWorkspace> userJoinWorkspaces = new ArrayList<>();
 
     @ManyToMany(mappedBy = "workspaces")
     private List<Post> posts = new ArrayList<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Notification> invitations = new ArrayList<>();
-
 }

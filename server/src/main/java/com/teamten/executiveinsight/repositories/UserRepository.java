@@ -12,12 +12,12 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<Users, Long> {
     Optional<Users> findByEmail(String email);
-    @Query("SELECT u FROM Users u JOIN u.workspaces w WHERE w.code = :code AND u.userId = :id")
-    Optional<Users> findUserByWorkspaceCode(@Param("code") String code, @Param("id") Long id);
-    @Query("SELECT u FROM Users u JOIN u.workspaces w WHERE w.id = :id")
-    List<Users> findUsersByWorkspaceId(@Param("id") Long id);
     @Query("SELECT n FROM Users u JOIN u.notifications n WHERE u.email= :email ORDER BY n.notificationId DESC")
     List<Notification> findNotificationsByUser(@Param("email") String email);
-    @Query("SELECT w FROM Users u JOIN u.workspaces w WHERE u.email= :email ORDER BY w.workspaceId DESC")
-    List<Workspace> findWorkspacesByUser(@Param("email") String email);
+//    @Query("SELECT u FROM Users u JOIN u.workspaces w WHERE w.code = :code AND u.userId = :id")
+//    Optional<Users> findUserByWorkspaceCode(@Param("code") String code, @Param("id") Long id);
+//    @Query("SELECT u FROM Users u JOIN u.workspaces w WHERE w.id = :id")
+//    List<Users> findUsersByWorkspaceId(@Param("id") Long id);
+//    @Query("SELECT w FROM Users u JOIN u.workspaces w WHERE u.email= :email ORDER BY w.workspaceId DESC")
+//    List<Workspace> findWorkspacesByUser(@Param("email") String email);
 }
