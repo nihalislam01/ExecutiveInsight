@@ -26,3 +26,5 @@ export const updateNotificationApi = (notification) => apiClient.patch("/update-
 //Post API
 export const addCustomPostApi = (post) => apiClient.post("/add-custom-post", post);
 export const deletePostApi = (id, title) => apiClient.delete(`/delete-post/${id}/${title}`);
+export const assignUserToPostApi = (email, code, postId) => apiClient.patch(`/assign-post/${email}/${code}/${postId}`);
+export const retrieveUsersByWorkspaceAndPostApi = (workspaceId, postId) => apiClient.get(`/get-post-users/${workspaceId}/${postId}`);

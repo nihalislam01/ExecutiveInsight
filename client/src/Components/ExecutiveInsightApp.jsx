@@ -21,8 +21,8 @@ import UserProfileComponent from './UserProfileComponent';
 //Admin Components
 import WorkspaceComponent from './MyWorkspace/WorkspaceComponent';
 import SidebarComponent from './MyWorkspace/SidebarComponent';
-import EmployeesComponent from './MyWorkspace/EmployeesComponent';
-import PostComponent from './MyWorkspace/PostComponent';
+import ListEmployeeComponent from './MyWorkspace/ListEmployeeComponent';
+import ListPostComponent from './MyWorkspace/ListPostComponent';
 
 import AuthProvider, { useAuth } from './security/AuthContext';
 
@@ -78,7 +78,7 @@ export default function ExecutiveInsightApp() {
                             <AuthenticatedRoute>
                                 <AdminRoute>
                                     <SidebarComponent />
-                                    <EmployeesComponent />
+                                    <ListEmployeeComponent />
                                 </AdminRoute>
                             </AuthenticatedRoute>
                         } />
@@ -87,7 +87,7 @@ export default function ExecutiveInsightApp() {
                             <AuthenticatedRoute>
                                 <AdminRoute>
                                     <SidebarComponent />
-                                    <PostComponent />
+                                    <ListPostComponent />
                                 </AdminRoute>
                             </AuthenticatedRoute>
                         } />

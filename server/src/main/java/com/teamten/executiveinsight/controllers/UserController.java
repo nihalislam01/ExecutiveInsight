@@ -2,6 +2,7 @@ package com.teamten.executiveinsight.controllers;
 
 import com.teamten.executiveinsight.events.email.EmailCompleteEvent;
 import com.teamten.executiveinsight.events.email.EmailRequest;
+import com.teamten.executiveinsight.model.UserJoinWorkspace;
 import com.teamten.executiveinsight.model.UserRequest;
 import com.teamten.executiveinsight.model.Users;
 import com.teamten.executiveinsight.repositories.UserJoinWorkspaceRepository;
@@ -40,8 +41,8 @@ public class UserController {
         return userRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
     }
     @GetMapping("/get-users/{id}")
-    public List<Users> retrieveUsers(@PathVariable Long id) {
-        return userJoinWorkspaceRepository.findUsersByWorkspaceId(id);
+    public List<UserJoinWorkspace> retrieveUsers(@PathVariable Long id) {
+        return userJoinWorkspaceRepository.findUserJoinWorkspaceByWorkspaceId(id);
     }
     //Updating user information
     @PatchMapping("/update-user")

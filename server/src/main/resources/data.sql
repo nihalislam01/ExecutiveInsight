@@ -8,5 +8,8 @@ insert into users(user_id, email, name, password, role, bio, is_enable, workspac
 update workspace set user_id = 1001 where workspace_id = 2001;
 update workspace set user_id = 1003 where workspace_id = 2002;
 
+insert into user_join_workspace(user_join_workspace_id, user_id, workspace_id, post_id) values(4001, 1002, 2001, null),
+(4002, 1003, 2001, null);
+
 insert into notification(notification_id, user_id, description, is_invitation) values(3001, 1001, 'Your very own workspace Food Bear has been created', false),
 (3002, 1003, 'Your very own workspace BrainStand has been created', false);
