@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface PostRepository extends JpaRepository<Post, Long> {
     Optional<Post> findByTitle(String title);
     @Query("SELECT p FROM Post p JOIN p.workspaces w WHERE w.workspaceId = :id AND p.title = :title")
-    Optional<Post> findPostByWorkspaceId(@Param("title") String title, @Param("id") Long id);
+    Optional<Post> findByTitleAndWorkspaceId(@Param("title") String title, @Param("id") Long id);
 }

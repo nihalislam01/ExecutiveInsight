@@ -2,22 +2,20 @@ package com.teamten.executiveinsight.services;
 
 import com.teamten.executiveinsight.model.UserRequest;
 import com.teamten.executiveinsight.model.Users;
+import com.teamten.executiveinsight.model.Workspace;
 import com.teamten.executiveinsight.repositories.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    public Users userSignup(UserRequest userRequest) {
+    public Users createUser(UserRequest userRequest) {
         Users newUser = new Users();
         newUser.setName(userRequest.name());
         newUser.setEmail(userRequest.email());
@@ -26,20 +24,28 @@ public class UserService {
         newUser.setEnable(false);
         return userRepository.save(newUser);
     }
-    public void updateUser(UserRequest userRequest) {
-        Users user = userRepository.findByEmail(userRequest.email()).orElseThrow(EntityNotFoundException::new);
-        user.setName(userRequest. name());
-        user.setPassword(passwordEncoder.encode(userRequest.password()));
+    public Optional<Users> getUser(String username) {
+        return userRepository.findByEmail(username);
+    }
+    public void updateUser(Users theUser) {
+        userRepository.save(theUser);
+    }
+    public void addWorkspace(Users user, Workspace workspace) {
+        user.setWorkspace(workspace);
+        user.setRole("ADMIN");
         userRepository.save(user);
     }
-
-    public void uploadPhoto(String email, MultipartFile file) {
-        try {
-            Users user = userRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
-            user.setPhoto(file.getBytes());
-            userRepository.save(user);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to upload profile photo", e);
-        }
+    public void removeUser(Users theUser) {
+        userRepository.delete(theUser);
     }
+
+//    public void uploadPhoto(String email, MultipartFile file) {
+//        try {
+//            Users user = this.getUser(email).orElseThrow(EntityNotFoundException::new);
+//            user.setPhoto(file.getBytes());
+//            userRepository.save(user);
+//        } catch (IOException e) {
+//            throw new RuntimeException("Failed to upload profile photo", e);
+//        }
+//    }
 }

@@ -1,11 +1,11 @@
 package com.teamten.executiveinsight.controllers;
 
 import com.teamten.executiveinsight.model.Users;
-import com.teamten.executiveinsight.repositories.UserRepository;
 import com.teamten.executiveinsight.security.JwtTokenRequest;
 import com.teamten.executiveinsight.security.JwtTokenResponse;
 import com.teamten.executiveinsight.security.JwtTokenService;
-import jakarta.persistence.EntityExistsException;
+import com.teamten.executiveinsight.services.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,16 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
 @RequiredArgsConstructor
 public class JwtAuthenticationController {
 
     //Services
     private final JwtTokenService tokenService;
-    private final UserRepository userRepository;
-
+    private final UserService userService;
     private final AuthenticationManager authenticationManager;
 
     //Authentication using JwtToken
@@ -41,7 +38,7 @@ public class JwtAuthenticationController {
 
         var token = tokenService.generateToken(authentication);
 
-        Users user = userRepository.findByEmail(jwtTokenRequest.username()).orElseThrow(EntityExistsException::new);
+        Users user = userService.getUser(jwtTokenRequest.username()).orElseThrow(EntityNotFoundException::new);
 
         return ResponseEntity.ok(new JwtTokenResponse(token, user));
     }

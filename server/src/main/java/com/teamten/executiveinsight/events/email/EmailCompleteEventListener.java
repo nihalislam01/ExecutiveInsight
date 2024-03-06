@@ -27,7 +27,7 @@ public class EmailCompleteEventListener implements ApplicationListener<EmailComp
     public void onApplicationEvent(EmailCompleteEvent event) {
         theUser = event.getUser();
         String verificationToken = UUID.randomUUID().toString();
-        verificationTokenService.saveToken(theUser, verificationToken);
+        verificationTokenService.addToken(theUser, verificationToken);
         try {
             if (event.isDidForgetPassword()) {
                 String url = event.getApplicationUrl()+"/verify-email/" + verificationToken + "/true";

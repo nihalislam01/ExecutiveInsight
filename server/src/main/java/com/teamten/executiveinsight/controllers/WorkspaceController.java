@@ -1,12 +1,9 @@
 package com.teamten.executiveinsight.controllers;
 
 import com.teamten.executiveinsight.model.*;
-import com.teamten.executiveinsight.repositories.BusinessTitleRepository;
-import com.teamten.executiveinsight.repositories.UserJoinWorkspaceRepository;
-import com.teamten.executiveinsight.repositories.WorkspaceRepository;
-import com.teamten.executiveinsight.services.NotificationService;
-import com.teamten.executiveinsight.services.WorkspaceService;
+import com.teamten.executiveinsight.services.*;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,39 +16,47 @@ import java.util.List;
 public class WorkspaceController {
 
     //Service
+    private final UserService userService;
     private final WorkspaceService workspaceService;
     private final NotificationService notificationService;
-
-    //Repositories
-    private final WorkspaceRepository workspaceRepository;
-    private final BusinessTitleRepository businessTitleRepository;
-    private final UserJoinWorkspaceRepository userJoinWorkspaceRepository;
+    private final BusinessTitleService businessTitleService;
+    private final UserJoinWorkspaceService userJoinWorkspaceService;
     @GetMapping("/get-workspace/{id}")
     public Workspace retrieveWorkspaceById(@PathVariable Long id) {
-        return workspaceRepository.findById(id).orElseThrow(EntityExistsException::new);
+        return workspaceService.getWorkspace(id).orElseThrow(EntityExistsException::new);
     }
     @GetMapping("/get-workspaces/{email}")
     public List<Workspace> retrieveWorkspaces(@PathVariable String email) {
-        return userJoinWorkspaceRepository.findWorkspacesByUserEmail(email);
+        return userJoinWorkspaceService.getAllWorkspace(email);
     }
     @GetMapping("/get-business-title")
     public List<BusinessTitle> retrieveBusinessTitle() {
-        return businessTitleRepository.findAll();
+        return businessTitleService.getAllTitle();
     }
     //Create My Workspace
     @PostMapping("/create-workspace")
-    public ResponseEntity<?> createWorkspace(@RequestBody WorkspaceRequest workspaceRequest) {
+    public ResponseEntity<String> createWorkspace(@RequestBody WorkspaceRequest workspaceRequest) {
+        Users user =  userService.getUser(workspaceRequest.email()).orElseThrow(EntityNotFoundException::new);
+        BusinessTitle businessTitle = businessTitleService.getTitle(workspaceRequest.title());
         try {
-            Users user = workspaceService.createWorkspace(workspaceRequest);
+            Workspace workspace = workspaceService.createWorkspace(user, businessTitle, workspaceRequest);
+            userService.addWorkspace(user, workspace);
             String description = "Your very own workspace " + workspaceRequest.name() + " has been created";
             notificationService.sendNotification(user, description);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok("Workspace has been created");
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Something went wrong");
         }
     }
     @PostMapping("/join-workspace/{code}/{email}")
     public ResponseEntity<String> joinWorkspace(@PathVariable String code, @PathVariable String email) {
-        return workspaceService.joinWorkspace(code, email);
+        Users user = userService.getUser(email).orElseThrow(EntityNotFoundException::new);
+        Workspace workspace = workspaceService.getWorkspace(code).orElseThrow(EntityNotFoundException::new);
+        try {
+            userJoinWorkspaceService.addUser(user, workspace);
+            return ResponseEntity.ok("User has been joined successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Something went wrong");
+        }
     }
 }

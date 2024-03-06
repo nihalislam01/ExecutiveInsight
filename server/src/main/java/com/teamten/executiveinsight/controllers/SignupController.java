@@ -4,8 +4,6 @@ import com.teamten.executiveinsight.events.email.EmailCompleteEvent;
 import com.teamten.executiveinsight.model.UserRequest;
 import com.teamten.executiveinsight.model.Users;
 import com.teamten.executiveinsight.model.VerificationToken;
-import com.teamten.executiveinsight.repositories.TokenRepository;
-import com.teamten.executiveinsight.repositories.UserRepository;
 import com.teamten.executiveinsight.services.VerificationTokenService;
 import com.teamten.executiveinsight.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Calendar;
 import java.util.Optional;
 
 @RestController
@@ -22,48 +21,47 @@ public class SignupController {
 
     //Services
     private final UserService userService;
-    private final VerificationTokenService verificationTokenService;
-
-    //Repositories
-    private final UserRepository userRepository;
-    private final TokenRepository tokenRepository;
-
     private final ApplicationEventPublisher publisher;
+    private final VerificationTokenService verificationTokenService;
 
     // Signup step01: Sending signup information
     @PostMapping("/signup")
-    public ResponseEntity<?> userSignup(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<String> userSignup(@RequestBody UserRequest userRequest) {
         try {
-            Optional<Users> user = userRepository.findByEmail(userRequest.email());
+            Optional<Users> user = userService.getUser(userRequest.email());
             if (user.isPresent()) {
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists");
             }
             // Signup step02: Saving information to database
-            Users theUser = userService.userSignup(userRequest);
+            Users theUser = userService.createUser(userRequest);
             // Signup step03: Sending verification email
             publisher.publishEvent(new EmailCompleteEvent(theUser, "http://localhost:3000", false));
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok("User sign up successful. Please check you email.");
         }
         catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Something went wrong");
         }
     }
     // Signup step04: Verifying the token
     @GetMapping("/verify-email/{token}/{isForgotPassword}")
     public ResponseEntity<?> verifyEmail(@PathVariable String token, @PathVariable String isForgotPassword){
-        Optional<VerificationToken> verificationToken = tokenRepository.findByToken(token);
+        Optional<VerificationToken> verificationToken = verificationTokenService.getToken(token);
         if (verificationToken.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid Token");
         }  else if (isForgotPassword.equalsIgnoreCase("true")) {
             return ResponseEntity.ok(verificationToken.get().getUser().getEmail());
         }
         // Signup step05: Validating the token
-        String verificationResult = verificationTokenService.validateToken(token);
-        if (verificationResult.equalsIgnoreCase("valid")){
-            return ResponseEntity.ok("User been verified. Please login");
-        } else if (verificationResult.equalsIgnoreCase("expired")) {
+        VerificationToken theToken = verificationToken.get();
+        Users theUser = theToken.getUser();
+        Calendar calendar = Calendar.getInstance();
+        if ((theToken.getExpirationTime().getTime() - calendar.getTime().getTime()) <= 0) {
+            verificationTokenService.removeToken(theToken);
+            userService.removeUser(theUser);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Verification token expired");
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Token");
+        theUser.setEnable(true);
+        userService.updateUser(theUser);
+        return ResponseEntity.ok("User been verified. Please login");
     }
 }

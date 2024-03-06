@@ -4,7 +4,6 @@ import com.teamten.executiveinsight.model.BusinessTitle;
 import com.teamten.executiveinsight.model.Post;
 import com.teamten.executiveinsight.repositories.BusinessTitleRepository;
 import com.teamten.executiveinsight.repositories.PostRepository;
-import com.teamten.executiveinsight.repositories.WorkspaceRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
@@ -68,8 +67,5 @@ public class DatabaseInitializer {
         postRepository.save(new Post("IT Consultant", businessTitleRepository.findById(10L).orElseThrow(EntityExistsException::new)));
         postRepository.save(new Post("Financial Consultant", businessTitleRepository.findById(10L).orElseThrow(EntityExistsException::new)));
         postRepository.save(new Post("Human Resources Consultant", businessTitleRepository.findById(10L).orElseThrow(EntityExistsException::new)));
-
-
-
     }
 }
