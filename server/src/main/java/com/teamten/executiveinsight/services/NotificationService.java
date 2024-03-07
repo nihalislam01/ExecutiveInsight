@@ -6,7 +6,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +23,7 @@ public class NotificationService {
     public void sendInviteOrRequest(Users user, Workspace workspace, String description, String email) {
         Optional<Notification> notification = notificationRepository.findFirstByUserEmailAndWorkspaceCodeOrderByNotificationIdDesc(email, workspace.getCode());
         if (notification.isPresent() && notification.get().isInvitation()) {
-            notification.get().setTime(LocalDateTime.now());
+            notification.get().setTime(LocalDate.now());
             notification.get().setUser(user);
             String newDescription = description + workspace.getName();
             notification.get().setDescription(newDescription);

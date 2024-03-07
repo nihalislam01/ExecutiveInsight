@@ -2,10 +2,10 @@ import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createWorkspaceApi, retrieveBusinessTitlesApi } from './api/ExecutiveInsightApiService';
-import { useAuth } from "./security/AuthContext";
+import { createWorkspaceApi, retrieveBusinessTitlesApi } from '../api/ExecutiveInsightApiService';
+import { useAuth } from "../security/AuthContext";
 
-export default function CreateWorkspaceFormComponent() {
+export default function CreateWorkspaceFormComponent({ setShow }) {
 
     const [workspaceName, setWorkspaceName] = useState('');
     const [titles, setTitles] = useState(null);
@@ -57,9 +57,9 @@ export default function CreateWorkspaceFormComponent() {
 
     return (
         <div className="FormComponent">
-            <div className='row justify-content-center'>
-                <div className='col-md-6'>
-                    <div className="card">
+            <div className='row justify-content-center position-relative'>
+                <div className='col-md-6 position-absolute'>
+                    <div className="card shadow">
                         <div className="card-header">Create you workspace</div>
                         <div className="card-body">
                             <div>
@@ -79,7 +79,11 @@ export default function CreateWorkspaceFormComponent() {
                                         }
                                     </select>
                                 </div>
-                                <button type="button" className="btn btn-success form-control" onClick={handleSubmit}>Create Workspace</button>
+                                <hr />
+                                <div className='text-end'>
+                                    <button type="button" className="btn btn-secondary mx-2" onClick={() => setShow(false)}>Cancel</button>
+                                    <button type="button" className="btn btn-success" onClick={handleSubmit}>Create Workspace</button>
+                                </div>
                             </div>
                         </div>
                     </div>

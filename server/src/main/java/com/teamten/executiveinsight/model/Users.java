@@ -16,8 +16,8 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-
     private String name;
+
     @NaturalId(mutable = true)
     private String email;
     private String password;
@@ -45,4 +45,8 @@ public class Users {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<UserJoinWorkspace> userJoinWorkspaces = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<UserJoinTeam> userJoinTeams = new ArrayList<>();
 }

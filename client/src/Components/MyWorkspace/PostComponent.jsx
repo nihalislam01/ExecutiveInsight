@@ -65,6 +65,9 @@ export default function PostComponent({ post, id }) {
                         )
                     )
                 }
+                {!hasUsers &&
+                    <Dropdown.Item className="text-center">No employees yet</Dropdown.Item>
+                }
             </Dropdown.Menu>
         </Dropdown>
     )

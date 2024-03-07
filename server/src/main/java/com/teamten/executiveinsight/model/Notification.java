@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -16,7 +16,7 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notificationId;
     private String description;
-    private LocalDateTime time = LocalDateTime.now();
+    private LocalDate time = LocalDate.now();
     private String workspaceCode;
     private String userEmail;
     private boolean isInvitation = false;

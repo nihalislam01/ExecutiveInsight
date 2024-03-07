@@ -18,6 +18,9 @@ public class Workspace {
     private Long workspaceId;
     private String name;
 
+    @NaturalId(mutable = true)
+    private String code;
+
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "user_id")
@@ -27,12 +30,12 @@ public class Workspace {
     @JoinColumn(name = "business_title_id")
     private BusinessTitle businessTitle;
 
-    @NaturalId(mutable = true)
-    private String code;
-
     @JsonIgnore
     @OneToMany(mappedBy = "workspace")
     private List<UserJoinWorkspace> userJoinWorkspaces = new ArrayList<>();
+
+    @OneToMany(mappedBy = "workspace")
+    private List<Team> teams;
 
     @ManyToMany(mappedBy = "workspaces")
     private List<Post> posts = new ArrayList<>();

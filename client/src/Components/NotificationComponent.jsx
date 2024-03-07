@@ -73,7 +73,7 @@ export default function NotificationComponent() {
                                 notifications.map(
                                     notification => (
                                         <tr key={notification.notificationId}>
-                                            <td className='form-control bg-light mb-3'>
+                                            <td className='form-control mb-3' style={{ backgroundColor: "#a3cef1", borderColor: '#0466c8' }}>
                                                 <div className="row pt-3 pb-3">
                                                     <div className='text-start col-md-6'>
                                                         <div>{notification.description}</div>

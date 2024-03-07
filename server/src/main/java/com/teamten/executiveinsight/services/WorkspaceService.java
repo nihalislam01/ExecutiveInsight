@@ -32,5 +32,9 @@ public class WorkspaceService {
     public void updateWorkspace(Workspace workspace) {
         workspaceRepository.save(workspace);
     }
+    public void updateWorkspace(Workspace workspace, Team team) {
+        workspace.getTeams().remove(team);
+        workspaceRepository.save(workspace);
+    }
 }
 
