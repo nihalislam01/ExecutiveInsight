@@ -29,8 +29,9 @@ export default function PostComponent({ post, id }) {
     }
 
     function selectColor(id) {
-        const colors = ["warning", "success", "primary", "secondary", "info"]
-        return colors[id%5];
+        const colors = ["warning", "success", "primary", "secondary", "info"];
+        const customColors = ["3a5a40", "7f5539", "588157", "30638e", "3c6e71", "ad2831", "495057", "b5838d", "6a4c93", "ee6c4d"];
+        return customColors[id%10];
     }
 
     function handleDelete(title) {
@@ -51,10 +52,10 @@ export default function PostComponent({ post, id }) {
 
     return (
         <Dropdown show={isOpen} onToggle={toggleDropdown}>
-            <Dropdown.Toggle className={`btn btn-${selectColor(post.postId)} form-control text-start`}>
+            <Dropdown.Toggle className={`btn form-control text-start border-0`} style={{ backgroundColor: `#${selectColor(post.postId)}`}}>
                 <div className="d-flex justify-content-between align-items-center">
                     <p className="m-0">{post.title}</p>
-                    <p className={`btn btn-${selectColor(post.postId)} m-0`} onClick={() => handleDelete(post.title)}><FontAwesomeIcon icon={faTrashCan} /></p>
+                    <p className={`btn m-0`} style={{ backgroundColor: `#${selectColor(post.postId)}`}} onClick={() => handleDelete(post.title)}><FontAwesomeIcon icon={faTrashCan} /></p>
                 </div>
             </Dropdown.Toggle>
             <Dropdown.Menu className="form-control">
@@ -66,7 +67,7 @@ export default function PostComponent({ post, id }) {
                     )
                 }
                 {!hasUsers &&
-                    <Dropdown.Item className="text-center">No employees yet</Dropdown.Item>
+                    <Dropdown.Item className="text-center">No members yet</Dropdown.Item>
                 }
             </Dropdown.Menu>
         </Dropdown>

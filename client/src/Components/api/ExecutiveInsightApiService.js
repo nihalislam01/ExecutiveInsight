@@ -28,3 +28,6 @@ export const addCustomPostApi = (post) => apiClient.post("/add-custom-post", pos
 export const deletePostApi = (id, title) => apiClient.delete(`/delete-post/${id}/${title}`);
 export const assignUserToPostApi = (email, code, postId) => apiClient.patch(`/assign-post/${email}/${code}/${postId}`);
 export const retrieveUsersByWorkspaceAndPostApi = (workspaceId, postId) => apiClient.get(`/get-post-users/${workspaceId}/${postId}`);
+
+//Team API
+export const createTeamApi = (team) => apiClient.post("/create-team", team);

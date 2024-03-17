@@ -5,6 +5,8 @@ import { retrieveWorkspaceByIdApi } from "../api/ExecutiveInsightApiService";
 import { useAuth } from "../security/AuthContext"
 import AddPostComponent from "./AddPostComponent";
 import PostComponent from "./PostComponent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export default function ListPostComponent() {
 
@@ -40,10 +42,7 @@ export default function ListPostComponent() {
             <div className="row">
                 <div className="col-md-2"></div>
                 <div className="col-md-10">
-                    <div className="d-flex justify-content-between mb-4">
-                        <h2 className="px-5">Posts</h2>
-                        <button className="btn btn-outline-primary px-4 mx-5" onClick={showForm}>Add Post</button>
-                    </div>
+                    <h2 className="mx-3 text-start">Posts</h2>
                     <table className='table'>
                         <tbody>
                             {hasPosts &&
@@ -57,6 +56,11 @@ export default function ListPostComponent() {
                                     )
                                 )
                             }
+                            <tr>
+                                <td>
+                                    <button className="btn form-control py-2" onClick={showForm} style={{ backgroundColor: "#e9ecef" }}><FontAwesomeIcon icon={faPlus} /></button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

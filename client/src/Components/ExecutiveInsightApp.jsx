@@ -22,6 +22,7 @@ import WorkspaceComponent from './MyWorkspace/WorkspaceComponent';
 import SidebarComponent from './MyWorkspace/SidebarComponent';
 import ListEmployeeComponent from './MyWorkspace/ListEmployeeComponent';
 import ListPostComponent from './MyWorkspace/ListPostComponent';
+import ListTeamComponent from './MyWorkspace/ListTeamComponent';
 
 import AuthProvider, { useAuth } from './security/AuthContext';
 
@@ -73,7 +74,16 @@ export default function ExecutiveInsightApp() {
                             </AuthenticatedRoute>
                         } />
 
-                        <Route path='/employees/:id' element={
+                        <Route path='/teams/:id' element={
+                            <AuthenticatedRoute>
+                                <AdminRoute>
+                                    <SidebarComponent />
+                                    <ListTeamComponent />
+                                </AdminRoute>
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/members/:id' element={
                             <AuthenticatedRoute>
                                 <AdminRoute>
                                     <SidebarComponent />
