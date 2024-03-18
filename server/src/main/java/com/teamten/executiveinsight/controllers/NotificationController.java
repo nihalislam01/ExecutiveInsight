@@ -44,7 +44,7 @@ public class NotificationController {
         if (isExists.isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("User already joined the workspace");
         }
-        String description = "You have been invited to the workspace " + workspace.getName();
+        String description = "You have been invited to the workspace ";
         notificationService.sendInviteOrRequest(user.get(), workspace, description, user.get().getEmail());
         return ResponseEntity.ok("Invitation send. Please ask your employee to check their notification");
     }

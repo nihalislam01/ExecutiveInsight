@@ -8,6 +8,9 @@ export const verifyEmailApi = (token, isForgotPassword) => apiClient.get(`/verif
 export const retrieveUserApi = (email) => apiClient.get(`/get-user/${email}`);
 export const forgotPasswordApi = (email) => apiClient.post("/forgot-password", email);
 export const resetPasswordApi = (user) => apiClient.patch("/reset-password", user);
+export const updateProfileInfoApi = (user) => apiClient.patch("/update-profile", user);
+export const uploadPhotoApi = (imageData) => apiClient.patch("/upload-photo", imageData);
+export const changePasswordApi = (password) => apiClient.patch("/change-password", password);
 
 //Workspace API
 export const retrieveBusinessTitlesApi = () => apiClient.get("/get-business-title");
@@ -28,3 +31,6 @@ export const addCustomPostApi = (post) => apiClient.post("/add-custom-post", pos
 export const deletePostApi = (id, title) => apiClient.delete(`/delete-post/${id}/${title}`);
 export const assignUserToPostApi = (email, code, postId) => apiClient.patch(`/assign-post/${email}/${code}/${postId}`);
 export const retrieveUsersByWorkspaceAndPostApi = (workspaceId, postId) => apiClient.get(`/get-post-users/${workspaceId}/${postId}`);
+
+//Team API
+export const createTeamApi = (team) => apiClient.post("/create-team", team);

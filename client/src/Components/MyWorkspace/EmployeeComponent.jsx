@@ -27,7 +27,7 @@ export default function EmployeeComponent({ userJoinWorkspace, hasPosts, posts, 
     authContext.refresh();
     assignUserToPostApi(email, workspaceCode, postId)
         .then((response) => {
-            window.location.href = `/employees/${id}`;
+            window.location.href = `/members/${id}`;
         })
         .catch((error) => navigate('/error'))
 }

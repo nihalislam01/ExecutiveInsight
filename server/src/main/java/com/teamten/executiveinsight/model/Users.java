@@ -23,13 +23,15 @@ public class Users {
     private String password;
     private String role;
     private String bio;
+    private String location;
     private boolean isEnable;
 
-    @Lob
-    private byte[] photo;
+    @Column(columnDefinition = "TEXT")
+    private String image;
 
-    @Lob
-    private byte[] badge;
+    @OneToOne
+    @JoinColumn(name = "badge_id")
+    private Badge badge;
 
     @OneToOne
     @JoinColumn(name = "workspace_id")

@@ -1,0 +1,12 @@
+.notification-container {
+    height: 500px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    top: -46px;
+    right: 15px;
+    overflow: auto;
+}
+
+.date {
+    font-size: 12px;
+}

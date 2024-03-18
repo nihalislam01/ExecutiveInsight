@@ -37,9 +37,9 @@ export default function SidebarComponent() {
                     <table className="table table-hover">
                         <tbody>
                             <tr><td><Link className="nav-link" to="/my-workspace">Main Dashboard</Link></td></tr>
-                            <tr><td><Link className="nav-link" to="/my-workspace">Teams</Link></td></tr>
-                            <tr><td><Link className="nav-link" to={`/employees/${workspaceId}`}>Employees</Link></td></tr>
-                            <tr><td><Link className="nav-link" to={`/posts/${workspaceId}`}>Employee Posts</Link></td></tr>
+                            <tr><td><Link className="nav-link" to={`/teams/${workspaceId}`}>Teams</Link></td></tr>
+                            <tr><td><Link className="nav-link" to={`/members/${workspaceId}`}>Members</Link></td></tr>
+                            <tr><td><Link className="nav-link" to={`/posts/${workspaceId}`}>Member Posts</Link></td></tr>
                             <tr><td><Link className="nav-link" to="/my-workspace">Products</Link></td></tr>
                             <tr><td><Link className="nav-link" to="/my-workspace">Sales</Link></td></tr>
                             <tr><td><Link className="nav-link" to="/my-workspace">Orders</Link></td></tr>

@@ -1,5 +1,6 @@
 package com.teamten.executiveinsight.services;
 
+import com.teamten.executiveinsight.model.Badge;
 import com.teamten.executiveinsight.model.UserRequest;
 import com.teamten.executiveinsight.model.Users;
 import com.teamten.executiveinsight.model.Workspace;
@@ -22,6 +23,7 @@ public class UserService {
         newUser.setPassword(passwordEncoder.encode(userRequest.password()));
         newUser.setRole("USER");
         newUser.setEnable(false);
+        newUser.setBadge(new Badge());
         return userRepository.save(newUser);
     }
     public Optional<Users> getUser(String username) {

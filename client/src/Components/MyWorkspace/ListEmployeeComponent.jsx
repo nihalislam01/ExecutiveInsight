@@ -4,6 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { retrieveUsersByWorkspaceIdApi, retrieveWorkspaceByIdApi } from "../api/ExecutiveInsightApiService";
 import EmployeeComponent from "./EmployeeComponent";
 import InviteEmployeeComponent from "./InviteEmployeeComponent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import '../styles/ListComponent.css';
 
 export default function ListEmployeeComponent() {
 
@@ -44,7 +47,7 @@ export default function ListEmployeeComponent() {
                 <div className="col-md-2">
                 </div>
                 <div className="col-md-10 text-end">
-                    <button type="button" className="btn btn-outline-success text-end mx-5 px-4 mb-4" onClick={() => setShow(true)}>Invite</button>
+                    <h2 className="text-start mx-3">Members</h2>
                     <table className="table">
                         <tbody> 
                             {hasUserJoinWorkspaces &&
@@ -58,6 +61,11 @@ export default function ListEmployeeComponent() {
                                     )
                                 )
                             }
+                            <tr>
+                                <td>
+                                    <div className="w-100 py-2 create text-center" onClick={() => setShow(true)}><FontAwesomeIcon icon={faPlus} /></div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
