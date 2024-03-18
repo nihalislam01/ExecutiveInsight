@@ -1,0 +1,9 @@
+.create-team:hover {
+    background-color: #cccccc;
+    cursor: pointer;
+}
+
+.create-team {
+    background-color: #f2f2f2;
+    border-radius: 6px;
+}

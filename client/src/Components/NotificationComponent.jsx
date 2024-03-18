@@ -3,6 +3,9 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { joinWorkspaceApi, retrieveNotificationByUserApi, updateNotificationApi } from './api/ExecutiveInsightApiService';
 import { useAuth } from './security/AuthContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
+import './styles/NotificationComponent.css'
 
 export default function NotificationComponent() {
 
@@ -62,10 +65,11 @@ export default function NotificationComponent() {
 
 
     return (
-        <div className="NotificationComponent">
-            <div className='container'>
-                {!hasNotifications && <p>No notifications yet</p>}
-                {hasNotifications && <p>Notifications</p>}
+        <div className='row justify-content-end position-relative pt-0 mt-0'>
+            <div className='col-md-4 position-absolute shadow z-2 border border-2 notification-container'>
+                {!hasNotifications && <h5 className='text-start my-4'>No notifications yet</h5>}
+                {hasNotifications && <h5 className='text-start my-4'>Notifications</h5>}
+                <hr className='mt-0' />
                 <table className='table'>
                     <tbody>
                         {
@@ -73,16 +77,24 @@ export default function NotificationComponent() {
                                 notifications.map(
                                     notification => (
                                         <tr key={notification.notificationId}>
-                                            <td className='form-control mb-3' style={{ backgroundColor: "#a3cef1", borderColor: '#0466c8' }}>
-                                                <div className="row pt-3 pb-3">
+                                            <td className='form-control mb-3' style={{ backgroundColor: "#f2f2f2" }}>
+                                                <div className="row">
+                                                {!notification.invitation &&
+                                                    <div className='text-start col-md-12'>
+                                                        <div>{notification.description}</div>
+                                                        <div className='date'>{notification.time}</div>
+                                                    </div>
+                                                }
+                                                {notification.invitation &&
                                                     <div className='text-start col-md-6'>
                                                         <div>{notification.description}</div>
-                                                        <div style={{"fontSize": "12px"}}>{notification.time}</div>
+                                                        <div className='date'>{notification.time}</div>
                                                     </div>
+                                                }
                                                 {notification.invitation &&
                                                     <div className='text-end col-md-6'>
-                                                        <button className='btn btn-outline-secondary mx-2 px-4' onClick={() => handleReject(notification.notificationId, notification.userEmail )}>Reject</button>
-                                                        <button className='btn btn-outline-primary px-4' onClick={() => handleAccept(notification.notificationId, notification.workspaceCode, notification.userEmail)}>Accept</button>
+                                                        <button className='btn' onClick={() => handleReject(notification.notificationId, notification.userEmail )}><FontAwesomeIcon icon={faXmark} /></button>
+                                                        <button className='btn' onClick={() => handleAccept(notification.notificationId, notification.workspaceCode, notification.userEmail)}><FontAwesomeIcon icon={faCheck} /></button>
                                                     </div>
                                                 }
                                                 </div>                                                      

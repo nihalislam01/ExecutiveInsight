@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import CreateTeamComponent from "./CreateTeamComponent";
+import '../styles/ListTeamComponent.css';
 
 export default function ListTeamComponent() {
 
@@ -55,8 +56,8 @@ export default function ListTeamComponent() {
                             )
                         }
                         <div className="col-12 col-md-3">
-                            <div className="btn w-100" style={{backgroundColor: "#e9ecef" }} onClick={addTeam}>
-                                <h4 className="py-5"><FontAwesomeIcon icon={faPlus} /></h4>
+                            <div className="w-100 create-team" onClick={addTeam}>
+                                <h4 style={{ paddingTop: "58px", paddingBottom: "58px" }}><FontAwesomeIcon icon={faPlus} /></h4>
                             </div>
                         </div>
                     </div>

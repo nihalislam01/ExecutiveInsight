@@ -14,7 +14,6 @@ import ErrorComponent from './ErrorComponent';
 //Authorized Components
 import HomeComponent from './HomeComponent';
 import NotificationComponent from './NotificationComponent';
-import CodeFormComponent from './CodeFormComponent';
 import UserProfileComponent from './UserProfileComponent';
 
 //Admin Components
@@ -104,12 +103,6 @@ export default function ExecutiveInsightApp() {
                         <Route path='/workspace-profile/:id' element={
                             <AuthenticatedRoute>
                                 <WorkspaceComponent />
-                            </AuthenticatedRoute>
-                        } />
-
-                        <Route path='/join-workspace' element={
-                            <AuthenticatedRoute>
-                                <CodeFormComponent />
                             </AuthenticatedRoute>
                         } />
 

@@ -40,19 +40,17 @@ export default function CodeFormComponent() {
     }
 
     return (
-        <div className="CodeFormComponent">
-            <div className='row justify-content-center'>
-                <div className='col-md-6'>
-                    {showAlert && <div className={`alert alert-${alertColor}`}>{message}</div>}
-                    <div className="card">
-                        <div className="card-header">Enter workspace code</div>
-                        <div className="card-body">
-                            <div>
-                                <div className="mb-3">
-                                    <input type="text" className="form-control" name="code" value={code} onChange={handleCodeChange} required />
-                                </div>
-                                <button type="button" className="btn btn-success form-control" onClick={handleSubmit}>Join Workspace</button>
+        <div className='row justify-content-center position-relative'>
+            <div className='col-md-6 position-absolute z-2' style={{ top: "150px" }}>
+                {showAlert && <div className={`alert alert-${alertColor}`}>{message}</div>}
+                <div className="card shadow">
+                    <div className="card-header">Enter workspace code</div>
+                    <div className="card-body">
+                        <div>
+                            <div className="mb-3">
+                                <input type="text" className="form-control" name="code" value={code} onChange={handleCodeChange} required />
                             </div>
+                            <button type="button" className="btn btn-success form-control" onClick={handleSubmit}>Join Workspace</button>
                         </div>
                     </div>
                 </div>
