@@ -1,9 +1,7 @@
 package com.teamten.executiveinsight.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -14,6 +12,10 @@ public class Badge {
     private Long badgeId;
     private Long points;
     private Long pointLimit;
+
+    @JsonIgnore
+    @OneToOne
+    private Users user;
 
     public Badge() {
         this.points = 0L;

@@ -23,7 +23,6 @@ public class UserService {
         newUser.setPassword(passwordEncoder.encode(userRequest.password()));
         newUser.setRole("USER");
         newUser.setEnable(false);
-        newUser.setBadge(new Badge());
         return userRepository.save(newUser);
     }
     public Optional<Users> getUser(String username) {

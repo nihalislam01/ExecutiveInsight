@@ -1,9 +1,11 @@
 package com.teamten.executiveinsight.controllers;
 
 import com.teamten.executiveinsight.events.email.EmailCompleteEvent;
+import com.teamten.executiveinsight.model.entity.Badge;
 import com.teamten.executiveinsight.model.request.UserRequest;
 import com.teamten.executiveinsight.model.entity.Users;
 import com.teamten.executiveinsight.model.entity.VerificationToken;
+import com.teamten.executiveinsight.services.BadgeService;
 import com.teamten.executiveinsight.services.VerificationTokenService;
 import com.teamten.executiveinsight.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class SignupController {
     private final UserService userService;
     private final ApplicationEventPublisher publisher;
     private final VerificationTokenService verificationTokenService;
+    private final BadgeService badgeService;
 
     // Signup step01: Sending signup information
     @PostMapping("/signup")
@@ -34,6 +37,10 @@ public class SignupController {
             }
             // Signup step02: Saving information to database
             Users theUser = userService.createUser(userRequest);
+            Badge newBadge = new Badge();
+            theUser.setBadge(newBadge);
+            badgeService.updateBadge(newBadge);
+            userService.updateUser(theUser);
             // Signup step03: Sending verification email
             publisher.publishEvent(new EmailCompleteEvent(theUser, "http://localhost:3000", false));
             return ResponseEntity.ok("User sign up successful. Please check you email.");
