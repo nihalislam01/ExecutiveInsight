@@ -1,12 +1,11 @@
 package com.teamten.executiveinsight.services;
 
-import com.teamten.executiveinsight.model.Team;
-import com.teamten.executiveinsight.model.UserJoinTeam;
-import com.teamten.executiveinsight.model.Users;
+import com.teamten.executiveinsight.model.entity.Team;
+import com.teamten.executiveinsight.model.entity.UserJoinTeam;
+import com.teamten.executiveinsight.model.entity.Users;
 import com.teamten.executiveinsight.repositories.UserJoinTeamRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

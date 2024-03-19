@@ -1,6 +1,9 @@
 package com.teamten.executiveinsight.controllers;
 
-import com.teamten.executiveinsight.model.*;
+import com.teamten.executiveinsight.model.entity.Team;
+import com.teamten.executiveinsight.model.entity.Users;
+import com.teamten.executiveinsight.model.entity.Workspace;
+import com.teamten.executiveinsight.model.request.TeamRequest;
 import com.teamten.executiveinsight.services.*;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

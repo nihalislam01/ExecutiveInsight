@@ -1,6 +1,6 @@
 package com.teamten.executiveinsight.repositories;
 
-import com.teamten.executiveinsight.model.Team;
+import com.teamten.executiveinsight.model.entity.Team;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

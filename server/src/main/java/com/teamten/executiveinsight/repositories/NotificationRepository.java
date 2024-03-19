@@ -1,6 +1,6 @@
 package com.teamten.executiveinsight.repositories;
 
-import com.teamten.executiveinsight.model.Notification;
+import com.teamten.executiveinsight.model.entity.Notification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

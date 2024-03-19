@@ -1,7 +1,7 @@
 package com.teamten.executiveinsight.services;
 
-import com.teamten.executiveinsight.model.BusinessTitle;
-import com.teamten.executiveinsight.model.Post;
+import com.teamten.executiveinsight.model.entity.BusinessTitle;
+import com.teamten.executiveinsight.model.entity.Post;
 import com.teamten.executiveinsight.repositories.BusinessTitleRepository;
 import com.teamten.executiveinsight.repositories.PostRepository;
 import jakarta.annotation.PostConstruct;

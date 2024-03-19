@@ -1,7 +1,7 @@
 package com.teamten.executiveinsight.services;
 
-import com.teamten.executiveinsight.model.Users;
-import com.teamten.executiveinsight.model.VerificationToken;
+import com.teamten.executiveinsight.model.entity.Users;
+import com.teamten.executiveinsight.model.entity.VerificationToken;
 import com.teamten.executiveinsight.repositories.TokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

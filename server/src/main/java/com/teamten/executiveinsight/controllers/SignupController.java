@@ -1,9 +1,9 @@
 package com.teamten.executiveinsight.controllers;
 
 import com.teamten.executiveinsight.events.email.EmailCompleteEvent;
-import com.teamten.executiveinsight.model.UserRequest;
-import com.teamten.executiveinsight.model.Users;
-import com.teamten.executiveinsight.model.VerificationToken;
+import com.teamten.executiveinsight.model.request.UserRequest;
+import com.teamten.executiveinsight.model.entity.Users;
+import com.teamten.executiveinsight.model.entity.VerificationToken;
 import com.teamten.executiveinsight.services.VerificationTokenService;
 import com.teamten.executiveinsight.services.UserService;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.teamten.executiveinsight.controllers;
 
-import com.teamten.executiveinsight.model.Users;
+import com.teamten.executiveinsight.model.entity.Users;
 import com.teamten.executiveinsight.security.JwtTokenRequest;
 import com.teamten.executiveinsight.security.JwtTokenResponse;
 import com.teamten.executiveinsight.security.JwtTokenService;

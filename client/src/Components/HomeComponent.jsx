@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { retrieveWorkspacesByUserApi } from './api/ExecutiveInsightApiService';
 import { useAuth } from './security/AuthContext';
 import { Image } from "react-bootstrap";
-import noWorkspace from "./styles/executive-insight-no-workspace.png";
 
 export default function HomeComponent() {
 
@@ -45,7 +44,7 @@ export default function HomeComponent() {
             <div className='container'>
                 {hasWorkspaces && <h2 className='text-start mb-4'>Workspaces</h2>}
                 {hasWorkspaces && <hr />}
-                {!hasWorkspaces && <div><Image src={noWorkspace} alt="noWorkspace" style={{ height: "250px", width: "250px" }} /></div>}
+                {!hasWorkspaces && <h5 className='mt-4'>Haven't Joined Any Workspace Yet</h5>}
                 <table className='table'>
                     <tbody>
                         {

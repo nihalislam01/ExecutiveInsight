@@ -1,6 +1,6 @@
 package com.teamten.executiveinsight.events.email;
 
-import com.teamten.executiveinsight.model.Users;
+import com.teamten.executiveinsight.model.entity.Users;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationEvent;

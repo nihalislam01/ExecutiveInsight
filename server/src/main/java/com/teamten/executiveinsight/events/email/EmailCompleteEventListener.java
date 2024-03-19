@@ -1,6 +1,6 @@
 package com.teamten.executiveinsight.events.email;
 
-import com.teamten.executiveinsight.model.Users;
+import com.teamten.executiveinsight.model.entity.Users;
 import com.teamten.executiveinsight.services.VerificationTokenService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

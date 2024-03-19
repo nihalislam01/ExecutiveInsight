@@ -1,6 +1,6 @@
 package com.teamten.executiveinsight.security;
 
-import com.teamten.executiveinsight.model.Users;
+import com.teamten.executiveinsight.model.entity.Users;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

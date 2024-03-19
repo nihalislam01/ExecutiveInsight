@@ -2,7 +2,11 @@ package com.teamten.executiveinsight.controllers;
 
 import com.teamten.executiveinsight.events.email.EmailCompleteEvent;
 import com.teamten.executiveinsight.events.email.EmailRequest;
-import com.teamten.executiveinsight.model.*;
+import com.teamten.executiveinsight.model.entity.UserJoinWorkspace;
+import com.teamten.executiveinsight.model.entity.Users;
+import com.teamten.executiveinsight.model.request.ImageDataRequest;
+import com.teamten.executiveinsight.model.request.PasswordRequest;
+import com.teamten.executiveinsight.model.request.UserRequest;
 import com.teamten.executiveinsight.services.NotificationService;
 import com.teamten.executiveinsight.services.UserJoinWorkspaceService;
 import com.teamten.executiveinsight.services.UserService;
@@ -11,11 +15,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,6 +1,11 @@
 package com.teamten.executiveinsight.controllers;
 
-import com.teamten.executiveinsight.model.*;
+import com.teamten.executiveinsight.model.entity.Notification;
+import com.teamten.executiveinsight.model.entity.UserJoinWorkspace;
+import com.teamten.executiveinsight.model.entity.Users;
+import com.teamten.executiveinsight.model.entity.Workspace;
+import com.teamten.executiveinsight.model.request.NotificationRequest;
+import com.teamten.executiveinsight.model.request.UserJoinWorkspaceRequest;
 import com.teamten.executiveinsight.services.NotificationService;
 import com.teamten.executiveinsight.services.UserJoinWorkspaceService;
 import com.teamten.executiveinsight.services.UserService;

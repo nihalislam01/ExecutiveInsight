@@ -1,8 +1,8 @@
 package com.teamten.executiveinsight.repositories;
 
-import com.teamten.executiveinsight.model.UserJoinWorkspace;
-import com.teamten.executiveinsight.model.Users;
-import com.teamten.executiveinsight.model.Workspace;
+import com.teamten.executiveinsight.model.entity.UserJoinWorkspace;
+import com.teamten.executiveinsight.model.entity.Users;
+import com.teamten.executiveinsight.model.entity.Workspace;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
