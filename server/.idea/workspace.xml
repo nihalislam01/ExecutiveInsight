@@ -5,53 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98024a58-7d0a-4e43-8c66-860eadc4b630" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/CreateTeamComponent.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/ListTeamComponent.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/TeamComponent.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/Components/UserProfileWorkspaceComponent.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/Components/styles/NotificationComponent.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/Components/styles/nihal_photo.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/server.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/CodeFormComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/CodeFormComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/ExecutiveInsightApp.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/ExecutiveInsightApp.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/HeaderComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/HeaderComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/Components/HomeComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/HomeComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/EmployeeComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/EmployeeComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/ListEmployeeComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/ListEmployeeComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/ListPostComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/ListPostComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/PostComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/PostComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/ListTeamComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/ListTeamComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/SidebarComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/SidebarComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/NotificationComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/NotificationComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/ResetPasswordComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/ResetPasswordComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/SignupComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/SignupComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/UserProfileComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/UserProfileComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/api/ExecutiveInsightApiService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/api/ExecutiveInsightApiService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/styles/SidebarComponent.css" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/styles/SidebarComponent.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/styles/executive-insight-blank-user.png" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/styles/executive-insight-blank-user.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/NotificationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/NotificationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/TeamController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/TeamController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/UserRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/UserRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/Users.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TeamController.class.uniqueId0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/UserJoinTeamRepository.class.uniqueId2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/UserJoinTeamService.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/UserController.class.uniqueId0" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/UserController.class.uniqueId0" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/controllers/NotificationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/controllers/NotificationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/controllers/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/controllers/TeamController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/UserRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/UserRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/services/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

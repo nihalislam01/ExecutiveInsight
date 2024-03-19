@@ -44,6 +44,7 @@ export default function ListPostComponent() {
                 <div className="col-md-2"></div>
                 <div className="col-md-10">
                     <h2 className="mx-3 text-start">Posts</h2>
+                    <hr />
                     <table className='table'>
                         <tbody>
                             {hasPosts &&

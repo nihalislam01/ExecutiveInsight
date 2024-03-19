@@ -46,7 +46,8 @@ export default function ListTeamComponent() {
             <Row>
                 <Col xs={2}></Col>
                 <Col xs={10}>
-                    <h5 className="text-start my-4">Teams</h5>
+                    <h2 className="text-start mx-3">Teams</h2>
+                    <hr />
                     <div className="row g-2">
                         {hasTeams &&
                             teams.map(

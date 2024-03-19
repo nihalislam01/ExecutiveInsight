@@ -66,6 +66,7 @@ public class UserController {
         if (passwordEncoder.matches(passwordRequest.oldPassword(), user.getPassword())) {
             user.setPassword(passwordEncoder.encode(passwordRequest.newPassword()));
             userService.updateUser(user);
+            notificationService.sendNotification(user, "Your password has been changed");
             return ResponseEntity.ok("Password Changed Successfully");
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You old password did not match");

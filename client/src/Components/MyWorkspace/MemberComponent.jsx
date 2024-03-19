@@ -3,14 +3,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Overlay, Popover } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { assignUserToPostApi } from '../api/ExecutiveInsightApiService';
 import { useAuth } from '../security/AuthContext';
+import AssignMemberComponent from './AssignMemberComponent';
 
-
-export default function EmployeeComponent({ userJoinWorkspace, hasPosts, posts, workspaceCode, id }) {
+export default function MemberComponent({ userJoinWorkspace, hasPosts, posts, workspaceCode, id, hasTeams, teams }) {
   const [showPopover, setShowPopover] = useState(false);
+  const [showPosts, setShowPosts] = useState(false);
+  const [showTeams, setShowTeams] = useState(false);
   const target = React.useRef(null);
-  const navigate = useNavigate();
+  const postTarget = React.useRef(null);
+  const teamTarget = React.useRef(null);
   const authContext = useAuth();
 
   useEffect(() => refreshPage(), [])
@@ -19,18 +21,21 @@ export default function EmployeeComponent({ userJoinWorkspace, hasPosts, posts, 
     authContext.refresh();
   }
 
-  const handleClick = () => {
+  function handleClick() {
     setShowPopover(!showPopover);
+    setShowPosts(false);
+    setShowTeams(false);
   };
 
-  const assignPost = (postId, email) => {
-    authContext.refresh();
-    assignUserToPostApi(email, workspaceCode, postId)
-        .then((response) => {
-            window.location.href = `/members/${id}`;
-        })
-        .catch((error) => navigate('/error'))
-}
+  function handleShowPost() {
+    setShowPosts(!showPosts);
+    setShowTeams(false);
+  }
+
+  function handleShowTeam() {
+    setShowTeams(!showTeams);
+    setShowPosts(false);
+  }
 
   return (
     <div>
@@ -47,24 +52,13 @@ export default function EmployeeComponent({ userJoinWorkspace, hasPosts, posts, 
         </button>
         <Overlay target={target.current} show={showPopover} placement="bottom">
             <Popover id={userJoinWorkspace.userJoinWorkspaceId}>
-                <Popover.Header as="h3">Assign User To A Post</Popover.Header>
                 <Popover.Body className='m-0 p-0'>
-                <table className="table text-center m-0 p-0">
-                    <tbody>
-                            {hasPosts &&
-                                posts.map(
-                                    post => (
-                                        <tr key={post.postId}>
-                                            <td className='m-0 p-0'><button className="btn btn-light form-control" onClick={() => assignPost(post.postId, userJoinWorkspace.user.email)}>{post.title}</button></td>
-                                        </tr>
-                                    )
-                                )
-                            }
-                        </tbody>
-                    </table>
+                    <button className="btn btn-light form-control" ref={postTarget} onClick={handleShowPost}>Assign User To a Post</button>
+                    <button className="btn btn-light form-control" ref={teamTarget} onClick={handleShowTeam}>Assign User To a Team</button>
                 </Popover.Body>
             </Popover>
         </Overlay>
+        <AssignMemberComponent showPosts={showPosts} showTeams={showTeams} hasPosts={hasPosts} hasTeams={hasTeams} posts={posts} teams={teams} userJoinWorkspace={userJoinWorkspace} postTarget={postTarget} teamTarget={teamTarget} id={id} workspaceCode={workspaceCode} />
     </div>
   );
 }

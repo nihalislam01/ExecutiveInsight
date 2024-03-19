@@ -34,3 +34,4 @@ export const retrieveUsersByWorkspaceAndPostApi = (workspaceId, postId) => apiCl
 
 //Team API
 export const createTeamApi = (team) => apiClient.post("/create-team", team);
+export const assignUserToTeamApi = (email, teamId) => apiClient.patch(`/join-team/${email}/${teamId}`)

@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { retrieveWorkspacesByUserApi } from './api/ExecutiveInsightApiService';
 import { useAuth } from './security/AuthContext';
+import { Image } from "react-bootstrap";
+import noWorkspace from "./styles/executive-insight-no-workspace.png";
 
 export default function HomeComponent() {
 
@@ -41,8 +43,9 @@ export default function HomeComponent() {
     return (
         <div className="HomeComponent">
             <div className='container'>
-                {hasWorkspaces && <h2 className='text-start'>Workspaces</h2>}
-                {!hasWorkspaces && <p>You haven't joined any workspaces yet</p>}
+                {hasWorkspaces && <h2 className='text-start mb-4'>Workspaces</h2>}
+                {hasWorkspaces && <hr />}
+                {!hasWorkspaces && <div><Image src={noWorkspace} alt="noWorkspace" style={{ height: "250px", width: "250px" }} /></div>}
                 <table className='table'>
                     <tbody>
                         {

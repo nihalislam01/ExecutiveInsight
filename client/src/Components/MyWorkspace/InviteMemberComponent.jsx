@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { inviteJoinApi } from "../api/ExecutiveInsightApiService";
 
-export default function InviteEmployeeComponent({ workspaceCode, setShow }) {
+export default function InviteMemberComponent({ workspaceCode, setShow }) {
 
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');

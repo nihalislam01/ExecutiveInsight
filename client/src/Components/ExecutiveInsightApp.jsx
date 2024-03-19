@@ -21,7 +21,7 @@ import ChangePhotoComponent from './ChangePhotoComponent';
 //Admin Components
 import WorkspaceComponent from './MyWorkspace/WorkspaceComponent';
 import SidebarComponent from './MyWorkspace/SidebarComponent';
-import ListEmployeeComponent from './MyWorkspace/ListEmployeeComponent';
+import ListMemberComponent from './MyWorkspace/ListMemberComponent';
 import ListPostComponent from './MyWorkspace/ListPostComponent';
 import ListTeamComponent from './MyWorkspace/ListTeamComponent';
 
@@ -82,7 +82,7 @@ export default function ExecutiveInsightApp() {
                             <AuthenticatedRoute>
                                 <AdminRoute>
                                     <SidebarComponent />
-                                    <ListEmployeeComponent />
+                                    <ListMemberComponent />
                                 </AdminRoute>
                             </AuthenticatedRoute>
                         } />

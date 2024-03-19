@@ -39,6 +39,7 @@ public class TeamController {
         Users user = userService.getUser(email).orElseThrow(EntityNotFoundException::new);
         Team team = teamService.getTeam(teamId).orElseThrow(EntityNotFoundException::new);
         if(userJoinTeamService.addUserToTeam(user, team)) {
+            notificationService.sendNotification(user, "You have been assigned to the team " + team.getName());
             return ResponseEntity.ok("User joined team " + team.getName() + " successfully");
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).body("User already joined the team " + team.getName());

@@ -2,18 +2,20 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { retrieveUsersByWorkspaceIdApi, retrieveWorkspaceByIdApi } from "../api/ExecutiveInsightApiService";
-import EmployeeComponent from "./EmployeeComponent";
-import InviteEmployeeComponent from "./InviteEmployeeComponent";
+import MemberComponent from "./MemberComponent";
+import InviteMemberComponent from "./InviteMemberComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import '../styles/ListComponent.css';
 
-export default function ListEmployeeComponent() {
+export default function ListMemberComponent() {
 
 
     const [userJoinWorkspaces, setUserJoinWorkspaces] = useState([{}]);
     const [posts, setPosts] = useState([{}]);
-    const [hasPosts, setHasPosts] = useState([{}]);
+    const [hasPosts, setHasPosts] = useState(false);
+    const [teams, setTeams] = useState([{}]);
+    const [hasTeams, setHasTeams] = useState(false);
     const [show, setShow] = useState(false);
     const [workspaceCode, setWorkspaceCode] = useState('');
     const [hasUserJoinWorkspaces, setHasUserJoinWorkspaces] = useState(false);
@@ -34,6 +36,8 @@ export default function ListEmployeeComponent() {
                 setWorkspaceCode(response.data.code);
                 setPosts(response.data.posts);
                 setHasPosts(response.data.posts.length > 0);
+                setTeams(response.data.teams);
+                setHasTeams(response.data.teams.length > 0);
             })
             .catch((error) => navigate('/error'))
     }
@@ -41,13 +45,14 @@ export default function ListEmployeeComponent() {
     return (
         <div className="EmployeesComponent">
             {show &&
-                <InviteEmployeeComponent workspaceCode={workspaceCode} setShow={setShow} />
+                <InviteMemberComponent workspaceCode={workspaceCode} setShow={setShow} />
             }
             <div className="row">
                 <div className="col-md-2">
                 </div>
                 <div className="col-md-10 text-end">
                     <h2 className="text-start mx-3">Members</h2>
+                    <hr />
                     <table className="table">
                         <tbody> 
                             {hasUserJoinWorkspaces &&
@@ -55,7 +60,7 @@ export default function ListEmployeeComponent() {
                                     userJoinWorkspace => (
                                         <tr key={userJoinWorkspace.userJoinWorkspaceId}>
                                             <td>
-                                                <EmployeeComponent userJoinWorkspace={userJoinWorkspace} hasPosts={hasPosts} posts={posts} workspaceCode={workspaceCode} id={id} />
+                                                <MemberComponent userJoinWorkspace={userJoinWorkspace} hasPosts={hasPosts} hasTeams={hasTeams} posts={posts} teams={teams} workspaceCode={workspaceCode} id={id} />
                                             </td>
                                         </tr>
                                     )
