@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import CreateTeamComponent from "./CreateTeamComponent";
-import '../styles/ListTeamComponent.css';
+import '../styles/ListComponent.css';
 
 export default function ListTeamComponent() {
 
@@ -46,7 +46,8 @@ export default function ListTeamComponent() {
             <Row>
                 <Col xs={2}></Col>
                 <Col xs={10}>
-                    <h5 className="text-start my-4">Teams</h5>
+                    <h2 className="text-start mx-3">Teams</h2>
+                    <hr />
                     <div className="row g-2">
                         {hasTeams &&
                             teams.map(
@@ -56,7 +57,7 @@ export default function ListTeamComponent() {
                             )
                         }
                         <div className="col-12 col-md-3">
-                            <div className="w-100 create-team" onClick={addTeam}>
+                            <div className="w-100 create" onClick={addTeam}>
                                 <h4 style={{ paddingTop: "58px", paddingBottom: "58px" }}><FontAwesomeIcon icon={faPlus} /></h4>
                             </div>
                         </div>

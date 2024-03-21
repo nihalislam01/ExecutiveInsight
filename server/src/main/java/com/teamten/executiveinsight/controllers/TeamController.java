@@ -1,6 +1,9 @@
 package com.teamten.executiveinsight.controllers;
 
-import com.teamten.executiveinsight.model.*;
+import com.teamten.executiveinsight.model.entity.Team;
+import com.teamten.executiveinsight.model.entity.Users;
+import com.teamten.executiveinsight.model.entity.Workspace;
+import com.teamten.executiveinsight.model.request.TeamRequest;
 import com.teamten.executiveinsight.services.*;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +42,7 @@ public class TeamController {
         Users user = userService.getUser(email).orElseThrow(EntityNotFoundException::new);
         Team team = teamService.getTeam(teamId).orElseThrow(EntityNotFoundException::new);
         if(userJoinTeamService.addUserToTeam(user, team)) {
+            notificationService.sendNotification(user, "You have been assigned to the team " + team.getName());
             return ResponseEntity.ok("User joined team " + team.getName() + " successfully");
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).body("User already joined the team " + team.getName());

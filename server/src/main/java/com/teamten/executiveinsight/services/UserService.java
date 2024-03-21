@@ -1,8 +1,9 @@
 package com.teamten.executiveinsight.services;
 
-import com.teamten.executiveinsight.model.UserRequest;
-import com.teamten.executiveinsight.model.Users;
-import com.teamten.executiveinsight.model.Workspace;
+import com.teamten.executiveinsight.model.entity.Badge;
+import com.teamten.executiveinsight.model.request.UserRequest;
+import com.teamten.executiveinsight.model.entity.Users;
+import com.teamten.executiveinsight.model.entity.Workspace;
 import com.teamten.executiveinsight.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,6 +27,9 @@ public class UserService {
     }
     public Optional<Users> getUser(String username) {
         return userRepository.findByEmail(username);
+    }
+    public Optional<Users> getUser(Long id) {
+        return userRepository.findById(id);
     }
     public void updateUser(Users theUser) {
         userRepository.save(theUser);

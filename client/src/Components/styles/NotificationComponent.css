@@ -3,7 +3,8 @@
     background-color: #f8f9fa;
     border-radius: 5px;
     top: -46px;
-    right: 15px
+    right: 15px;
+    overflow: auto;
 }
 
 .date {

@@ -42,7 +42,9 @@ export default function NotificationComponent() {
             description: message
         }
         updateNotificationApi(notification)
-            .then((response) => window.location.href = "/notification")
+            .then((response) => {
+                window.location.href = '/home';
+        })
             .catch((error) => navigate('/error'))
     }
 
@@ -59,7 +61,10 @@ export default function NotificationComponent() {
         joinWorkspaceApi(code, email)
             .catch((error) => navigate('/error'))
         updateNotificationApi(notification)
-            .then((response) => window.location.href = "/notification")
+            .then((response) => {
+                var newMessage = message
+                navigate('/message', { state: { newMessage } });
+        })
             .catch((error) => navigate('/error'))
     }
 
@@ -86,13 +91,13 @@ export default function NotificationComponent() {
                                                     </div>
                                                 }
                                                 {notification.invitation &&
-                                                    <div className='text-start col-md-6'>
+                                                    <div className='text-start col-md-9'>
                                                         <div>{notification.description}</div>
                                                         <div className='date'>{notification.time}</div>
                                                     </div>
                                                 }
                                                 {notification.invitation &&
-                                                    <div className='text-end col-md-6'>
+                                                    <div className='text-end col-md-3'>
                                                         <button className='btn' onClick={() => handleReject(notification.notificationId, notification.userEmail )}><FontAwesomeIcon icon={faXmark} /></button>
                                                         <button className='btn' onClick={() => handleAccept(notification.notificationId, notification.workspaceCode, notification.userEmail)}><FontAwesomeIcon icon={faCheck} /></button>
                                                     </div>

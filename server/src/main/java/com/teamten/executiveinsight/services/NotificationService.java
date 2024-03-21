@@ -1,6 +1,9 @@
 package com.teamten.executiveinsight.services;
 
-import com.teamten.executiveinsight.model.*;
+import com.teamten.executiveinsight.model.entity.Notification;
+import com.teamten.executiveinsight.model.entity.Users;
+import com.teamten.executiveinsight.model.entity.Workspace;
+import com.teamten.executiveinsight.model.request.NotificationRequest;
 import com.teamten.executiveinsight.repositories.NotificationRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

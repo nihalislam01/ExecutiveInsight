@@ -2,9 +2,11 @@ package com.teamten.executiveinsight.controllers;
 
 import com.teamten.executiveinsight.events.email.EmailCompleteEvent;
 import com.teamten.executiveinsight.events.email.EmailRequest;
-import com.teamten.executiveinsight.model.UserJoinWorkspace;
-import com.teamten.executiveinsight.model.UserRequest;
-import com.teamten.executiveinsight.model.Users;
+import com.teamten.executiveinsight.model.entity.UserJoinWorkspace;
+import com.teamten.executiveinsight.model.entity.Users;
+import com.teamten.executiveinsight.model.request.ImageDataRequest;
+import com.teamten.executiveinsight.model.request.PasswordRequest;
+import com.teamten.executiveinsight.model.request.UserRequest;
 import com.teamten.executiveinsight.services.NotificationService;
 import com.teamten.executiveinsight.services.UserJoinWorkspaceService;
 import com.teamten.executiveinsight.services.UserService;
@@ -35,9 +37,17 @@ public class UserController {
     public Users getUser(@PathVariable String email) {
         return userService.getUser(email).orElseThrow(EntityNotFoundException::new);
     }
+    @GetMapping("/get-user-by-id/{id}")
+    public Users getUserById(@PathVariable Long id) {
+        return userService.getUser(id).orElseThrow(EntityNotFoundException::new);
+    }
     @GetMapping("/get-users/{id}")
     public List<UserJoinWorkspace> retrieveUsers(@PathVariable Long id) {
         return userJoinWorkspaceService.getAllUserJoinWorkspace(id);
+    }
+    @GetMapping("/get-workspaces-for-view/{id}")
+    public List<UserJoinWorkspace> getWorkspacesForView(@PathVariable Long id) {
+        return userJoinWorkspaceService.getAllUserJoinWorkspaceByUser(id);
     }
     //Step01: Change password
     @PostMapping("/forgot-password")
@@ -53,16 +63,39 @@ public class UserController {
     }
     //Step02: Change password
     @PatchMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<String> resetPassword(@RequestBody UserRequest userRequest) {
         Users user = userService.getUser(userRequest.email()).orElseThrow(EntityNotFoundException::new);
         user.setPassword(passwordEncoder.encode(userRequest.password()));
         userService.updateUser(user);
         notificationService.sendNotification(user, "Your password has been changed");
         return ResponseEntity.ok("User password has been changed");
     }
-//    @PostMapping("/upload-photo/{email}")
-//    public ResponseEntity<String> uploadPhoto(@PathVariable String email, @RequestParam("file") MultipartFile file) {
-//        userService.uploadPhoto(email, file);
-//        return ResponseEntity.ok("Your profile photo has been uploaded successfully");
-//    }
+    @PatchMapping("/change-password")
+    public ResponseEntity<String> changePassword(@RequestBody PasswordRequest passwordRequest) {
+        Users user = userService.getUser(passwordRequest.email()).orElseThrow(EntityNotFoundException::new);
+        if (passwordEncoder.matches(passwordRequest.oldPassword(), user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(passwordRequest.newPassword()));
+            userService.updateUser(user);
+            notificationService.sendNotification(user, "Your password has been changed");
+            return ResponseEntity.ok("Password Changed Successfully");
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You old password did not match");
+    }
+    @PatchMapping("/update-profile")
+    public ResponseEntity<String> updateProfileInfo(@RequestBody UserRequest userRequest) {
+        Users user = userService.getUser(userRequest.email()).orElseThrow(EntityNotFoundException::new);
+        user.setName(userRequest.name());
+        user.setBio(userRequest.bio());
+        user.setLocation(userRequest.location());
+        userService.updateUser(user);
+        notificationService.sendNotification(user, "You have just updated your profile");
+        return ResponseEntity.ok("User profile updated");
+    }
+    @PatchMapping("/upload-photo")
+    public ResponseEntity<String> uploadPhoto(@RequestBody ImageDataRequest imageDataRequest) {
+        Users user = userService.getUser(imageDataRequest.email()).orElseThrow(EntityNotFoundException::new);
+        user.setImage(imageDataRequest.image());
+        userService.updateUser(user);
+        return ResponseEntity.ok("Your profile photo has been uploaded successfully");
+    }
 }

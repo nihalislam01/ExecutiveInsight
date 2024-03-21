@@ -1,6 +1,6 @@
 package com.teamten.executiveinsight.services;
 
-import com.teamten.executiveinsight.model.Workspace;
+import com.teamten.executiveinsight.model.entity.Workspace;
 import com.teamten.executiveinsight.repositories.WorkspaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

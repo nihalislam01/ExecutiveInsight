@@ -9,7 +9,7 @@ export default function CreateWorkspaceFormComponent({ setShow }) {
 
     const [workspaceName, setWorkspaceName] = useState('');
     const [titles, setTitles] = useState(null);
-    const [businessTitle, setBusinessTitle] = useState("manufacturing Company");
+    const [businessTitle, setBusinessTitle] = useState("Manufacturing Company");
     const [hasTitles, setHasTitles] = useState(false);
     const authContext = useAuth();
     const username = authContext.username();

@@ -1,11 +1,11 @@
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Dropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { deletePostApi, retrieveUsersByWorkspaceAndPostApi } from "../api/ExecutiveInsightApiService";
 import { useAuth } from "../security/AuthContext";
+import '../styles/PostComponent.css';
 
 export default function PostComponent({ post, id }) {
 
@@ -29,7 +29,6 @@ export default function PostComponent({ post, id }) {
     }
 
     function selectColor(id) {
-        const colors = ["warning", "success", "primary", "secondary", "info"];
         const customColors = ["3a5a40", "7f5539", "588157", "30638e", "3c6e71", "ad2831", "495057", "b5838d", "6a4c93", "ee6c4d"];
         return customColors[id%10];
     }
@@ -48,28 +47,37 @@ export default function PostComponent({ post, id }) {
 
     function toggleDropdown() {
         setIsOpen(!isOpen);
-      }
+    }
+
+    function viewProfile(id) {
+        navigate(`/user/${id}`)
+    }
 
     return (
-        <Dropdown show={isOpen} onToggle={toggleDropdown}>
-            <Dropdown.Toggle className={`btn form-control text-start border-0`} style={{ backgroundColor: `#${selectColor(post.postId)}`}}>
-                <div className="d-flex justify-content-between align-items-center">
-                    <p className="m-0">{post.title}</p>
-                    <p className={`btn m-0`} style={{ backgroundColor: `#${selectColor(post.postId)}`}} onClick={() => handleDelete(post.title)}><FontAwesomeIcon icon={faTrashCan} /></p>
+        <div className="PostComponent">
+            <div className="d-flex justify-content-between align-items-center p-3 post-button" style={{backgroundColor: `#${selectColor(post.postId)}`}} onClick={toggleDropdown}>
+                <div className="d-flex">
+                    <p className="m-0"><FontAwesomeIcon icon={faCaretDown} /></p>
+                    <p className="my-0 mx-2">{post.title}</p>
                 </div>
-            </Dropdown.Toggle>
-            <Dropdown.Menu className="form-control">
-                {hasUsers &&
-                    users.map(
-                        user => (
-                            <Dropdown.Item key={user.userId} className="text-start bg-light">{user.name}</Dropdown.Item>
+                <p className="m-0" onClick={() => handleDelete(post.title)}><FontAwesomeIcon icon={faTrashCan} /></p>
+            </div>
+            {isOpen &&
+                <div className="border border-2 shadow members-list bg-light">
+                    {hasUsers &&
+                        users.map(
+                            user => (
+                                <div key={user.userId} className="text-start p-2 m-2 user" onClick={() => viewProfile(user.userId)}>
+                                    {user.name}
+                                </div>
+                            )
                         )
-                    )
-                }
-                {!hasUsers &&
-                    <Dropdown.Item className="text-center">No members yet</Dropdown.Item>
-                }
-            </Dropdown.Menu>
-        </Dropdown>
+                    }
+                    {!hasUsers &&
+                        <div className="text-center p-3">No members yet</div>
+                    }
+                </div>
+            }
+        </div>
     )
 }

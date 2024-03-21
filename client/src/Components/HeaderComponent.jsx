@@ -18,17 +18,19 @@ export default function HeaderComponent() {
     }
 
     function handleShowNotification() {
-        setShowNotification(!showNotification)
+        setShowNotification(!showNotification);
+        setShowCodeForm(false);
     }
 
     function handleShowCodeForm() {
-        setShowCodeForm(!showCodeForm)
+        setShowCodeForm(!showCodeForm);
+        setShowNotification(false);
     }
 
     return (
         <div>
             {showCodeForm && <CodeFormComponent />}
-            <header className='border-bottom border-light border-5 mb-5 p-2'>
+            <header className='border-bottom border-light border-5 mb-3 p-2'>
                 <div className='container'>
                     <div className='row'>
                         <nav className='navbar navbar-expand-lg'>

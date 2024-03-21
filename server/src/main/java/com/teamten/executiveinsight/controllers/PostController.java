@@ -1,6 +1,10 @@
 package com.teamten.executiveinsight.controllers;
 
-import com.teamten.executiveinsight.model.*;
+import com.teamten.executiveinsight.model.entity.Post;
+import com.teamten.executiveinsight.model.entity.UserJoinWorkspace;
+import com.teamten.executiveinsight.model.entity.Users;
+import com.teamten.executiveinsight.model.entity.Workspace;
+import com.teamten.executiveinsight.model.request.PostRequest;
 import com.teamten.executiveinsight.services.PostService;
 import com.teamten.executiveinsight.services.UserJoinWorkspaceService;
 import com.teamten.executiveinsight.services.WorkspaceService;

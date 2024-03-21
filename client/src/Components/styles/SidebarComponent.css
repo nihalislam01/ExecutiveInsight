@@ -3,3 +3,12 @@
   top: 95px;
   bottom: 0;
   }
+
+.link:hover {
+  background-color: #cccccc;
+  cursor: pointer;
+}
+
+.link {
+  border-radius: 6px;
+}

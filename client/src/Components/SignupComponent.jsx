@@ -50,7 +50,9 @@ export default function SignupComponent() {
             const user = {
                 name: name,
                 email: username,
-                password: password
+                password: password,
+                bio: '',
+                location: ''
             }
             await userSignupApi(user)
                 .then((response) => setStatus(response))

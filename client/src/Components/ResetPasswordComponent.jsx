@@ -29,7 +29,9 @@ export default function ResetPasswordComponent() {
             const user = {
                 name: '',
                 email: username,
-                password: password
+                password: password,
+                bio: '',
+                location: ''
             }
             resetPasswordApi(user)
                 .then((response) => handleResponse(response))

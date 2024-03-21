@@ -1,6 +1,6 @@
 package com.teamten.executiveinsight.repositories;
 
-import com.teamten.executiveinsight.model.VerificationToken;
+import com.teamten.executiveinsight.model.entity.VerificationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

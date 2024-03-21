@@ -7,6 +7,7 @@ import AddPostComponent from "./AddPostComponent";
 import PostComponent from "./PostComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import '../styles/ListComponent.css';
 
 export default function ListPostComponent() {
 
@@ -43,6 +44,7 @@ export default function ListPostComponent() {
                 <div className="col-md-2"></div>
                 <div className="col-md-10">
                     <h2 className="mx-3 text-start">Posts</h2>
+                    <hr />
                     <table className='table'>
                         <tbody>
                             {hasPosts &&
@@ -58,7 +60,7 @@ export default function ListPostComponent() {
                             }
                             <tr>
                                 <td>
-                                    <button className="btn form-control py-2" onClick={showForm} style={{ backgroundColor: "#e9ecef" }}><FontAwesomeIcon icon={faPlus} /></button>
+                                    <div className="w-100 py-2 create text-center" onClick={showForm}><FontAwesomeIcon icon={faPlus} /></div>
                                 </td>
                             </tr>
                         </tbody>

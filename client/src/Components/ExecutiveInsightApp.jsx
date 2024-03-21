@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './styles/ExecutiveInsightApp.css'
+
 //Unauthorized Components
 import HeaderComponent from './HeaderComponent';
 import SignupComponent from './SignupComponent';
@@ -13,13 +14,15 @@ import ErrorComponent from './ErrorComponent';
 
 //Authorized Components
 import HomeComponent from './HomeComponent';
-import NotificationComponent from './NotificationComponent';
-import UserProfileComponent from './UserProfileComponent';
+import UserProfileComponent from './Profile/UserProfileComponent';
+import EditProfileComponent from './Profile/EditProfileComponent';
+import ChangePhotoComponent from './Profile/ChangePhotoComponent';
+import ProfileViewComponent from './Profile/ProfileViewComponent';
 
 //Admin Components
 import WorkspaceComponent from './MyWorkspace/WorkspaceComponent';
 import SidebarComponent from './MyWorkspace/SidebarComponent';
-import ListEmployeeComponent from './MyWorkspace/ListEmployeeComponent';
+import ListMemberComponent from './MyWorkspace/ListMemberComponent';
 import ListPostComponent from './MyWorkspace/ListPostComponent';
 import ListTeamComponent from './MyWorkspace/ListTeamComponent';
 
@@ -60,12 +63,6 @@ export default function ExecutiveInsightApp() {
                             </AuthenticatedRoute>
                         } />
 
-                        <Route path='/notification' element={
-                            <AuthenticatedRoute>
-                                <NotificationComponent />
-                            </AuthenticatedRoute>
-                        } />
-
                         <Route path='/my-workspace' element={
                             <AuthenticatedRoute>
                                 <SidebarComponent />
@@ -86,7 +83,7 @@ export default function ExecutiveInsightApp() {
                             <AuthenticatedRoute>
                                 <AdminRoute>
                                     <SidebarComponent />
-                                    <ListEmployeeComponent />
+                                    <ListMemberComponent />
                                 </AdminRoute>
                             </AuthenticatedRoute>
                         } />
@@ -109,6 +106,24 @@ export default function ExecutiveInsightApp() {
                         <Route path='/user-profile' element={
                             <AuthenticatedRoute>
                                 <UserProfileComponent />
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/user/:id' element={
+                            <AuthenticatedRoute>
+                                <ProfileViewComponent />
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/user-profile/edit' element={
+                            <AuthenticatedRoute>
+                                <EditProfileComponent />
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/user-profile/edit/photo' element={
+                            <AuthenticatedRoute>
+                                <ChangePhotoComponent />
                             </AuthenticatedRoute>
                         } />
 

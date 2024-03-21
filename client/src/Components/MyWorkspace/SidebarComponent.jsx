@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAddressCard, faCalendarDays, faChartLine, faFile, faGauge, faPeopleGroup, faTruckFast, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -33,19 +35,18 @@ export default function SidebarComponent() {
 
             {hasWorkspace && 
             <div className="row container">
-                <div className="col-md-2 border-end border-5 border-light sidebar">
-                    <table className="table table-hover">
-                        <tbody>
-                            <tr><td><Link className="nav-link" to="/my-workspace">Main Dashboard</Link></td></tr>
-                            <tr><td><Link className="nav-link" to={`/teams/${workspaceId}`}>Teams</Link></td></tr>
-                            <tr><td><Link className="nav-link" to={`/members/${workspaceId}`}>Members</Link></td></tr>
-                            <tr><td><Link className="nav-link" to={`/posts/${workspaceId}`}>Member Posts</Link></td></tr>
-                            <tr><td><Link className="nav-link" to="/my-workspace">Products</Link></td></tr>
-                            <tr><td><Link className="nav-link" to="/my-workspace">Sales</Link></td></tr>
-                            <tr><td><Link className="nav-link" to="/my-workspace">Orders</Link></td></tr>
-                            <tr><td><Link className="nav-link" to="/my-workspace">Calender</Link></td></tr>
-                        </tbody>
-                    </table>
+                <div className="col-md-2 border-end border-5 border-light sidebar px-0 text-start" style={{ overflow: "auto" }}>
+                    <Link className="nav-link my-2 mx-2 link" to="/my-workspace"><FontAwesomeIcon icon={faGauge} className="mx-2" />Dashboard</Link>
+                    <hr className="my-0" />
+                    <Link className="nav-link my-2 mx-2 link" to={`/teams/${workspaceId}`}><FontAwesomeIcon icon={faPeopleGroup} className="mx-2" />Teams</Link>
+                    <Link className="nav-link mb-2 mx-2 link" to={`/members/${workspaceId}`}><FontAwesomeIcon icon={faUsers} className="mx-2" />Members</Link>
+                    <Link className="nav-link mb-2 mx-2 link" to={`/posts/${workspaceId}`}><FontAwesomeIcon icon={faAddressCard} className="mx-2" />Member Posts</Link>
+                    <hr className="my-0" />
+                    <Link className="nav-link my-2 mx-2 link" to="/my-workspace"><FontAwesomeIcon icon={faChartLine} className="mx-2" />Sales</Link>
+                    <Link className="nav-link mb-2 mx-2 link" to="/my-workspace"><FontAwesomeIcon icon={faFile} className="mx-2" />Products</Link>
+                    <Link className="nav-link mb-2 mx-2 link" to="/my-workspace"><FontAwesomeIcon icon={faTruckFast} className="mx-2" />Task Allocation</Link>
+                    <hr className="my-0" />
+                    <Link className="nav-link my-2 mx-2 link" to="/my-workspace"><FontAwesomeIcon icon={faCalendarDays} className="mx-2" />Calender</Link>
                 </div>
                 <div className="col-md-10">
                 </div>
