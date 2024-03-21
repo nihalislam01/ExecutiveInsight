@@ -5,25 +5,25 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Entity
 @Data
 @NoArgsConstructor
-public class Notification {
-
+public class Delivery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long notificationId;
+    private Long deliveryId;
 
     private String description;
-    private LocalDate time = LocalDate.now();
-    private String workspaceCode;
-    private String userEmail;
-    private boolean isInvitation = false;
+    private String receipt;
+    private boolean isSubmitted;
+
+    @OneToOne
+    @JoinColumn(name = "task_id")
+    private Task task;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Users user;
+    @JoinColumn(name = "team_id")
+    private Team team;
+
 }

@@ -35,7 +35,13 @@ public class Workspace {
     private List<UserJoinWorkspace> userJoinWorkspaces = new ArrayList<>();
 
     @OneToMany(mappedBy = "workspace")
-    private List<Team> teams;
+    private List<Team> teams = new ArrayList<>();
+
+    @OneToMany(mappedBy = "workspace")
+    private List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "workspace")
+    private List<Task> tasks = new ArrayList<>();
 
     @ManyToMany(mappedBy = "workspaces")
     private List<Post> posts = new ArrayList<>();

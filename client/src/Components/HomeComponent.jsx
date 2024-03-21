@@ -44,7 +44,7 @@ export default function HomeComponent() {
             <div className='container'>
                 {hasWorkspaces && <h2 className='text-start mb-4'>Workspaces</h2>}
                 {hasWorkspaces && <hr />}
-                {!hasWorkspaces && <h5 className='mt-4'>Haven't Joined Any Workspace Yet</h5>}
+                {!hasWorkspaces && <h5 className='mt-4'>You Haven't Joined Any Workspace Yet</h5>}
                 <table className='table'>
                     <tbody>
                         {

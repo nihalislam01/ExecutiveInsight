@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useEffect } from "react"
 import { Col, Image, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { changePasswordApi, retrieveUserApi, updateProfileInfoApi } from "./api/ExecutiveInsightApiService";
-import { useAuth } from "./security/AuthContext";
-import profileImage from "./styles/executive-insight-blank-user.png";
+import { changePasswordApi, retrieveUserApi, updateProfileInfoApi } from "../api/ExecutiveInsightApiService";
+import { useAuth } from "../security/AuthContext";
+import profileImage from "../styles/executive-insight-blank-user.png";
 
 export default function EditProfileComponent() {
 

@@ -28,6 +28,9 @@ public class UserService {
     public Optional<Users> getUser(String username) {
         return userRepository.findByEmail(username);
     }
+    public Optional<Users> getUser(Long id) {
+        return userRepository.findById(id);
+    }
     public void updateUser(Users theUser) {
         userRepository.save(theUser);
     }

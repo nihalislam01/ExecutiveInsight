@@ -34,6 +34,10 @@ public class Users {
     private Badge badge;
 
     @OneToOne
+    @JoinColumn(name = "task_id")
+    private Task task;
+
+    @OneToOne
     @JoinColumn(name = "workspace_id")
     private Workspace workspace;
 

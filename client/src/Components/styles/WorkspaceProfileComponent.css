@@ -1,0 +1,16 @@
+.option {
+    color: #000;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.option:hover {
+    background-color: #cccccc;
+    cursor: pointer;
+}

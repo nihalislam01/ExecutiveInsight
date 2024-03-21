@@ -14,9 +14,10 @@ import ErrorComponent from './ErrorComponent';
 
 //Authorized Components
 import HomeComponent from './HomeComponent';
-import UserProfileComponent from './UserProfileComponent';
-import EditProfileComponent from './EditProfileComponent';
-import ChangePhotoComponent from './ChangePhotoComponent';
+import UserProfileComponent from './Profile/UserProfileComponent';
+import EditProfileComponent from './Profile/EditProfileComponent';
+import ChangePhotoComponent from './Profile/ChangePhotoComponent';
+import ProfileViewComponent from './Profile/ProfileViewComponent';
 
 //Admin Components
 import WorkspaceComponent from './MyWorkspace/WorkspaceComponent';
@@ -105,6 +106,12 @@ export default function ExecutiveInsightApp() {
                         <Route path='/user-profile' element={
                             <AuthenticatedRoute>
                                 <UserProfileComponent />
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/user/:id' element={
+                            <AuthenticatedRoute>
+                                <ProfileViewComponent />
                             </AuthenticatedRoute>
                         } />
 

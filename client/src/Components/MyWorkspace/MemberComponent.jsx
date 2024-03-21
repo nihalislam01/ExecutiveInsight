@@ -14,6 +14,7 @@ export default function MemberComponent({ userJoinWorkspace, hasPosts, posts, wo
   const postTarget = React.useRef(null);
   const teamTarget = React.useRef(null);
   const authContext = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => refreshPage(), [])
 
@@ -37,19 +38,23 @@ export default function MemberComponent({ userJoinWorkspace, hasPosts, posts, wo
     setShowPosts(false);
   }
 
+  function viewProfile() {
+    navigate(`/user/${userJoinWorkspace.user.userId}`)
+  }
+
   return (
     <div>
-        <button className="btn btn-light form-control d-flex justify-content-between align-items-center px-4">
-            <div>
-                <p style={{fontSize: "25px"}} className="p-0 m-0 text-start">{userJoinWorkspace.user.name}</p>
-                {userJoinWorkspace.post!=null &&
-                    <p style={{fontSize: "15px"}} className="p-0 m-0 text-start">{userJoinWorkspace.post.title}</p>
-                }
-            </div>
-            <div>
-                <p className="m-0 btn btn-light" ref={target} onClick={handleClick}><FontAwesomeIcon icon={faEllipsisVertical} /></p>
-            </div>
-        </button>
+      <div className='d-flex justify-content-between'>
+          <button className="btn btn-light form-control d-flex justify-content-between align-items-center px-4" style={{ borderTopRightRadius: "0", borderBottomRightRadius: "0" }} onClick={viewProfile}>
+              <div>
+                  <p style={{fontSize: "25px"}} className="p-0 m-0 text-start">{userJoinWorkspace.user.name}</p>
+                  {userJoinWorkspace.post!=null &&
+                      <p style={{fontSize: "15px"}} className="p-0 m-0 text-start">{userJoinWorkspace.post.title}</p>
+                  }
+              </div>
+          </button>
+          <button className="m-0 btn btn-light" style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0" }} ref={target} onClick={handleClick}><FontAwesomeIcon icon={faEllipsisVertical} /></button>
+        </div>
         <Overlay target={target.current} show={showPopover} placement="bottom">
             <Popover id={userJoinWorkspace.userJoinWorkspaceId}>
                 <Popover.Body className='m-0 p-0'>

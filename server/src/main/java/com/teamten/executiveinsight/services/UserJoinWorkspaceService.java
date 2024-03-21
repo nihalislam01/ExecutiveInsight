@@ -43,4 +43,7 @@ public class UserJoinWorkspaceService {
         userJoinWorkspace.setPost(post);
         userJoinWorkspaceRepository.save(userJoinWorkspace);
     }
+    public List<UserJoinWorkspace> getAllUserJoinWorkspaceByUser(Long id) {
+        return userJoinWorkspaceRepository.findAllByUser_userId(id);
+    }
 }

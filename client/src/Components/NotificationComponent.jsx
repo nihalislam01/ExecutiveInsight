@@ -62,7 +62,8 @@ export default function NotificationComponent() {
             .catch((error) => navigate('/error'))
         updateNotificationApi(notification)
             .then((response) => {
-                window.location.href = '/home';
+                var newMessage = message
+                navigate('/message', { state: { newMessage } });
         })
             .catch((error) => navigate('/error'))
     }

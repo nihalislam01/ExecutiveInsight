@@ -37,9 +37,17 @@ public class UserController {
     public Users getUser(@PathVariable String email) {
         return userService.getUser(email).orElseThrow(EntityNotFoundException::new);
     }
+    @GetMapping("/get-user-by-id/{id}")
+    public Users getUserById(@PathVariable Long id) {
+        return userService.getUser(id).orElseThrow(EntityNotFoundException::new);
+    }
     @GetMapping("/get-users/{id}")
     public List<UserJoinWorkspace> retrieveUsers(@PathVariable Long id) {
         return userJoinWorkspaceService.getAllUserJoinWorkspace(id);
+    }
+    @GetMapping("/get-workspaces-for-view/{id}")
+    public List<UserJoinWorkspace> getWorkspacesForView(@PathVariable Long id) {
+        return userJoinWorkspaceService.getAllUserJoinWorkspaceByUser(id);
     }
     //Step01: Change password
     @PostMapping("/forgot-password")

@@ -6,18 +6,20 @@ export const verifyEmailApi = (token, isForgotPassword) => apiClient.get(`/verif
 
 //User API
 export const retrieveUserApi = (email) => apiClient.get(`/get-user/${email}`);
+export const retrieveUserByIdApi = (id) => apiClient.get(`/get-user-by-id/${id}`);
 export const forgotPasswordApi = (email) => apiClient.post("/forgot-password", email);
 export const resetPasswordApi = (user) => apiClient.patch("/reset-password", user);
 export const updateProfileInfoApi = (user) => apiClient.patch("/update-profile", user);
 export const uploadPhotoApi = (imageData) => apiClient.patch("/upload-photo", imageData);
 export const changePasswordApi = (password) => apiClient.patch("/change-password", password);
+export const retrieveWorkspacesByUserForViewApi = (id) => apiClient.get(`/get-workspaces-for-view/${id}`);
 
 //Workspace API
 export const retrieveBusinessTitlesApi = () => apiClient.get("/get-business-title");
 export const createWorkspaceApi = (workspace) => apiClient.post("/create-workspace", workspace);
 export const joinWorkspaceApi = (code, email) => apiClient.post(`/join-workspace/${code}/${email}`);
 export const retrieveWorkspaceByIdApi = (id) => apiClient.get(`/get-workspace/${id}`);
-export const retrieveWorkspacesByUserApi = (email) => apiClient(`/get-workspaces/${email}`);
+export const retrieveWorkspacesByUserApi = (email) => apiClient.get(`/get-workspaces/${email}`);
 export const retrieveUsersByWorkspaceIdApi = (id) => apiClient.get(`/get-users/${id}`);
 
 //Notification API

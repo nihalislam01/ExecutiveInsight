@@ -47,7 +47,11 @@ export default function PostComponent({ post, id }) {
 
     function toggleDropdown() {
         setIsOpen(!isOpen);
-      }
+    }
+
+    function viewProfile(id) {
+        navigate(`/user/${id}`)
+    }
 
     return (
         <div className="PostComponent">
@@ -63,7 +67,7 @@ export default function PostComponent({ post, id }) {
                     {hasUsers &&
                         users.map(
                             user => (
-                                <div key={user.userId} className="text-start p-2 m-2 user">
+                                <div key={user.userId} className="text-start p-2 m-2 user" onClick={() => viewProfile(user.userId)}>
                                     {user.name}
                                 </div>
                             )

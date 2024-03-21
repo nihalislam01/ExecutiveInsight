@@ -4,6 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { retrieveUserApi, retrieveWorkspaceByIdApi } from "../api/ExecutiveInsightApiService";
 import { useAuth } from "../security/AuthContext";
 import CreateWorkspaceComponent from "./CreateWorkspaceComponent";
+import WorkspaceProfileComponent from "../WorkspaceProfileComponent";
+import WorkspaceProfileHeaderComponent from "../WorkspaceProfileHeader";
+import { Container } from "react-bootstrap";
 
 export default function WorkspaceComponent() {
 
@@ -65,12 +68,12 @@ export default function WorkspaceComponent() {
                 </div>
             }
 
-            {isWorkspaceProfile && 
-                <div className="container">
-                    <div className="text-start">
-                        <h1>{workspaceName}</h1>
-                        <p>{workspaceTitle}</p>
-                    </div>
+            {isWorkspaceProfile &&
+                <div>
+                    <WorkspaceProfileHeaderComponent />
+                    <Container>
+                        <WorkspaceProfileComponent workspaceName={workspaceName} workspaceTitle={workspaceTitle} />
+                    </Container>
                 </div>
             }
         </div>

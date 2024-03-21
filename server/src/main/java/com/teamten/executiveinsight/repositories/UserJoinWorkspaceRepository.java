@@ -12,6 +12,7 @@ import java.util.Optional;
 
 public interface UserJoinWorkspaceRepository extends JpaRepository<UserJoinWorkspace, Long> {
     List<UserJoinWorkspace> findAllByWorkspace_workspaceId(Long id);
+    List<UserJoinWorkspace> findAllByUser_userId(Long id);
     Optional<UserJoinWorkspace> findByUser_EmailAndWorkspace_Code(String email, String code);
     List<UserJoinWorkspace> findAllByWorkspace_workspaceIdAndPost_title(Long id, String title);
     @Query("SELECT u.user FROM UserJoinWorkspace u WHERE u.workspace.workspaceId = :workspaceId AND u.post.postId = :postId")

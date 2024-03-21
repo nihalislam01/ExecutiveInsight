@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.min.css';
 import { useNavigate } from 'react-router-dom';
-import { uploadPhotoApi } from './api/ExecutiveInsightApiService';
-import { useAuth } from './security/AuthContext';
+import { uploadPhotoApi } from '../api/ExecutiveInsightApiService';
+import { useAuth } from '../security/AuthContext';
 
 export default function ChangePhotoComponent() {
   const [croppedImage, setCroppedImage] = useState(null);

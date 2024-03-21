@@ -17,13 +17,20 @@ public class Team {
     private Long teamId;
     private String name;
 
+    @OneToOne
+    @JoinColumn(name = "task_id")
+    private Task task;
+
     @JsonIgnore
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserJoinTeam> userJoinTeams = new ArrayList<>();
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "workspace_id")
     private Workspace workspace;
+
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Delivery> deliveries = new ArrayList<>();
 }
 
