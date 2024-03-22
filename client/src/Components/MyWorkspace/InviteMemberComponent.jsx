@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { inviteJoinApi } from "../api/ExecutiveInsightApiService";
 
 export default function InviteMemberComponent({ workspaceCode, setShow }) {
@@ -7,6 +7,19 @@ export default function InviteMemberComponent({ workspaceCode, setShow }) {
     const [message, setMessage] = useState('');
     const [alertColor, setAlertColor] = useState('success');
     const [showAlert, setAlert] = useState(false);
+    const formRef = useRef(null);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (formRef.current && !formRef.current.contains(event.target)) {
+              setShow(false);
+            }
+          }
+          document.addEventListener('mousedown', handleClickOutside);
+          return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+          };
+    }, [])
 
     function handleEmailChange(event) {
         setEmail(event.target.value);
@@ -43,7 +56,7 @@ export default function InviteMemberComponent({ workspaceCode, setShow }) {
     }
 
     return (
-        <div className='row justify-content-center position-relative'>
+        <div className='row justify-content-center position-relative' ref={formRef}>
         <div className='col-md-6 position-absolute'>
             {showAlert && <div className={`alert alert-${alertColor} shadow`}>{message}</div>}
             <div className="card shadow">

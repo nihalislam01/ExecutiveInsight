@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createTeamApi } from "../api/ExecutiveInsightApiService";
-import { useNavigate } from "react-router-dom";
 
 export default function CreateTeamComponent(props) {
 
@@ -8,7 +7,19 @@ export default function CreateTeamComponent(props) {
     const [message, setMessage] = useState('');
     const [alertColor, setAlertColor] = useState('success');
     const [showAlert, setShowAlert] = useState(false);
-    const navigate = useNavigate();
+    const formRef = useRef(null);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (formRef.current && !formRef.current.contains(event.target)) {
+              props.setShow(false);
+            }
+          }
+          document.addEventListener('mousedown', handleClickOutside);
+          return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+          };
+    }, [])
 
     function handleNameChange(event) {
         setName(event.target.value);
@@ -36,7 +47,7 @@ export default function CreateTeamComponent(props) {
     }
 
     return (
-        <div className='row justify-content-center position-relative'>
+        <div className='row justify-content-center position-relative' ref={formRef}>
             <div className='col-md-6 position-absolute'>
                 {showAlert && <div className={`alert alert-${alertColor} shadow`}>{message}</div>}
                 <div className="card shadow">

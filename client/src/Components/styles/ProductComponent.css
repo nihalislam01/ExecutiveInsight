@@ -1,0 +1,8 @@
+.icon {
+    transition: color 0.3s ease;
+}
+
+.icon:hover {
+    cursor: pointer;
+    color: rgb(100, 100, 100);
+}

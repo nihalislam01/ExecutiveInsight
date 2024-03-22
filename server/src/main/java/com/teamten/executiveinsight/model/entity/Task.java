@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.jdbc.Work;
 
 import java.time.LocalDate;
 
@@ -19,10 +18,10 @@ public class Task {
     private String name;
     private String description;
     private String status;
+    private String quantity;
     private LocalDate startDate;
     private LocalDate endDate;
-
-    private int quantity;
+    private boolean isAssigned;
 
     @OneToOne
     @JoinColumn(name = "product_id")

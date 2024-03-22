@@ -37,3 +37,9 @@ export const retrieveUsersByWorkspaceAndPostApi = (workspaceId, postId) => apiCl
 //Team API
 export const createTeamApi = (team) => apiClient.post("/create-team", team);
 export const assignUserToTeamApi = (email, teamId) => apiClient.patch(`/join-team/${email}/${teamId}`)
+
+//Product API
+export const retrieveProductsApi = (id) => apiClient.get(`/get-products/${id}`);
+export const createProductApi = (product) => apiClient.post("/create-product", product);
+export const changeProductNameApi = (product) => apiClient.patch("/change-product-name", product);
+export const deleteProductApi = (id) => apiClient.delete(`/delete-product/${id}`);

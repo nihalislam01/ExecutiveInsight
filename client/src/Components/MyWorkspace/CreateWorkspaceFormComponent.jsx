@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createWorkspaceApi, retrieveBusinessTitlesApi } from '../api/ExecutiveInsightApiService';
@@ -14,6 +14,7 @@ export default function CreateWorkspaceFormComponent({ setShow }) {
     const authContext = useAuth();
     const username = authContext.username();
     const navigate = useNavigate();
+    const formRef = useRef(null);
 
     useEffect(() => refreshPage(), [])
 
@@ -25,6 +26,15 @@ export default function CreateWorkspaceFormComponent({ setShow }) {
                 setHasTitles(response.data.length > 0)
             })
             .catch((error) => navigate("/error"))
+        function handleClickOutside(event) {
+            if (formRef.current && !formRef.current.contains(event.target)) {
+                setShow(false);
+            }
+        }
+            document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
     }
 
     async function handleSubmit() {
@@ -56,34 +66,32 @@ export default function CreateWorkspaceFormComponent({ setShow }) {
     }
 
     return (
-        <div className="FormComponent">
-            <div className='row justify-content-center position-relative'>
-                <div className='col-md-6 position-absolute'>
-                    <div className="card shadow">
-                        <div className="card-header">Create you workspace</div>
-                        <div className="card-body">
-                            <div>
-                                <div className="mb-3">
-                                    <label className="form-label">Workspace Name</label>
-                                    <input type="text" className="form-control" name="workspaceName" value={workspaceName} onChange={handleNameChange} required />
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label">Select Business</label>
-                                    <select className="form-select" onChange={handleTitle}>
-                                        { hasTitles &&
-                                            titles.map(
-                                                title => (
-                                                    <option key={title.businessTitleId} value={title.title}>{title.title}</option>
-                                                )
+        <div className='row justify-content-center position-relative' ref={formRef}>
+            <div className='col-md-6 position-absolute'>
+                <div className="card shadow">
+                    <div className="card-header">Create you workspace</div>
+                    <div className="card-body">
+                        <div>
+                            <div className="mb-3">
+                                <label className="form-label">Workspace Name</label>
+                                <input type="text" className="form-control" name="workspaceName" value={workspaceName} onChange={handleNameChange} required />
+                            </div>
+                            <div className="mb-3">
+                                <label className="form-label">Select Business</label>
+                                <select className="form-select" onChange={handleTitle}>
+                                    { hasTitles &&
+                                        titles.map(
+                                            title => (
+                                                <option key={title.businessTitleId} value={title.title}>{title.title}</option>
                                             )
-                                        }
-                                    </select>
-                                </div>
-                                <hr />
-                                <div className='text-end'>
-                                    <button type="button" className="btn btn-secondary mx-2" onClick={() => setShow(false)}>Cancel</button>
-                                    <button type="button" className="btn btn-success" onClick={handleSubmit}>Create Workspace</button>
-                                </div>
+                                        )
+                                    }
+                                </select>
+                            </div>
+                            <hr />
+                            <div className='text-end'>
+                                <button type="button" className="btn btn-secondary mx-2" onClick={() => setShow(false)}>Cancel</button>
+                                <button type="button" className="btn btn-success" onClick={handleSubmit}>Create Workspace</button>
                             </div>
                         </div>
                     </div>

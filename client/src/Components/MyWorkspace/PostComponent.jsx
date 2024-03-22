@@ -55,12 +55,12 @@ export default function PostComponent({ post, id }) {
 
     return (
         <div className="PostComponent">
-            <div className="d-flex justify-content-between align-items-center p-3 post-button" style={{backgroundColor: `#${selectColor(post.postId)}`}} onClick={toggleDropdown}>
-                <div className="d-flex">
+            <div className="d-flex justify-content-between align-items-center">
+                <div className="d-flex px-4 py-3 post-button w-100" style={{ borderTopRightRadius: "0", borderBottomRightRadius: "0", backgroundColor: `#${selectColor(post.postId)}` }} onClick={toggleDropdown}>
                     <p className="m-0"><FontAwesomeIcon icon={faCaretDown} /></p>
                     <p className="my-0 mx-2">{post.title}</p>
                 </div>
-                <p className="m-0" onClick={() => handleDelete(post.title)}><FontAwesomeIcon icon={faTrashCan} /></p>
+                <div className="m-0 post-button px-4 py-3" style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0", backgroundColor: `#${selectColor(post.postId)}` }} onClick={() => handleDelete(post.title)}><FontAwesomeIcon icon={faTrashCan} /></div>
             </div>
             {isOpen &&
                 <div className="border border-2 shadow members-list bg-light">

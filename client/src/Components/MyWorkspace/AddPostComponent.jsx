@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { addCustomPostApi } from "../api/ExecutiveInsightApiService";
 
 export default function AddPostComponent({ setShow, id }) {
@@ -7,6 +7,19 @@ export default function AddPostComponent({ setShow, id }) {
     const [alertColor, setAlertColor] = useState('success');
     const [message, setMessage] = useState('');
     const [postTitle, setPostTitle] = useState('');
+    const formRef = useRef(null);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (formRef.current && !formRef.current.contains(event.target)) {
+              setShow(false);
+            }
+          }
+          document.addEventListener('mousedown', handleClickOutside);
+          return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+          };
+    }, [])
 
     function handleTitleChange(event) {
         setPostTitle(event.target.value);
@@ -34,7 +47,7 @@ export default function AddPostComponent({ setShow, id }) {
     }
 
     return (
-        <div className='row justify-content-center position-relative'>
+        <div className='row justify-content-center position-relative' ref={formRef}>
             <div className='col-md-6 position-fixed z-1'>
                 {showAlert && <div className={`alert alert-${alertColor} shadow`}>{message}</div>}
                 <div className="card shadow">

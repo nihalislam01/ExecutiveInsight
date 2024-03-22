@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,13 +24,21 @@ public class ProductService {
     public List<Product> getAllProduct(Long id) {
         return productRepository.findAllByWorkspace_workspaceId(id);
     }
-    public void updateProduct(ProductRequest productRequest) {
+    public boolean updateProduct(ProductRequest productRequest) {
         Product product = productRepository.findById(productRequest.id()).orElseThrow(EntityNotFoundException::new);
+        if (product.getName().equalsIgnoreCase(productRequest.name())) {
+            return false;
+        }
         product.setName(productRequest.name());
         productRepository.save(product);
+        return true;
     }
     public void removeProduct(Long id) {
         Product product = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         productRepository.delete(product);
+    }
+
+    public Optional<Product> getProduct(Long id) {
+        return productRepository.findById(id);
     }
 }

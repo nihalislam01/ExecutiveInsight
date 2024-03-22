@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from './security/AuthContext';
 import NotificationComponent from './NotificationComponent';
 import CodeFormComponent from './CodeFormComponent';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function HeaderComponent() {
 
@@ -12,6 +12,20 @@ export default function HeaderComponent() {
     const isAuthenticated = authContext.isAuthenticated();
     const [showNotification, setShowNotification] = useState(false);
     const [showCodeForm, setShowCodeForm] = useState(false);
+    const formRef = useRef(null);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (formRef.current && !formRef.current.contains(event.target)) {
+              setShowNotification(false);
+              setShowCodeForm(false);
+            }
+          }
+          document.addEventListener('mousedown', handleClickOutside);
+          return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+          };
+    }, [])
 
     function logout() {
         authContext.logout();
@@ -29,7 +43,7 @@ export default function HeaderComponent() {
 
     return (
         <div>
-            {showCodeForm && <CodeFormComponent />}
+            {showCodeForm && <CodeFormComponent ref={formRef} />}
             <header className='border-bottom border-light border-5 mb-3 p-2'>
                 <div className='container'>
                     <div className='row'>
@@ -53,10 +67,10 @@ export default function HeaderComponent() {
                                     {!isAuthenticated && <Link className='nav-link' to="/signup">Signup</Link>}
                                 </li>
                                 <li className='nav-item'>
-                                    {isAuthenticated && <Link className='nav-link mx-2' onClick={handleShowCodeForm}><FontAwesomeIcon icon={faPlus} /></Link>}
+                                    {isAuthenticated && <Link className='nav-link mx-2' onClick={handleShowCodeForm} ref={formRef}><FontAwesomeIcon icon={faPlus} /></Link>}
                                 </li>
                                 <li className='nav-item'>
-                                    {isAuthenticated && <Link className='nav-link mx-2' onClick={handleShowNotification}><FontAwesomeIcon icon={faBell} /></Link>}
+                                    {isAuthenticated && <Link className='nav-link mx-2' onClick={handleShowNotification} ref={formRef}><FontAwesomeIcon icon={faBell} /></Link>}
                                 </li>
                                 <li className='nav-item'>
                                     {isAuthenticated && <a className='nav-link mx-2' href="/user-profile"><FontAwesomeIcon icon={faUser} /></a>}
@@ -69,7 +83,7 @@ export default function HeaderComponent() {
                     </div>
                 </div>
             </header>
-            {showNotification && <NotificationComponent />}
+            {showNotification && <NotificationComponent ref={formRef} />}
             </div>
     )
 }
