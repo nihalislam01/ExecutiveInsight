@@ -44,7 +44,7 @@ export default function SidebarComponent() {
                     <hr className="my-0" />
                     <Link className="nav-link my-2 mx-2 link" to="/my-workspace"><FontAwesomeIcon icon={faChartLine} className="mx-2" />Sales</Link>
                     <Link className="nav-link mb-2 mx-2 link" to={`/products/${workspaceId}`}><FontAwesomeIcon icon={faFile} className="mx-2" />Products</Link>
-                    <Link className="nav-link mb-2 mx-2 link" to="/my-workspace"><FontAwesomeIcon icon={faTruckFast} className="mx-2" />Task Allocation</Link>
+                    <Link className="nav-link mb-2 mx-2 link" to={`/tasks/${workspaceId}`}><FontAwesomeIcon icon={faTruckFast} className="mx-2" />Task Allocation</Link>
                     <hr className="my-0" />
                     <Link className="nav-link my-2 mx-2 link" to="/my-workspace"><FontAwesomeIcon icon={faCalendarDays} className="mx-2" />Calender</Link>
                 </div>

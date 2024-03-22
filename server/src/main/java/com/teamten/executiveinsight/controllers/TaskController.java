@@ -5,9 +5,11 @@ import com.teamten.executiveinsight.model.request.TaskRequest;
 import com.teamten.executiveinsight.services.*;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -20,6 +22,13 @@ public class TaskController {
     private final WorkspaceService workspaceService;
     @PostMapping("create-task")
     private ResponseEntity<String> addTask(@RequestBody TaskRequest taskRequest) {
+        if (taskRequest.name().equalsIgnoreCase("") || taskRequest.name().equalsIgnoreCase(" ")) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter task name");
+        } else if (taskRequest.productId()==0) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter a product name");
+        } else if (LocalDate.parse(taskRequest.endDate()).isBefore(LocalDate.now()) || taskRequest.endDate().equalsIgnoreCase("")) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter valid delivery date");
+        }
         Workspace workspace = workspaceService.getWorkspace(taskRequest.workspaceId()).orElseThrow(EntityNotFoundException::new);
         Product product = productService.getProduct(taskRequest.productId()).orElseThrow(EntityNotFoundException::new);
         taskService.createTask(workspace, product, taskRequest);

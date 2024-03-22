@@ -43,3 +43,7 @@ export const retrieveProductsApi = (id) => apiClient.get(`/get-products/${id}`);
 export const createProductApi = (product) => apiClient.post("/create-product", product);
 export const changeProductNameApi = (product) => apiClient.patch("/change-product-name", product);
 export const deleteProductApi = (id) => apiClient.delete(`/delete-product/${id}`);
+
+//Task API
+export const retrieveTasksApi = (id) => apiClient.get(`/get-tasks/${id}`);
+export const createTaskApi = (task) => apiClient.post("/create-task", task);

@@ -46,7 +46,6 @@ export default function CreateWorkspaceFormComponent({ setShow }) {
         await createWorkspaceApi(workspace)
             .then((response) => handleResponse(response))
             .catch((error) => {
-                console.log(error)
                 navigate("/error")
             })
     }
