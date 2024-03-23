@@ -17,9 +17,8 @@ public class Team {
     private Long teamId;
     private String name;
 
-    @OneToOne
-    @JoinColumn(name = "task_id")
-    private Task task;
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks;
 
     @JsonIgnore
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)

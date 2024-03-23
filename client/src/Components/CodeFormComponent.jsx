@@ -1,8 +1,10 @@
+import { useRef } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { requestJoinApi } from './api/ExecutiveInsightApiService';
 import { useAuth } from './security/AuthContext';
 
-export default function CodeFormComponent() {
+export default function CodeFormComponent({ setShowCodeForm }) {
 
     const [code, setCode] = useState('');
     const [message, setMessage] = useState('');
@@ -10,6 +12,19 @@ export default function CodeFormComponent() {
     const [showAlert, setAlert] = useState(false);
     const authContext = useAuth();
     const username = authContext.username();
+    const formRef = useRef(null);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (formRef.current && !formRef.current.contains(event.target)) {
+              setShowCodeForm(false);
+            }
+          }
+          document.addEventListener('mousedown', handleClickOutside);
+          return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+          };
+    }, [])
 
     function handleSubmit() {
         const userJoinWorkspace = {
@@ -40,7 +55,7 @@ export default function CodeFormComponent() {
     }
 
     return (
-        <div className='row justify-content-center position-relative'>
+        <div className='row justify-content-center position-relative' ref={formRef}>
             <div className='col-md-6 position-absolute z-2' style={{ top: "150px" }}>
                 {showAlert && <div className={`alert alert-${alertColor}`}>{message}</div>}
                 <div className="card shadow">

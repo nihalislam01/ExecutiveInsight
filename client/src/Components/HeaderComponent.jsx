@@ -29,7 +29,7 @@ export default function HeaderComponent() {
 
     return (
         <div>
-            {showCodeForm && <CodeFormComponent />}
+            {showCodeForm && <CodeFormComponent setShowCodeForm={setShowCodeForm} />}
             <header className='border-bottom border-light border-5 mb-3 p-2'>
                 <div className='container'>
                     <div className='row'>
@@ -53,10 +53,10 @@ export default function HeaderComponent() {
                                     {!isAuthenticated && <Link className='nav-link' to="/signup">Signup</Link>}
                                 </li>
                                 <li className='nav-item'>
-                                    {isAuthenticated && <Link className='nav-link mx-2' onClick={handleShowCodeForm}><FontAwesomeIcon icon={faPlus} /></Link>}
+                                    {isAuthenticated && <Link className='nav-link mx-2' onClick={handleShowCodeForm} ><FontAwesomeIcon icon={faPlus} /></Link>}
                                 </li>
                                 <li className='nav-item'>
-                                    {isAuthenticated && <Link className='nav-link mx-2' onClick={handleShowNotification}><FontAwesomeIcon icon={faBell} /></Link>}
+                                    {isAuthenticated && <Link className='nav-link mx-2' onClick={handleShowNotification} ><FontAwesomeIcon icon={faBell} /></Link>}
                                 </li>
                                 <li className='nav-item'>
                                     {isAuthenticated && <a className='nav-link mx-2' href="/user-profile"><FontAwesomeIcon icon={faUser} /></a>}
@@ -69,7 +69,7 @@ export default function HeaderComponent() {
                     </div>
                 </div>
             </header>
-            {showNotification && <NotificationComponent />}
+            {showNotification && <NotificationComponent setShowNotification={setShowNotification} />}
             </div>
     )
 }

@@ -47,6 +47,11 @@ export default function ListPostComponent() {
                     <hr />
                     <table className='table'>
                         <tbody>
+                            <tr>
+                                <td>
+                                    <div className="w-100 py-2 create text-center" onClick={showForm}><FontAwesomeIcon icon={faPlus} /></div>
+                                </td>
+                            </tr>
                             {hasPosts &&
                                 posts.map(
                                     post => (
@@ -58,11 +63,6 @@ export default function ListPostComponent() {
                                     )
                                 )
                             }
-                            <tr>
-                                <td>
-                                    <div className="w-100 py-2 create text-center" onClick={showForm}><FontAwesomeIcon icon={faPlus} /></div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>

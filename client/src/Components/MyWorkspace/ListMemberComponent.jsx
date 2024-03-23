@@ -54,7 +54,12 @@ export default function ListMemberComponent() {
                     <h2 className="text-start mx-3">Members</h2>
                     <hr />
                     <table className="table">
-                        <tbody> 
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div className="w-100 py-2 create text-center" onClick={() => setShow(true)}><FontAwesomeIcon icon={faPlus} /></div>
+                                </td>
+                            </tr>
                             {hasUserJoinWorkspaces &&
                                 userJoinWorkspaces.map(
                                     userJoinWorkspace => (
@@ -66,11 +71,6 @@ export default function ListMemberComponent() {
                                     )
                                 )
                             }
-                            <tr>
-                                <td>
-                                    <div className="w-100 py-2 create text-center" onClick={() => setShow(true)}><FontAwesomeIcon icon={faPlus} /></div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>

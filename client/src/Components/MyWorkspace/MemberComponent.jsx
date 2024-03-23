@@ -1,6 +1,6 @@
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Overlay, Popover } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../security/AuthContext';
@@ -15,11 +15,24 @@ export default function MemberComponent({ userJoinWorkspace, hasPosts, posts, wo
   const teamTarget = React.useRef(null);
   const authContext = useAuth();
   const navigate = useNavigate();
+  const formRef = useRef(null);
 
   useEffect(() => refreshPage(), [])
 
   function refreshPage() {
     authContext.refresh();
+    function handleClickOutside(event) {
+      if (formRef.current && !formRef.current.contains(event.target)) {
+        setShowPopover(false);
+        setShowPosts(false);
+        setShowTeams(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+    
   }
 
   function handleClick() {
@@ -55,7 +68,7 @@ export default function MemberComponent({ userJoinWorkspace, hasPosts, posts, wo
           </button>
           <button className="m-0 btn btn-light" style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0" }} ref={target} onClick={handleClick}><FontAwesomeIcon icon={faEllipsisVertical} /></button>
         </div>
-        <Overlay target={target.current} show={showPopover} placement="bottom">
+        <Overlay target={target.current} show={showPopover} placement="bottom" ref={formRef}>
             <Popover id={userJoinWorkspace.userJoinWorkspaceId}>
                 <Popover.Body className='m-0 p-0'>
                     <button className="btn btn-light form-control" ref={postTarget} onClick={handleShowPost}>Assign User To a Post</button>

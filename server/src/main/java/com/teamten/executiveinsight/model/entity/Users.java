@@ -33,9 +33,8 @@ public class Users {
     @JoinColumn(name = "badge_id")
     private Badge badge;
 
-    @OneToOne
-    @JoinColumn(name = "task_id")
-    private Task task;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks;
 
     @OneToOne
     @JoinColumn(name = "workspace_id")

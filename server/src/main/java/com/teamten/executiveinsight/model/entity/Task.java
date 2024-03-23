@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.jdbc.Work;
 
 import java.time.LocalDate;
 
@@ -19,22 +18,22 @@ public class Task {
     private String name;
     private String description;
     private String status;
+    private String quantity;
     private LocalDate startDate;
     private LocalDate endDate;
+    private boolean isAssigned;
 
-    private int quantity;
-
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
     @JsonIgnore
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
 
     @JsonIgnore
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
 

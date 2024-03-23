@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { joinWorkspaceApi, retrieveNotificationByUserApi, updateNotificationApi } from './api/ExecutiveInsightApiService';
@@ -7,13 +7,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import './styles/NotificationComponent.css'
 
-export default function NotificationComponent() {
+export default function NotificationComponent({ setShowNotification }) {
 
     const [notifications, setNotifications] = useState(null);
     const [hasNotifications, setHasNotifications] = useState(false)
     const authContext = useAuth();
     const username = authContext.username();
     const navigate = useNavigate();
+    const formRef = useRef(null);
 
     useEffect(() => refreshPage(), [])
 
@@ -24,6 +25,15 @@ export default function NotificationComponent() {
                 handleResponse(response)
             })
             .catch((error) => navigate('/error'))
+        function handleClickOutside(event) {
+            if (formRef.current && !formRef.current.contains(event.target)) {
+                setShowNotification(false);
+            }
+        }
+            document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+                document.removeEventListener('mousedown', handleClickOutside);
+        };
     }
 
     function handleResponse(response) {
@@ -70,7 +80,7 @@ export default function NotificationComponent() {
 
 
     return (
-        <div className='row justify-content-end position-relative pt-0 mt-0'>
+        <div className='row justify-content-end position-relative pt-0 mt-0' ref={formRef}>
             <div className='col-md-4 position-absolute shadow z-2 border border-2 notification-container'>
                 {!hasNotifications && <h5 className='text-start my-4'>No notifications yet</h5>}
                 {hasNotifications && <h5 className='text-start my-4'>Notifications</h5>}

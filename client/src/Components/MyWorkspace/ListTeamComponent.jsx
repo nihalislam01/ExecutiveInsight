@@ -49,6 +49,11 @@ export default function ListTeamComponent() {
                     <h2 className="text-start mx-3">Teams</h2>
                     <hr />
                     <div className="row g-2">
+                        <div className="col-12 col-md-3">
+                            <div className="w-100 create" onClick={addTeam}>
+                                <h4 style={{ paddingTop: "58px", paddingBottom: "58px" }}><FontAwesomeIcon icon={faPlus} /></h4>
+                            </div>
+                        </div>
                         {hasTeams &&
                             teams.map(
                                 team => (
@@ -56,11 +61,6 @@ export default function ListTeamComponent() {
                                 )
                             )
                         }
-                        <div className="col-12 col-md-3">
-                            <div className="w-100 create" onClick={addTeam}>
-                                <h4 style={{ paddingTop: "58px", paddingBottom: "58px" }}><FontAwesomeIcon icon={faPlus} /></h4>
-                            </div>
-                        </div>
                     </div>
                 </Col>
             </Row>
