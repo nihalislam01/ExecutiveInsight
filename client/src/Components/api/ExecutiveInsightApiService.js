@@ -49,3 +49,5 @@ export const retrieveTasksApi = (id) => apiClient.get(`/get-tasks/${id}`);
 export const retrieveTaskApi = (id) => apiClient.get(`get-task/${id}`);
 export const createTaskApi = (task) => apiClient.post("/create-task", task);
 export const editTaskApi = (task) => apiClient.patch("/update-task", task);
+export const assignTaskToMemberApi = (userId, taskId) => apiClient.put(`/assign-task-to-user/${userId}/${taskId}`);
+export const assignTaskToTeamApi = (teamId, taskId) => apiClient.put(`/assign-task-to-team/${teamId}/${taskId}`);

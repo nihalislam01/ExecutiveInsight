@@ -27,12 +27,10 @@ public class Task {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;

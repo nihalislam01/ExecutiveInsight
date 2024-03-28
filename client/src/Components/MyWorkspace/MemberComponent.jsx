@@ -13,14 +13,12 @@ export default function MemberComponent({ userJoinWorkspace, hasPosts, posts, wo
   const target = React.useRef(null);
   const postTarget = React.useRef(null);
   const teamTarget = React.useRef(null);
-  const authContext = useAuth();
   const navigate = useNavigate();
   const formRef = useRef(null);
 
   useEffect(() => refreshPage(), [])
 
   function refreshPage() {
-    authContext.refresh();
     function handleClickOutside(event) {
       if (formRef.current && !formRef.current.contains(event.target)) {
         setShowPopover(false);
@@ -32,7 +30,6 @@ export default function MemberComponent({ userJoinWorkspace, hasPosts, posts, wo
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-    
   }
 
   function handleClick() {

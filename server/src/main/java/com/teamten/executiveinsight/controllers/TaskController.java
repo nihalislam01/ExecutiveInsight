@@ -47,14 +47,18 @@ public class TaskController {
     @PutMapping("/assign-task-to-user/{userId}/{taskId}")
     private ResponseEntity<String> assignTaskToUser(@PathVariable Long userId, @PathVariable Long taskId) {
         Users user = userService.getUser(userId).orElseThrow(EntityNotFoundException::new);
-        taskService.updateTask(user, taskId);
-        return ResponseEntity.ok("User assigned successful");
+        if(taskService.updateTask(user, taskId)) {
+            return ResponseEntity.ok("User assigned successful");
+        }
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Task already has been assigned");
     }
     @PutMapping("/assign-task-to-team/{teamId}/{taskId}")
     private ResponseEntity<String> assignTaskToTeam(@PathVariable Long teamId, @PathVariable Long taskId) {
         Team team = teamService.getTeam(teamId).orElseThrow(EntityNotFoundException::new);
-        taskService.updateTask(team, taskId);
-        return ResponseEntity.ok("Team assigned successful");
+        if (taskService.updateTask(team, taskId)) {
+            return ResponseEntity.ok("Team assigned successful");
+        }
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Task already has been assigned");
     }
     @PatchMapping("/update-task")
     private ResponseEntity<String> updateTask(@RequestBody TaskRequest taskRequest) {

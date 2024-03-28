@@ -36,19 +36,31 @@ public class TaskService {
     public Optional<Task> getTask(Long id) {
         return taskRepository.findById(id);
     }
-    public void updateTask(Users user, Long taskId) {
+    public Optional<Task> getTaskByProductId(Long id) {
+        return taskRepository.findByProduct_productId(id);
+    }
+    public boolean updateTask(Users user, Long taskId) {
         Task task = this.getTask(taskId).orElseThrow(EntityNotFoundException::new);
+        if (task.isAssigned()) {
+            return false;
+        }
         task.setUser(user);
         task.setAssigned(true);
-        task.setStatus("User assigned. Not Delivered Yet");
+        task.setStatus("Not Delivered Yet");
         taskRepository.save(task);
+        return true;
     }
-    public void updateTask(Team team, Long taskId) {
+    public boolean updateTask(Team team, Long taskId) {
         Task task = this.getTask(taskId).orElseThrow(EntityNotFoundException::new);
+        if (task.isAssigned()) {
+            return false;
+        }
+
         task.setTeam(team);
         task.setAssigned(true);
-        task.setStatus("Team assigned. Not Delivered Yet");
+        task.setStatus("Not Delivered Yet");
         taskRepository.save(task);
+        return true;
     }
     public void updateTask(TaskRequest taskRequest, Product product) {
         Task task = this.getTask(taskRequest.taskId()).orElseThrow(EntityNotFoundException::new);
@@ -61,10 +73,6 @@ public class TaskService {
         task.setEndDate(endDate);
         task.setProduct(product);
         taskRepository.save(task);
-    }
-
-    public Optional<Task> getTaskByProductId(Long id) {
-        return taskRepository.findByProduct_productId(id);
     }
 
     public void removeProduct(Long id) {

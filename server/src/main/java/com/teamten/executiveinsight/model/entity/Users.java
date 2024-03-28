@@ -33,6 +33,7 @@ public class Users {
     @JoinColumn(name = "badge_id")
     private Badge badge;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;
 

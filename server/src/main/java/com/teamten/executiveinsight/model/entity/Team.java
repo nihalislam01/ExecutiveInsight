@@ -17,6 +17,7 @@ public class Team {
     private Long teamId;
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;
 
@@ -24,12 +25,12 @@ public class Team {
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserJoinTeam> userJoinTeams = new ArrayList<>();
 
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Delivery> deliveries = new ArrayList<>();
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "workspace_id")
     private Workspace workspace;
-
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Delivery> deliveries = new ArrayList<>();
 }
 

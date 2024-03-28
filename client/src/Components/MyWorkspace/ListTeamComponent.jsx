@@ -20,9 +20,7 @@ export default function ListTeamComponent() {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    useEffect(() => refreshPage(), [])
-
-    function refreshPage() {
+    useEffect(() => {
         authContext.refresh()
         retrieveWorkspaceByIdApi(id)
             .then((response) => {
@@ -31,12 +29,11 @@ export default function ListTeamComponent() {
                 setWorkspaceCode(response.data.code);
             })
             .catch((error) => navigate('/error'))
-    }
+    }, [authContext, id, navigate])
 
     function addTeam() {
         setShow(!show);
     }
-
 
     return (
         <div className="ListTeamComponent">
@@ -56,8 +53,8 @@ export default function ListTeamComponent() {
                         </div>
                         {hasTeams &&
                             teams.map(
-                                team => (
-                                    <TeamComponent team={team} />
+                                (team, key) => (
+                                    <TeamComponent key={key} team={team} />
                                 )
                             )
                         }

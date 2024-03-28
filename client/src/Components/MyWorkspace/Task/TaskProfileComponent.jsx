@@ -21,6 +21,9 @@ export default function TaskProfileComponent() {
     const [hasProducts, setHasProducts] = useState(false);
     const [products, setProducts] = useState([{}]);
     const [productId, setProductId] = useState(0);
+    const [userName, setUserName] = useState('');
+    const [userId, setUserId] = useState(0);
+    const [teamName, setTeamName] = useState('');
     const [showAlert, setShowAlert] = useState(false);
     const [alertColor, setAlertColor] = useState('success');
     const [message, setMessage] = useState('');
@@ -43,9 +46,18 @@ export default function TaskProfileComponent() {
                 setQuantity(response.data.quantity)
                 setStartDate(response.data.startDate)
                 setEndDate(response.data.endDate)
-                setAssigned(response.data.isAssigned)
+                setAssigned(response.data.assigned)
+                if (response.data.assigned) {
+                    if (response.data.user!==null) {
+                        setUserName(response.data.user.name)
+                        setUserId(response.data.user.userId)
+                    } else {
+                        setTeamName(response.data.team.name)
+                    }
+                }
             })
             .catch((error) => {
+                console.log(error)
                 navigate('/error')})
     }, [authContext, id, navigate])
 
@@ -118,15 +130,22 @@ export default function TaskProfileComponent() {
             })
     }
 
+    function goToProfile() {
+        navigate(`/user/${userId}`)
+    }
+
     return (
         <Row>
             <Col xs={2}></Col>
             <Col xs={5} className="text-start" style={{marginLeft: "20px"}}>
             {showAlert && <div className={`alert alert-${alertColor} shadow`}>{message}</div>}
                 {!isEdit &&
-                    <div className="d-flex align-items-center">
-                        <h5>{name}</h5>
-                        <FontAwesomeIcon icon={faPenToSquare} className="mx-2 pb-3 btn" onClick={setEdit} />
+                    <div>
+                        <div className="d-flex align-items-center">
+                            <h5>{name}</h5>
+                            <FontAwesomeIcon icon={faPenToSquare} className="mx-2 pb-3 btn" onClick={setEdit} />
+                        </div>
+                        <hr />
                     </div>
                 }
                 {isEdit &&
@@ -185,7 +204,23 @@ export default function TaskProfileComponent() {
                         </div>
                     </div>
                 }
-                {!isAssigned && !isEdit && <p>User has not been assigned yet</p>}
+                {!isAssigned && !isEdit &&
+                    <p>Task has not been assigned yet</p>
+                }
+                {isAssigned && !isEdit && userName!=='' &&
+                    <div>
+                    <h5>Task Assigned to</h5>
+                    <hr />
+                    <button className="btn btn-light form-control text-start" onClick={goToProfile}>{userName}</button>
+                    </div>
+                }
+                {isAssigned && !isEdit && teamName!=='' &&
+                    <div>
+                    <h5>Task Assigned to</h5>
+                    <hr />
+                    <button className="btn btn-light form-control text-start">{teamName}</button>
+                    </div>
+                }
             </Col>
             {!isEdit &&
                 <Col xs={4} style={{marginLeft: "60px", marginTop: "38px"}}>
