@@ -36,8 +36,11 @@ public class TaskService {
     public Optional<Task> getTask(Long id) {
         return taskRepository.findById(id);
     }
-    public Optional<Task> getTaskByProductId(Long id) {
-        return taskRepository.findByProduct_productId(id);
+    public List<Task> getAllTaskByUserId(Long id) {
+        return taskRepository.findAllByUser_userId(id);
+    }
+    public List<Task> getAllTaskByTeamId(Long id) {
+        return taskRepository.findAllByTeam_teamId(id);
     }
     public boolean updateTask(Users user, Long taskId) {
         Task task = this.getTask(taskId).orElseThrow(EntityNotFoundException::new);
@@ -75,9 +78,14 @@ public class TaskService {
         taskRepository.save(task);
     }
 
-    public void removeProduct(Long id) {
-        Task task = this.getTaskByProductId(id).orElseThrow(EntityNotFoundException::new);
-        task.setProduct(null);
-        taskRepository.save(task);
+    public void removeProductFromTask(Long id) {
+        List<Task> tasks = this.getAllTaskByProductId(id);
+        for (int i = 0; i < tasks.size(); i++) {
+            tasks.get(i).setProduct(null);
+        }
+        taskRepository.saveAll(tasks);
+    }
+    public List<Task> getAllTaskByProductId(Long id) {
+        return taskRepository.findAllByProduct_productId(id);
     }
 }

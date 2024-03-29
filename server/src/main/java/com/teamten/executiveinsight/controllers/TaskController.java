@@ -44,6 +44,16 @@ public class TaskController {
         Task task = taskService.getTask(id).orElseThrow(EntityNotFoundException::new);
         return ResponseEntity.ok(task);
     }
+    @GetMapping("/get-tasks-by-user/{id}")
+    private ResponseEntity<?> getAllTaskByUserId(@PathVariable Long id) {
+        List<Task> tasks = taskService.getAllTaskByUserId(id);
+        return ResponseEntity.ok(tasks);
+    }
+    @GetMapping("/get-tasks-by-team/{id}")
+    private ResponseEntity<?> getAllTaskByTeamId(@PathVariable Long id) {
+        List<Task> tasks = taskService.getAllTaskByTeamId(id);
+        return ResponseEntity.ok(tasks);
+    }
     @PutMapping("/assign-task-to-user/{userId}/{taskId}")
     private ResponseEntity<String> assignTaskToUser(@PathVariable Long userId, @PathVariable Long taskId) {
         Users user = userService.getUser(userId).orElseThrow(EntityNotFoundException::new);

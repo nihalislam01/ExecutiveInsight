@@ -50,10 +50,7 @@ public class ProductController {
     }
     @DeleteMapping("/delete-product/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
-        Optional<Task> task = taskService.getTaskByProductId(id);
-        if (task.isPresent()) {
-            taskService.removeProduct(id);
-        }
+        taskService.removeProductFromTask(id);
         productService.removeProduct(id);
         return ResponseEntity.ok("Product Removed Successfully");
     }

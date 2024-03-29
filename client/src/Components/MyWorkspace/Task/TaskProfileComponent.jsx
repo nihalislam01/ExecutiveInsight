@@ -218,7 +218,7 @@ export default function TaskProfileComponent() {
                     <div>
                     <h5>Task Assigned to</h5>
                     <hr />
-                    <button className="btn btn-light form-control text-start">{teamName}</button>
+                    <button className="btn btn-light form-control text-start">Team {teamName}</button>
                     </div>
                 }
             </Col>

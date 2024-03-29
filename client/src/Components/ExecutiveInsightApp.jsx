@@ -18,6 +18,7 @@ import UserProfileComponent from './Profile/UserProfileComponent';
 import EditProfileComponent from './Profile/EditProfileComponent';
 import ChangePhotoComponent from './Profile/ChangePhotoComponent';
 import ProfileViewComponent from './Profile/ProfileViewComponent';
+import TeamProfileComponent from './MyWorkspace/Team/TeamProfileComponent';
 
 //Admin Components
 import WorkspaceComponent from './MyWorkspace/WorkspaceComponent';
@@ -79,6 +80,12 @@ export default function ExecutiveInsightApp() {
                                     <SidebarComponent />
                                     <ListTeamComponent />
                                 </AdminRoute>
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/team/:id' element={
+                            <AuthenticatedRoute>
+                                    <TeamProfileComponent />
                             </AuthenticatedRoute>
                         } />
 

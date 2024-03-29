@@ -28,16 +28,14 @@ export default function TaskComponent(props) {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (formRef.current && !formRef.current.contains(event.target)) {
-        if (memberRef.current && !memberRef.current.contains(event.target)) {
-          if (teamRef.current && !teamRef.current.contains(event.target)) {
-            setShowOptions(false);
-            setShowMembers(false);
-            setShowTeams(false);
-          }
-        }
+      if ((formRef.current && !formRef.current.contains(event.target))) {
+        setShowOptions(false);
+        if((memberRef.current && !memberRef.current.contains(event.target)) || (teamRef.current && !teamRef.current.contains(event.target))) {
+          setShowMembers(false);
+          setShowTeams(false);
       }
     }
+  }
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -80,7 +78,7 @@ export default function TaskComponent(props) {
         <td>{props.task.quantity}</td>
         <td>{props.task.endDate}</td>
         <td>{props.task.status}</td>
-        <td onClick={handleOptionClick}><FontAwesomeIcon icon={faEllipsisVertical} ref={optionTarget} /></td>
+        <td ref={optionTarget} onClick={handleOptionClick}><FontAwesomeIcon icon={faEllipsisVertical} /></td>
         <Overlay target={optionTarget.current} show={showOptions} placement="bottom" ref={formRef}>
             <Popover id={props.task.taskId}>
                 <Popover.Body className='m-0 p-0'>

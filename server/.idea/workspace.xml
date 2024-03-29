@@ -5,25 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98024a58-7d0a-4e43-8c66-860eadc4b630" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/ProductController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/TaskController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/TaskController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/TaskService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/TaskService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ProductController.class.uniqueId2" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ProductController.class.uniqueId2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TaskController.class.uniqueId1" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TaskController.class.uniqueId1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TaskService.class.uniqueId0" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TaskService.class.uniqueId0" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/controllers/ProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/controllers/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/controllers/TaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Team.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/repositories/TaskRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/repositories/TaskRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/services/TaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/services/TaskService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
