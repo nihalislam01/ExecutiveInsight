@@ -27,20 +27,22 @@ public class TaskService {
         newTask.setAssigned(false);
         newTask.setProduct(product);
         newTask.setQuantity(taskRequest.quantity());
+        newTask.setMoney(taskRequest.value());
         taskRepository.save(newTask);
 
     }
-    public List<Task> getAllTask(Long id) {
+    public List<Task> getAllTaskByWorkspaceId(Long id) {
         return taskRepository.findAllByWorkspace_workspaceId(id);
-    }
-    public Optional<Task> getTask(Long id) {
-        return taskRepository.findById(id);
     }
     public List<Task> getAllTaskByUserId(Long id) {
         return taskRepository.findAllByUser_userId(id);
     }
-    public List<Task> getAllTaskByTeamId(Long id) {
-        return taskRepository.findAllByTeam_teamId(id);
+    public List<Task> getAllTaskByTeamId(Long id) { return taskRepository.findAllByTeam_teamId(id); }
+    public List<Task> getAllTaskByProductId(Long id) { return taskRepository.findAllByProduct_productId(id); }
+    public Optional<Task> getTask(Long id) { return taskRepository.findById(id); }
+    public int getTotalRevenue(Long id) {
+        Optional<Integer> totalRevenue =  taskRepository.findTotalRevenue(id, "Delivered");
+        return totalRevenue.orElse(0);
     }
     public boolean updateTask(Users user, Long taskId) {
         Task task = this.getTask(taskId).orElseThrow(EntityNotFoundException::new);
@@ -75,17 +77,14 @@ public class TaskService {
         task.setStartDate(startDate);
         task.setEndDate(endDate);
         task.setProduct(product);
+        task.setMoney(taskRequest.value());
         taskRepository.save(task);
     }
-
     public void removeProductFromTask(Long id) {
         List<Task> tasks = this.getAllTaskByProductId(id);
-        for (int i = 0; i < tasks.size(); i++) {
-            tasks.get(i).setProduct(null);
+        for (Task task : tasks) {
+            task.setProduct(null);
         }
         taskRepository.saveAll(tasks);
-    }
-    public List<Task> getAllTaskByProductId(Long id) {
-        return taskRepository.findAllByProduct_productId(id);
     }
 }

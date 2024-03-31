@@ -23,7 +23,7 @@ public class Delivery {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "team_id")
-    private Team team;
+    @JoinColumn(name = "workspace_id")
+    private Workspace workspace;
 
 }

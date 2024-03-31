@@ -43,6 +43,9 @@ public class Workspace {
     @OneToMany(mappedBy = "workspace")
     private List<Task> tasks = new ArrayList<>();
 
+    @OneToMany(mappedBy = "workspace")
+    private List<Delivery> deliveries = new ArrayList<>();
+
     @ManyToMany(mappedBy = "workspaces")
     private List<Post> posts = new ArrayList<>();
 }

@@ -36,7 +36,7 @@ public class TaskController {
     }
     @GetMapping("/get-tasks/{id}")
     private ResponseEntity<?> getAllTask(@PathVariable Long id) {
-        List<Task> tasks = taskService.getAllTask(id);
+        List<Task> tasks = taskService.getAllTaskByWorkspaceId(id);
         return ResponseEntity.ok(tasks);
     }
     @GetMapping("/get-task/{id}")
@@ -54,6 +54,12 @@ public class TaskController {
         List<Task> tasks = taskService.getAllTaskByTeamId(id);
         return ResponseEntity.ok(tasks);
     }
+    @GetMapping("/get-total-revenue/{id}")
+    private ResponseEntity<?> getTotalRevenue(@PathVariable Long id) {
+        int totalRevenue = taskService.getTotalRevenue(id);
+        return ResponseEntity.ok(totalRevenue);
+    }
+
     @PutMapping("/assign-task-to-user/{userId}/{taskId}")
     private ResponseEntity<String> assignTaskToUser(@PathVariable Long userId, @PathVariable Long taskId) {
         Users user = userService.getUser(userId).orElseThrow(EntityNotFoundException::new);
@@ -74,7 +80,7 @@ public class TaskController {
     private ResponseEntity<String> updateTask(@RequestBody TaskRequest taskRequest) {
         if (taskRequest.name().equalsIgnoreCase("") || taskRequest.name().equalsIgnoreCase(" ")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter task name");
-        } else if (taskRequest.productId()==0) {
+        } else if (taskRequest.productId() == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter a product name");
         } else if (LocalDate.parse(taskRequest.endDate()).isBefore(LocalDate.now()) || taskRequest.endDate().equalsIgnoreCase("")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter valid delivery date");

@@ -19,9 +19,15 @@ public class Task {
     private String description;
     private String status;
     private String quantity;
+    private int money;
     private LocalDate startDate;
     private LocalDate endDate;
     private boolean isAssigned;
+
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "delivery_id")
+    private Delivery delivery;
 
     @ManyToOne
     @JoinColumn(name = "product_id")

@@ -1,36 +1,39 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import './styles/ExecutiveInsightApp.css'
+
+import '../styles/ExecutiveInsightApp.css'
 
 //Unauthorized Components
-import HeaderComponent from './HeaderComponent';
-import SignupComponent from './SignupComponent';
-import EmailVerifiedComponent from './EmailVerifiedComponent';
-import LoginComponent from './LoginComponent';
-import LogoutComponent from './LogoutComponent';
-import ForgotPasswordComponent from './ForgotPasswordComponent';
-import ResetPasswordComponent from './ResetPasswordComponent';
-import MessageComponent from './MessageComponent';
-import ErrorComponent from './ErrorComponent';
+import HeaderComponent from './common/HeaderComponent';
+import MessageComponent from './common/MessageComponent';
+import ErrorComponent from './common/ErrorComponent';
+import LogoutComponent from './common/LogoutComponent';
+
+import SignupComponent from './unAuthorized/SignupComponent';
+import EmailVerifiedComponent from './unAuthorized/EmailVerifiedComponent';
+import LoginComponent from './unAuthorized/LoginComponent';
+import ForgotPasswordComponent from './unAuthorized/ForgotPasswordComponent';
+import ResetPasswordComponent from './unAuthorized/ResetPasswordComponent';
 
 //Authorized Components
-import HomeComponent from './HomeComponent';
-import UserProfileComponent from './Profile/UserProfileComponent';
-import EditProfileComponent from './Profile/EditProfileComponent';
-import ChangePhotoComponent from './Profile/ChangePhotoComponent';
-import ProfileViewComponent from './Profile/ProfileViewComponent';
-import TeamProfileComponent from './MyWorkspace/Team/TeamProfileComponent';
+import HomeComponent from './authorized/HomeComponent';
+import UserProfileComponent from './authorized/Profile/UserProfileComponent';
+import EditProfileComponent from './authorized/Profile/EditProfileComponent';
+import ChangePhotoComponent from './authorized/Profile/ChangePhotoComponent';
+import ProfileViewComponent from './authorized/Profile/ProfileViewComponent';
+import WorkspaceProfileComponent from './authorized/workspaceProfile/WorkspaceProfileComponent';
 
 //Admin Components
-import WorkspaceComponent from './MyWorkspace/WorkspaceComponent';
-import SidebarComponent from './MyWorkspace/SidebarComponent';
-import ListMemberComponent from './MyWorkspace/ListMemberComponent';
-import ListPostComponent from './MyWorkspace/ListPostComponent';
-import ListTeamComponent from './MyWorkspace/ListTeamComponent';
-import ListProductComponent from './MyWorkspace/ListProductComponent';
-import ListTaskComponent from './MyWorkspace/Task/ListTaskComponent';
-import TaskProfileComponent from './MyWorkspace/Task/TaskProfileComponent';
+import WorkspaceComponent from './admin/Workspace/WorkspaceComponent';
+import SidebarComponent from './admin/Workspace/SidebarComponent';
+import ListMemberComponent from './admin/Member/ListMemberComponent';
+import ListPostComponent from './admin/Post/ListPostComponent';
+import ListTeamComponent from './admin/Team/ListTeamComponent';
+import ListProductComponent from './admin/Product/ListProductComponent';
+import ListTaskComponent from './admin/Task/ListTaskComponent';
+import TaskProfileComponent from './admin/Task/TaskProfileComponent';
+import TeamProfileComponent from './admin/Team/TeamProfileComponent';
 
-import AuthProvider, { useAuth } from './security/AuthContext';
+import AuthProvider, { useAuth } from '../security/AuthContext';
 
 function AuthenticatedRoute({children}) {
     const authContext = useAuth();
@@ -125,7 +128,7 @@ export default function ExecutiveInsightApp() {
                             </AuthenticatedRoute>
                         } />
 
-                        <Route path='/task/:workspaceId/:id' element={
+                        <Route path='/task/:workspaceId/:taskId' element={
                             <AuthenticatedRoute>
                                 <AdminRoute>
                                     <SidebarComponent />
@@ -136,7 +139,7 @@ export default function ExecutiveInsightApp() {
 
                         <Route path='/workspace-profile/:id' element={
                             <AuthenticatedRoute>
-                                <WorkspaceComponent />
+                                <WorkspaceProfileComponent />
                             </AuthenticatedRoute>
                         } />
 
