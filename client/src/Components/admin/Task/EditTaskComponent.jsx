@@ -24,32 +24,42 @@ export default function EditTaskComponent(props) {
 
     useEffect(()=>{
         authContext.refresh()
-        retrieveTaskApi(props.taskId)
-            .then((response) => {
-                setName(response.data.name)
-                setDescription(response.data.description)
-                if (response.data.product!==null) {
-                    setProductId(response.data.product.productId)
-                }
-                setQuantity(response.data.quantity)
-                setMoney(response.data.money)
-                setStartDate(response.data.startDate)
-                setEndDate(response.data.endDate)
-            })
-            .catch((error) => {
-                console.log(error)
-                navigate('/error')})
-        retrieveProductsApi(props.workspaceId)
-            .then((response) => {
-                setHasProducts(response.data.length > 0)
-                setProducts(response.data)
-                if (response.data.length > 0 && productId===0) {
-                    setProductId(response.data[0].productId)
-                }
-            })
-            .catch((error) => {
-                console.log(error)
-                navigate('/error')})
+        const getTask = async () => {
+            await retrieveTaskApi(props.taskId)
+                .then((response) => {
+                    setName(response.data.name)
+                    setDescription(response.data.description)
+                    if (response.data.product!==null) {
+                        setProductId(response.data.product.productId)
+                    }
+                    setQuantity(response.data.quantity)
+                    setMoney(response.data.money)
+                    setStartDate(response.data.startDate)
+                    setEndDate(response.data.endDate)
+                })
+                .catch((error) => {
+                    console.log("Error fetching task: " + error)
+                    navigate('/error')})
+        }
+
+        getTask()
+
+        const getProducts = async () => {
+            await retrieveProductsApi(props.workspaceId)
+                .then((response) => {
+                    setHasProducts(response.data.length > 0)
+                    setProducts(response.data)
+                    if (response.data.length > 0 && productId===0) {
+                        setProductId(response.data[0].productId)
+                    }
+                })
+                .catch((error) => {
+                    console.log("Error fetching products: " + error)
+                    navigate('/error')})
+        }
+
+        getProducts()
+
     },[authContext, props, navigate, productId])
 
     const handleNameChange = (event) => {
@@ -94,7 +104,7 @@ export default function EditTaskComponent(props) {
         setEndDate(event.target.value)
     }
 
-    const saveChanges = () => {
+    const saveChanges = async () => {
         const theTask = {
             productId: productId,
             taskId: props.taskId,
@@ -105,8 +115,11 @@ export default function EditTaskComponent(props) {
             quantity: quantity,
             value: money
         }
-        editTaskApi(theTask)
-            .then((response) => props.setNotEdit())
+        await editTaskApi(theTask)
+            .then((response) => {
+                props.setNotEdit()
+                toast.success("Task updated")
+            })
             .catch((error) => toast.error(error.response.data))
     }
 

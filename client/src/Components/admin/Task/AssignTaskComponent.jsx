@@ -1,31 +1,35 @@
-import { Overlay, Popover } from "react-bootstrap";
+import { Image, Overlay, Popover } from "react-bootstrap";
 import { toast, Toaster } from "react-hot-toast";
 
 import { assignTaskToMemberApi, assignTaskToTeamApi } from "../../../api/ExecutiveInsightApiService";
-import { useAuth } from "../../../security/AuthContext";
+
+import profileImage from '../../../assets/executive-insight-blank-user.png';
 
 export default function AssignTaskComponent(props) {
 
-  const authContext = useAuth();
 
-  const assignMember = (userId) => {
-    authContext.refresh();
-    assignTaskToMemberApi(userId, props.task.taskId)
-      .then((response)=> window.location.href = `/tasks/${props.id}`)
-      .catch((error)=>{
-        props.setShowMembers(false);
-        toast.error(error.response.data);
-      })
+  const assignMember = async (userId) => {
+      await assignTaskToMemberApi(userId, props.task.taskId)
+        .then((response)=> {
+          props.setShowMembers(false);
+          toast.success("Task assigned to a user")
+        })
+        .catch((error)=>{
+          props.setShowMembers(false);
+          toast.error(error.response.data);
+        })
   }
 
-  const assignTeam = (teamId) => {
-    authContext.refresh();
-    assignTaskToTeamApi(teamId, props.task.taskId)
-      .then((response)=> window.location.href = `/tasks/${props.id}`)
-      .catch((error)=>{
-        props.setShowTeams(false);
-        toast.error(error.response.data);
-      })
+  const assignTeam = async (teamId) => {
+    await assignTaskToTeamApi(teamId, props.task.taskId)
+        .then((response)=> {
+          props.setShowTeams(false);
+          toast.success("Task assigned to a team")
+        })
+        .catch((error)=>{
+          props.setShowTeams(false);
+          toast.error(error.response.data);
+        })
   }
     return (
         <div>
@@ -40,7 +44,13 @@ export default function AssignTaskComponent(props) {
                           props.users.map(
                               user => (
                                   <tr key={user.user.userId}>
-                                      <td className='m-0 p-0'><button className="btn btn-light form-control" onClick={() => assignMember(user.user.userId)}>{user.user.name}</button></td>
+                                      <td className='m-0 p-0'>
+                                        <div className="btn btn-light form-control d-flex" onClick={() => assignMember(user.user.userId)}>
+                                          {user.user.image===null && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '20px', height: '20px' }} className='mx-2' />}
+                                          {user.user.image!==null && <Image src={user.user.image} alt="Profile" roundedCircle style={{ width: '20px', height: '20px' }} className='mx-2' />}
+                                          <p className="m-0">{user.user.name}</p>
+                                        </div>
+                                      </td>
                                   </tr>
                               )
                           )

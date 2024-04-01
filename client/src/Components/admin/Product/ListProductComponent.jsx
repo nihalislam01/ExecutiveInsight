@@ -23,12 +23,18 @@ export default function ListProductComponent() {
 
     useEffect(() => {
         authContext.refresh()
-        retrieveProductsApi(id)
-            .then((response) => {
-                setHasProduct(response.data.length > 0)
-                setProducts(response.data)
-            })
-            .catch((error) => navigate('/error'))
+        const getProducts = async () => {
+            await retrieveProductsApi(id)
+                .then((response) => {
+                    setHasProduct(response.data.length > 0)
+                    setProducts(response.data)
+                })
+                .catch((error) => {
+                    console.log("Error fetching products: " + error)
+                    navigate('/error')
+                })
+        }
+        getProducts();
     }, [authContext, id, navigate])
 
     const showForm = () => {

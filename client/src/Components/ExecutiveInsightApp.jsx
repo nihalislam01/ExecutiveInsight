@@ -13,6 +13,7 @@ import EmailVerifiedComponent from './unAuthorized/EmailVerifiedComponent';
 import LoginComponent from './unAuthorized/LoginComponent';
 import ForgotPasswordComponent from './unAuthorized/ForgotPasswordComponent';
 import ResetPasswordComponent from './unAuthorized/ResetPasswordComponent';
+import PlanComponent from './unAuthorized/PlanComponent';
 
 //Authorized Components
 import HomeComponent from './authorized/HomeComponent';
@@ -39,12 +40,12 @@ function AuthenticatedRoute({children}) {
     const authContext = useAuth();
     if (authContext.isAuthenticated())
         return children
-    return <Navigate to="/" />
+    return <Navigate to="/login" />
 }
 
 function AdminRoute({children}) {
     const authContext = useAuth();
-    if (authContext.hasWorkspace())
+    if (authContext.isAdmin())
         return children
     return <Navigate to="/home" />
 }
@@ -56,7 +57,8 @@ export default function ExecutiveInsightApp() {
                 <BrowserRouter>
                     <HeaderComponent />
                     <Routes>
-                        <Route path='/' element={<LoginComponent />} />
+                        <Route path='/' element={<PlanComponent />} />
+                        <Route path='/plan' element={<PlanComponent />} />
                         <Route path='/login' element={<LoginComponent />} />
                         <Route path='/signup' element={<SignupComponent />} />
                         <Route path='/forgot-password' element={<ForgotPasswordComponent />} />

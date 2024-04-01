@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { Image } from "react-bootstrap";
 
 import { faUserMinus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +10,7 @@ import { removeUserFromTeamApi, retrieveTeamUserApi } from "../../../api/Executi
 import { useAuth } from "../../../security/AuthContext";
 
 import '../../../styles/ListComponent.css';
+import profileImage from '../../../assets/executive-insight-blank-user.png';
 
 export default function TeamMembersComponent(props) {
 
@@ -58,10 +60,12 @@ export default function TeamMembersComponent(props) {
                 members.map(
                     member => (
                         <div className="d-flex justify-content-between align-items-center mb-3" key={member.userId}>
-                            <div className="w-100 px-4 py-2 text-start create" onClick={() => viewProfile(member.userId)} style={{fontSize: "25px", borderTopRightRadius: "0", borderBottomRightRadius: "0"}}>
-                                {member.name}
+                            <div className="d-flex w-100 py-2 text-start create" onClick={() => viewProfile(member.userId)} style={{fontSize: "25px", borderTopRightRadius: "0", borderBottomRightRadius: "0"}}>
+                                {member.image===null && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '40px', height: '40px' }} className='mx-2' />}
+                                {member.image!==null && <Image src={member.image} alt="Profile" roundedCircle style={{ width: '40px', height: '40px' }} className='mx-2' />}
+                                <p className="m-0">{member.name}</p>
                             </div>
-                            <div className="px-3 create" style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0", paddingTop: "15px", paddingBottom: "15px" }} onClick={() => removeUser(member.email)}><FontAwesomeIcon icon={faUserMinus} /></div>
+                            <div className="px-3 create" style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0", paddingTop: "16px", paddingBottom: "16px" }} onClick={() => removeUser(member.email)}><FontAwesomeIcon icon={faUserMinus} /></div>
                         </div>
                     )
                 )

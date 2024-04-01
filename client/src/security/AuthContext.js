@@ -24,7 +24,9 @@ export default function AuthProvider({ children }) {
                     return config
                 })
                 if (response.data.user.role==='ADMIN') {
-                    Cookies.set('hasWorkspace', true, {expires: 1});
+                    Cookies.set('isAdmin', true, {expires: 1});
+                } else if (response.data.user.role==='CONSUMER') {
+                    Cookies.set('isConsumer', true, {expires: 1});
                 }
                 return true;
             }else{
@@ -39,8 +41,18 @@ export default function AuthProvider({ children }) {
 
     function logout() {
         Cookies.remove('jwtToken');
-        Cookies.remove('hasWorkspace');
+        Cookies.remove('isAdmin');
         Cookies.remove('username');
+        Cookies.remove('isConsumer');
+    }
+
+    const setConsumer = () => {
+        Cookies.set('isConsumer', true, {expires: 1});
+    }
+
+    const setAdmin = () => {
+        Cookies.remove('isConsumer');
+        Cookies.set('isAdmin', true, {expires: 1});
     }
 
     function username() {
@@ -57,8 +69,15 @@ export default function AuthProvider({ children }) {
         return true;
     }
 
-    function hasWorkspace() {
-        if (Cookies.get('hasWorkspace')===undefined) {
+    function isAdmin() {
+        if (Cookies.get('isAdmin')===undefined) {
+            return false;
+        }
+        return true;
+    }
+
+    function isConsumer() {
+        if (Cookies.get('isConsumer')===undefined) {
             return false;
         }
         return true;
@@ -76,7 +95,7 @@ export default function AuthProvider({ children }) {
     }
 
     return (
-        <AuthConext.Provider value={ {login, logout, username, isAuthenticated, hasWorkspace, refresh} } >
+        <AuthConext.Provider value={ {login, logout, username, isAuthenticated, isAdmin, refresh, isConsumer, setAdmin, setConsumer} } >
             {children}
         </AuthConext.Provider>
     )

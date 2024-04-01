@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { Image } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+
+import profileImage from '../../../assets/executive-insight-blank-user.png';
 
 export default function TaskDetailsComponent(props) {
 
@@ -12,6 +15,10 @@ export default function TaskDetailsComponent(props) {
 
     const goToProfile = () => {
         navigate(`/user/${props.task.user.userId}`)
+    }
+
+    const goToTeamProfile = () => {
+        navigate(`/team/${props.task.team.teamId}`)
     }
 
 
@@ -48,14 +55,18 @@ export default function TaskDetailsComponent(props) {
                                 <div>
                                 <h5>Task Assigned to</h5>
                                 <hr />
-                                <button className="btn btn-light form-control text-start  border-0 shadow" onClick={goToProfile}>{props.task.user.name}</button>
+                                <div className="btn btn-light form-control d-flex align-items-center border-0 shadow" onClick={goToProfile}>
+                                    {props.task.user.image===null && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
+                                    {props.task.user.image!==null && <Image src={props.task.user.image} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
+                                    <p className="m-0">{props.task.user.name}</p>
+                                </div>
                                 </div>
                             }
                             {props.task.assigned && props.task.team!==null &&
                                 <div>
                                 <h5>Task Assigned to</h5>
                                 <hr />
-                                <button className="btn btn-light form-control text-start  border-0 shadow">{props.task.team.name}</button>
+                                <button className="btn btn-light form-control text-start  border-0 shadow" onClick={goToTeamProfile}>{props.task.team.name}</button>
                                 </div>
                             }
                         </div>

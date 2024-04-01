@@ -1,10 +1,8 @@
 package com.teamten.executiveinsight.controllers;
 
 import com.teamten.executiveinsight.model.entity.Product;
-import com.teamten.executiveinsight.model.entity.Task;
 import com.teamten.executiveinsight.model.entity.Workspace;
 import com.teamten.executiveinsight.model.request.ProductRequest;
-import com.teamten.executiveinsight.services.NotificationService;
 import com.teamten.executiveinsight.services.ProductService;
 import com.teamten.executiveinsight.services.TaskService;
 import com.teamten.executiveinsight.services.WorkspaceService;
@@ -15,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,7 +20,6 @@ public class ProductController {
     private final ProductService productService;
     private final WorkspaceService workspaceService;
     private final TaskService taskService;
-    private final NotificationService notificationService;
     @PostMapping("/create-product")
     public ResponseEntity<String> addProduct(@RequestBody ProductRequest productRequest) {
         if (productRequest.name().equalsIgnoreCase("") || productRequest.name().equalsIgnoreCase(" ")) {

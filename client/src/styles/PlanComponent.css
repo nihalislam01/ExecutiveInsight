@@ -1,0 +1,46 @@
+.plan {
+    width: 250px;
+    padding: 10px;
+    border: solid 1px rgb(206, 206, 206);
+}
+
+.plan-value {
+    padding-top: 24px;
+    font-size: 12px;
+}
+
+.info {
+    height: 150px;
+}
+
+.button {
+    border-radius: 3px;
+    border: solid 1px rgb(166, 0, 255);
+    padding: 5px 10px;
+    background: none;
+    transition: background-color 0.5s ease;
+}
+
+.button:hover {
+    background-color: rgb(166, 0, 255, 0.7);
+    color: white;
+}
+
+.pay {
+    width: 1000px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(182, 203, 237);
+}
+
+.plan-button {
+    width: 200px;
+    border: solid 1px rgb(124, 174, 255);
+    margin: 10px;
+    border-radius: 10px;
+    height: 100px;
+}
+
+.plan-button:hover {
+    cursor: pointer;
+}

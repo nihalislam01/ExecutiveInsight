@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Overlay, Popover } from 'react-bootstrap';
+import { Image, Overlay, Popover } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import AssignMemberComponent from './AssignMemberComponent';
 
-export default function MemberComponent({ userJoinWorkspace, hasPosts, posts, workspaceCode, id, hasTeams, teams }) {
+import profileImage from "../../../assets/executive-insight-blank-user.png";
+
+export default function MemberComponent({ userJoinWorkspace, hasPosts, posts, workspaceCode, id, hasTeams, teams, assigned, error }) {
 
   const [showPopover, setShowPopover] = useState(false);
   const [showPosts, setShowPosts] = useState(false);
@@ -56,7 +58,9 @@ export default function MemberComponent({ userJoinWorkspace, hasPosts, posts, wo
   return (
     <div>
       <div className='d-flex justify-content-between'>
-          <button className="btn btn-light form-control d-flex justify-content-between align-items-center px-4" style={{ borderTopRightRadius: "0", borderBottomRightRadius: "0" }} onClick={viewProfile}>
+          <button className="btn btn-light form-control d-flex justify-content-start align-items-center" style={{ borderTopRightRadius: "0", borderBottomRightRadius: "0" }} onClick={viewProfile}>
+            {userJoinWorkspace.user.image===null && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '40px', height: '40px' }} className='mx-2' />}
+            {userJoinWorkspace.user.image!==null && <Image src={userJoinWorkspace.user.image} alt="Profile" roundedCircle style={{ width: '40px', height: '40px' }} className='mx-2' />}
               <div>
                   <p style={{fontSize: "25px"}} className="p-0 m-0 text-start">{userJoinWorkspace.user.name}</p>
                   {userJoinWorkspace.post!=null &&

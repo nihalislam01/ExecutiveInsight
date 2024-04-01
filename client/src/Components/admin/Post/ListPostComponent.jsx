@@ -23,12 +23,18 @@ export default function ListPostComponent() {
 
     useEffect(() => {
         authContext.refresh()
-        retrieveWorkspaceByIdApi(id)
-            .then((response) => {
-                setPosts(response.data.posts);
-                setHasPosts(response.data.posts.length > 0);
-            })
-            .catch((error) => navigate('/error'))
+        const getWorkspace = async () => {
+                await retrieveWorkspaceByIdApi(id)
+                    .then((response) => {
+                        setPosts(response.data.posts);
+                        setHasPosts(response.data.posts.length > 0);
+                    })
+                    .catch((error) => {
+                        console.log("Error fetching workspace: " + error)
+                        navigate('/error')
+                    })
+        }
+        getWorkspace();
     }, [authContext, id, navigate])
 
     const showForm = () => {

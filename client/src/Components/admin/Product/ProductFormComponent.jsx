@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
 import { createProductApi, changeProductNameApi } from "../../../api/ExecutiveInsightApiService";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function ProductFormComponent(props) {
 
-    const [showAlert, setShowAlert] = useState(false);
-    const [alertColor, setAlertColor] = useState('success');
-    const [message, setMessage] = useState('');
     const [productName, setProductName] = useState('');
 
     const formRef = useRef(null);
@@ -32,42 +30,46 @@ export default function ProductFormComponent(props) {
 
     const setNotShow = () => {
         props.setShow(false);
-        setShowAlert(false);
     }
 
-    const addProduct = () => {
-        const theProduct = {
-            id: props.id,
-            name: productName
+    const addProduct = async () => {
+        if (productName.trim() === '') {
+            toast("Please enter product name")
+        } else {
+            const theProduct = {
+                id: props.id,
+                name: productName
+            }
+            await createProductApi(theProduct)
+                .then((response) => {
+                    setNotShow();
+                    toast.success("Product successfully added")
+                })
+                .catch((error) => toast.error(error.response.data))
         }
-        createProductApi(theProduct)
-            .then((response) => {
-                window.location.href = `/products/${props.id}`;
-            })
-            .catch((error) => {
-                setAlertColor('danger');
-                setMessage(error.response.data);
-                setShowAlert(true)
-            })
     }
 
-    const changeProduct = () => {
-        const theProduct = {
-            id: props.product.productId,
-            name: productName
+    const changeProduct = async () => {
+        if (productName.trim() === '') {
+            toast("Please enter product name")
+        } else {
+            const theProduct = {
+                id: props.product.productId,
+                name: productName
+            }
+            await changeProductNameApi(theProduct)
+                .then((response) => {
+                    setNotShow()
+                    toast.success("Product updated")
+                })
+                .catch((error) => toast.error(error.response.data))
         }
-        changeProductNameApi(theProduct)
-            .then((response) => window.location.href = `/products/${props.id}`)
-            .catch((error) => {
-                setAlertColor('danger');
-                setMessage(error.response.data);
-                setShowAlert(true)
-            })
     }
 
     return (
-        <div className='justify-content-center position-fixed z-1' style={{ width: "600px", top: "200px", left: "500px" }} ref={formRef}>
-                {showAlert && <div className={`alert alert-${alertColor} shadow`}>{message}</div>}
+        <div>
+            <Toaster />
+            <div className='justify-content-center position-fixed z-1' style={{ width: "600px", top: "200px", left: "500px" }} ref={formRef}>
                 <div className="card shadow">
                     <div className="card-header text-center p-3">
                         {props.isEdit && <h5>Change product name</h5>}
@@ -88,6 +90,7 @@ export default function ProductFormComponent(props) {
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     )
 }

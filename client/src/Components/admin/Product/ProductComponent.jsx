@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -12,20 +12,23 @@ import '../../../styles/ProductComponent.css'
 export default function ProductConponent(props) {
 
     const [showForm, setShowForm] = useState(false);
-    const navigate = useNavigate();
 
     const openEditForm = () => {
         setShowForm(true);
     }
 
-    const deleteProduct = () => {
-        deleteProductApi(props.product.productId)
-        .then((Response) => window.location.href = `/products/${props.id}`)
-        .catch((error) => navigate('/error'))
+    const deleteProduct = async () => {
+        await deleteProductApi(props.product.productId)
+            .then((response) => toast.success(response.data))
+            .catch((error) => {
+                console.log("Error deleting product: " + error)
+                toast.error("Something went wrong")
+            })
     }
 
     return (
         <div>
+            <Toaster />
             {showForm && <ProducFormComponent setShow={setShowForm} id={props.id} isEdit={true} product={props.product} />}
             <div className="form-control d-flex justify-content-between p-3" style={{ backgroundColor: "#e9ecef" }}>
                 <p className="m-0">{props.product.name}</p>

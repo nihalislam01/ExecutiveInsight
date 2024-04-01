@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Image } from "react-bootstrap";
+import toast, { Toaster } from "react-hot-toast";
 import { faTrashCan, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -7,6 +9,7 @@ import { deletePostApi, retrieveUsersByWorkspaceAndPostApi } from "../../../api/
 import { useAuth } from "../../../security/AuthContext";
 
 import '../../../styles/PostComponent.css';
+import profileImage from '../../../assets/executive-insight-blank-user.png';
 
 export default function PostComponent({ post, id }) {
 
@@ -19,12 +22,18 @@ export default function PostComponent({ post, id }) {
 
     useEffect(() => {
         authContext.refresh();
-        retrieveUsersByWorkspaceAndPostApi(id, post.postId)
-            .then((response) => {
-                setUsers(response.data);
-                setHasUsers(response.data.length > 0);
-            })
-            .catch((error) => navigate('/error'))
+        const getUsers = async () => {
+            await retrieveUsersByWorkspaceAndPostApi(id, post.postId)
+                .then((response) => {
+                    setUsers(response.data);
+                    setHasUsers(response.data.length > 0);
+                })
+                .catch((error) => {
+                    console.log("Error fetching users: " + error)
+                    navigate('/error')
+                })
+        }
+        getUsers();
     }, [authContext, id, post.postId, navigate])
 
     const selectColor = (id) => {
@@ -32,16 +41,13 @@ export default function PostComponent({ post, id }) {
         return customColors[id%10];
     }
 
-    const handleDelete = (title) => {
-        deletePostApi(id, title)
-            .then((response) => {
-                console.log(response)
-                window.location.href = `/posts/${id}`
-        })
+    const handleDelete = async (title) => {
+        await deletePostApi(id, title)
+            .then((response) => toast.success("Post successfully deleted"))
             .catch((error) => {
-                console.log(error)
-                navigate('/error')
-        })
+                console.log("Error deleting post: " + error)
+                toast.error("Something went wrong")
+            })
     }
 
     const toggleDropdown = () => {
@@ -54,6 +60,7 @@ export default function PostComponent({ post, id }) {
 
     return (
         <div className="PostComponent">
+            <Toaster />
             <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex px-4 py-3 post-button w-100" style={{ borderTopRightRadius: "0", borderBottomRightRadius: "0", backgroundColor: `#${selectColor(post.postId)}` }} onClick={toggleDropdown}>
                     <p className="m-0"><FontAwesomeIcon icon={faCaretDown} /></p>
@@ -66,8 +73,10 @@ export default function PostComponent({ post, id }) {
                     {hasUsers &&
                         users.map(
                             user => (
-                                <div key={user.userId} className="text-start p-2 m-2 user" onClick={() => viewProfile(user.userId)}>
-                                    {user.name}
+                                <div key={user.userId} className="d-flex align-items-center p-2 m-2 user" onClick={() => viewProfile(user.userId)}>
+                                    {user.image===null && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
+                                    {user.image!==null && <Image src={user.image} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
+                                    <p className="m-0">{user.name}</p>
                                 </div>
                             )
                         )

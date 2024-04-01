@@ -2,33 +2,27 @@ import { Overlay, Popover } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import { assignUserToPostApi, assignUserToTeamApi } from "../../../api/ExecutiveInsightApiService";
-import { useAuth } from "../../../security/AuthContext";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function AssignMemberComponent(props) {
 
     const navigate = useNavigate();
-    const authContext = useAuth();
 
-    const assignPost = (postId, email) => {
-        authContext.refresh();
-        assignUserToPostApi(email, props.workspaceCode, postId)
-            .then((response) => {
-                window.location.href = `/members/${props.id}`;
-            })
+    const assignPost = async (postId, email) => {
+        await assignUserToPostApi(email, props.workspaceCode, postId)
+            .then((response) => toast.success("User successfully assigned"))
             .catch((error) => navigate('/error'))
     }
 
-    const assignTeam = (teamId, email) => {
-        authContext.refresh()
-        assignUserToTeamApi(email, teamId)
-            .then((response) => {
-                window.location.href = `/members/${props.id}`;
-            })
-            .catch((error) => navigate('/error'))
+    const assignTeam = async (teamId, email) => {
+        await assignUserToTeamApi(email, teamId)
+            .then((response) => toast.success("User successfully assigned"))
+            .catch((error) => toast.error("User already assinged to the team"))
     }
 
     return (
         <div>
+            <Toaster />
             <Overlay target={props.postTarget.current} show={props.showPosts} placement="left">
                 <Popover id={props.userJoinWorkspace.userJoinWorkspaceId}>
                     <Popover.Header as="h3">Assign User To A Post</Popover.Header>

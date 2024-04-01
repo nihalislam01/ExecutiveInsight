@@ -12,7 +12,7 @@ export default function SidebarComponent() {
 
     const authContext = useAuth();
     const navigate = useNavigate()
-    const hasWorkspace = authContext.hasWorkspace();
+    const hasWorkspace = authContext.isAdmin();
     const username = authContext.username();
     const [workspaceId, setWorkspaceId] = useState(0);
 

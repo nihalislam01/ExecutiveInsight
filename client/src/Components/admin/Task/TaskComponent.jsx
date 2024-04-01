@@ -9,6 +9,8 @@ import { retrieveUsersByWorkspaceIdApi, retrieveWorkspaceByIdApi } from "../../.
 
 import AssignTaskComponent from "./AssignTaskComponent";
 
+import '../../../styles/ListComponent.css'
+
 export default function TaskComponent(props) {
 
   const [showOptions, setShowOptions] = useState(false);
@@ -30,7 +32,7 @@ export default function TaskComponent(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    function handleClickOutside(event) {
+    const handleClickOutside = (event) => {
       if ((formRef.current && !formRef.current.contains(event.target))) {
         setShowOptions(false);
         if((memberRef.current && !memberRef.current.contains(event.target)) || (teamRef.current && !teamRef.current.contains(event.target))) {
@@ -45,30 +47,30 @@ export default function TaskComponent(props) {
     };
   }, [])
 
-  function handleOptionClick() {
+  const handleOptionClick = () => {
     setShowOptions(!showOptions)
     setShowMembers(false);
     setShowTeams(false);
   }
 
-  function handleShowMember() {
-    retrieveUsersByWorkspaceIdApi(props.id)
-      .then((response) => {
-        setHasUsers(response.data.length > 0)
-        setUsers(response.data)
-      })
-      .catch((error)=>navigate('/error'))
+  const handleShowMember = async () => {
+    await retrieveUsersByWorkspaceIdApi(props.id)
+        .then((response) => {
+          setHasUsers(response.data.length > 0)
+          setUsers(response.data)
+        })
+        .catch((error)=>navigate('/error'))
     setShowMembers(!showMembers)
     setShowTeams(false);
   }
 
-  function handleShowTeam() {
-    retrieveWorkspaceByIdApi(props.id)
-      .then((response)=>{
-        setHasTeams(response.data.teams.length > 0)
-        setTeams(response.data.teams)
-      })
-      .catch((error)=>navigate('/error'))
+  const handleShowTeam = async () => {
+    await retrieveWorkspaceByIdApi(props.id)
+        .then((response)=>{
+          setHasTeams(response.data.teams.length > 0)
+          setTeams(response.data.teams)
+        })
+        .catch((error)=>navigate('/error'))
     setShowTeams(!showTeams);
     setShowMembers(false);
   }
@@ -83,7 +85,7 @@ export default function TaskComponent(props) {
         <td>{props.task.endDate}</td>
         <td>{props.task.status}</td>
         <td><Link to={`/task/${props.id}/${props.task.taskId}`} style={{color: "black"}}><FontAwesomeIcon icon={faCircleInfo} /></Link></td>
-        <td ref={optionTarget} onClick={handleOptionClick}><FontAwesomeIcon icon={faEllipsisVertical} /></td>
+        <td ref={optionTarget} onClick={handleOptionClick} className="button"><FontAwesomeIcon icon={faEllipsisVertical} /></td>
         <Overlay target={optionTarget.current} show={showOptions} placement="bottom" ref={formRef}>
             <Popover id={props.task.taskId}>
                 <Popover.Body className='m-0 p-0'>

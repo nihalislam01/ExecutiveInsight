@@ -118,7 +118,7 @@ export default function HeaderComponent() {
                                     {!isAuthenticated && <Link className='nav-link' to="/login">Login</Link>}
                                 </li>
                                 <li className='nav-item'>
-                                    {!isAuthenticated && <Link className='nav-link' to="/signup">Signup</Link>}
+                                    {!isAuthenticated && <Link className='nav-link' to="/plan">Signup</Link>}
                                 </li>
                                 <li className='nav-item'>
                                     {isAuthenticated && <Link className='nav-link mx-2' onClick={handleShowCodeForm} ref={addRef} ><FontAwesomeIcon icon={faPlus} /></Link>}

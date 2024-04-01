@@ -21,12 +21,20 @@ export default function ListTaskComponent() {
 
     useEffect(() => {
         authContext.refresh()
-        retrieveTasksApi(id)
-            .then((response) => {
-                setHasTasks(response.data.length > 0);
-                setTasks(response.data);
-            })
-            .catch((error) => navigate(error));
+        const getTasks = async () => {
+            await retrieveTasksApi(id)
+                .then((response) => {
+                    setHasTasks(response.data.length > 0);
+                    setTasks(response.data);
+                })
+                .catch((error) => {
+                    console.log("Error fetching tasks: " + error)
+                    navigate('/error')
+                });
+        }
+
+        getTasks()
+
     }, [authContext, id, navigate])
 
     function showForm() {

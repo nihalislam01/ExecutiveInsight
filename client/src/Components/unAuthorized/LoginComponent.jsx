@@ -24,7 +24,7 @@ export default function LoginComponent() {
 
     const handleSubmit = async () => {
         if(await authContext.login(username, password)) {
-            window.location.href = '/home';
+            window.location.href = '/my-workspace';
         }else{
             setAlertMessage(true);
             setAlertColor('alert alert-danger');

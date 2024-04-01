@@ -1,19 +1,20 @@
 import { useAuth } from "../../../security/AuthContext";
 
-import NoWorkspaceComponent from './NoWorkspaceComponent';
+import CreateWorkspaceComponent from "./CreateWorkspaceComponent";
+import PaymentForm from "./PaymentForm";
 
 export default function WorkspaceComponent() {
 
     const authContext = useAuth();
-    const hasWorkspace = authContext.hasWorkspace();
+    const isAdmin = authContext.isAdmin();
+    const isConsumer = authContext.isConsumer();
 
     return (
         <div className="WorkspaceComponent">
-            {!hasWorkspace &&
-                <NoWorkspaceComponent />
+            {!isConsumer && !isAdmin &&
+                <PaymentForm />
             }
-
-            {hasWorkspace &&
+            {!isConsumer && isAdmin &&
                 <div className="row">
                     <div className="col-md-2">
                     </div>
@@ -21,6 +22,9 @@ export default function WorkspaceComponent() {
                         <h1 className="text-start px-4">Name</h1>
                     </div>
                 </div>
+            }
+            {isConsumer && !isAdmin &&
+                <CreateWorkspaceComponent />
             }
         </div>
     )

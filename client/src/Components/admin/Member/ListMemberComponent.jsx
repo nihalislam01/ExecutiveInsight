@@ -26,21 +26,33 @@ export default function ListMemberComponent() {
     const { id } = useParams();
 
     useEffect(() => {
-        retrieveUsersByWorkspaceIdApi(id)
-        .then((response) => {
-            setUserJoinWorkspaces(response.data)
-            setHasUserJoinWorkspaces(response.data.length > 0)
-        })
-        .catch((error) => navigate('/error'))
-    retrieveWorkspaceByIdApi(id)
-        .then((response) => {
-            setWorkspaceCode(response.data.code);
-            setPosts(response.data.posts);
-            setHasPosts(response.data.posts.length > 0);
-            setTeams(response.data.teams);
-            setHasTeams(response.data.teams.length > 0);
-        })
-        .catch((error) => navigate('/error'))
+        const getUser = async () => {
+            await retrieveUsersByWorkspaceIdApi(id)
+                .then((response) => {
+                    setUserJoinWorkspaces(response.data)
+                    setHasUserJoinWorkspaces(response.data.length > 0)
+                })
+                .catch((error) => {
+                    console.log("Error fetching users:" + error)
+                    navigate('/error')
+                })
+        }
+        getUser();
+        const getWorkspace = async () => {
+            await retrieveWorkspaceByIdApi(id)
+                    .then((response) => {
+                        setWorkspaceCode(response.data.code);
+                        setPosts(response.data.posts);
+                        setHasPosts(response.data.posts.length > 0);
+                        setTeams(response.data.teams);
+                        setHasTeams(response.data.teams.length > 0);
+                    })
+                    .catch((error) => {
+                        console.log("Error fetching workspace:" + error)
+                        navigate('/error')
+                })
+        }
+        getWorkspace();
     }, [id, navigate])
 
     return (

@@ -7,54 +7,36 @@
     <list default="true" id="98024a58-7d0a-4e43-8c66-860eadc4b630" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/CodeFormComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/CodeFormComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/EmailVerifiedComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/EmailVerifiedComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/Components/ExecutiveInsightApp.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/ExecutiveInsightApp.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/ForgotPasswordComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/ForgotPasswordComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/HeaderComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/HeaderComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/HomeComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/HomeComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/LoginComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/LoginComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MessageComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MessageComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/AddPostComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/AddProductComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/AssignMemberComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/CreateTeamComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/CreateWorkspaceComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/CreateWorkspaceFormComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/InviteMemberComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/ListMemberComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/ListPostComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/ListProductComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/ListTeamComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/MemberComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/PostComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/ProductComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/SidebarComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Task/AddTaskComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Task/AddTaskComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Task/AssignTaskComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Task/AssignTaskComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Task/ListTaskComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Task/ListTaskComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Task/TaskComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Task/TaskComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Task/TaskProfileComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Task/TaskProfileComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Team/TeamHeaderComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Team/TeamHeaderComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Team/TeamMembersComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Team/TeamMembersComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Team/TeamProfileComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Team/TeamProfileComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Team/TeamTaskComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/Team/TeamTaskComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/TeamComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/MyWorkspace/WorkspaceComponent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/NotificationComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/NotificationComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/Profile/ChangePhotoComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/Profile/ChangePhotoComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/Profile/EditProfileComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/Profile/EditProfileComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/Profile/ProfileViewComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/Profile/ProfileViewComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/Profile/UserProfileComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/Profile/UserProfileComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/ResetPasswordComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/ResetPasswordComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/SignupComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/SignupComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/WorkspaceProfileComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/WorkspaceProfileComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/WorkspaceProfileHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/WorkspaceProfileHeader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/api/ApiClient.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/api/AuthenticationApiService.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/api/ExecutiveInsightApiService.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/security/AuthContext.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/Components/styles/ListComponent.css" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/styles/ListComponent.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Member/AssignMemberComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Member/AssignMemberComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Member/InviteMemberComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Member/InviteMemberComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Member/ListMemberComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Member/ListMemberComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Member/MemberComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Member/MemberComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Post/ListPostComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Post/ListPostComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Post/PostComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Post/PostComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Post/PostFormComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Post/PostFormComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Product/ListProductComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Product/ListProductComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Product/ProductComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Product/ProductComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Product/ProductFormComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Product/ProductFormComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Task/AddTaskComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Task/AddTaskComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Task/AssignTaskComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Task/AssignTaskComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Task/EditTaskComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Task/EditTaskComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Task/ListTaskComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Task/ListTaskComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Task/TaskComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Task/TaskComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Task/TaskDetailsComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Task/TaskDetailsComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Task/TaskProfileComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Task/TaskProfileComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Team/TeamMembersComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Team/TeamMembersComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Workspace/NoWorkspaceComponent.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Workspace/SidebarComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Workspace/SidebarComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/admin/Workspace/WorkspaceComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/admin/Workspace/WorkspaceComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/authorized/HomeComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/authorized/HomeComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/authorized/workspaceProfile/WorkspaceProfileHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/authorized/workspaceProfile/WorkspaceProfileHeader.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/common/HeaderComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/common/HeaderComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/Components/unAuthorized/LoginComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/Components/unAuthorized/LoginComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/security/AuthContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/security/AuthContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.5/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.5/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.5/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.5/fileHashes/fileHashes.bin" afterDir="false" />
@@ -63,29 +45,67 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/DeliveryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/DeliveryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/JwtAuthenticationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/JwtAuthenticationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/NotificationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/NotificationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/PostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/PostController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/ProductController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/TaskController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/TaskController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/TeamController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/TeamController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/WorkspaceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/controllers/WorkspaceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/events/email/EmailCompleteEventListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/events/email/EmailCompleteEventListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/events/email/EmailConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/events/email/EmailConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/events/email/EmailRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/events/email/EmailRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Badge.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Badge.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/BusinessTitle.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/BusinessTitle.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Delivery.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Delivery.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Notification.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Notification.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Post.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Product.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Task.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Team.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Team.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/UserJoinTeam.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/UserJoinTeam.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/UserJoinWorkspace.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/UserJoinWorkspace.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Users.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/VerificationToken.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/VerificationToken.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Workspace.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/entity/Workspace.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/DeliveryRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/DeliveryRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/ImageDataRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/ImageDataRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/NotificationRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/NotificationRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/PasswordRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/PasswordRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/PostRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/PostRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/ProductRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/ProductRequest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/TaskRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/TaskRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/repositories/DeliveryRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/repositories/DeliveryRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/repositories/TaskRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/repositories/TaskRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/TeamRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/TeamRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/UserJoinWorkspaceRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/UserJoinWorkspaceRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/UserRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/UserRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/WorkspaceRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/model/request/WorkspaceRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/security/CustomSecurityConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/security/CustomSecurityConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/security/CustomUserDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/security/CustomUserDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/security/CustomUserDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/security/CustomUserDetailsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/security/JwtTokenRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/security/JwtTokenRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/security/JwtTokenResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/security/JwtTokenResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/security/JwtTokenService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/security/JwtTokenService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/DatabaseInitializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/DatabaseInitializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/DeliveryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/DeliveryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/NotificationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/NotificationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/PostService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/PostService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/ProductService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/TaskService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/TaskService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/UserJoinTeamService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/teamten/executiveinsight/services/UserJoinTeamService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ProductController.class.uniqueId2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TaskController.class.uniqueId1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TaskService.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/NotificationController.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/NotificationService.class.uniqueId3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ProductController.class.uniqueId5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/TeamController.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/UserController.class.uniqueId4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/WorkspaceController.class.uniqueId2" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/controllers/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/controllers/TaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Delivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Delivery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Team.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Workspace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Workspace.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/request/TaskRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/request/TaskRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/repositories/DeliveryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/repositories/DeliveryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/repositories/TaskRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/repositories/TaskRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/services/TaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/services/TaskService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/controllers/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamten/executiveinsight/model/entity/Users.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -119,8 +139,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="Record" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -195,7 +215,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-20.0.2-corretto-20.0.2.1-4caba194b151-d89c1816" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
       </set>
     </attachedChunks>
   </component>

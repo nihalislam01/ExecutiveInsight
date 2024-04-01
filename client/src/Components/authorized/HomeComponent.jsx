@@ -30,7 +30,7 @@ export default function HomeComponent() {
 
     const selectColor = (id) => {
         const colors = ["info", "success", "primary", "secondary"]
-        return colors[id%5];
+        return colors[id%4];
     }
 
     const goToWorkspace = (id) => {
