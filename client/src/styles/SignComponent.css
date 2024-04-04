@@ -1,0 +1,7 @@
+.sign {
+    background-image: url('../assets/executive-insight-background.png');
+    background-position: center;
+    background-size: cover;
+    height: 75vh;
+    width: 100%;
+}

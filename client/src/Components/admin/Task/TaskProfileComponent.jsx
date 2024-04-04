@@ -6,6 +6,7 @@ import { useAuth } from "../../../security/AuthContext";
 
 import TaskDetailsComponent from "./TaskDetailsComponent";
 import EditTaskComponent from "./EditTaskComponent";
+import SidebarComponent from "../SidebarComponent";
 
 export default function TaskProfileComponent() {
 
@@ -27,7 +28,10 @@ export default function TaskProfileComponent() {
                         setProductName(response.data.product.name);
                     }
                 })
-                .catch((error)=>navigate('/error'))
+                .catch((error)=>{
+                    console.log("Error fetching task: " + error)
+                    navigate('/error')
+                })
         }
 
         getTask();
@@ -39,9 +43,12 @@ export default function TaskProfileComponent() {
     }
 
     return (
-        <div>
-            {!isEdit && <TaskDetailsComponent task={task} setIsEdit={setIsEdit} productName={productName} />}
-            {isEdit && <EditTaskComponent setNotEdit={setNotEdit} taskId={taskId} workspaceId={workspaceId} />}
+        <div className="d-flex">
+            <SidebarComponent />
+            <div className="container mt-4 w-100">
+                {!isEdit && <TaskDetailsComponent task={task} setIsEdit={setIsEdit} productName={productName} />}
+                {isEdit && <EditTaskComponent setNotEdit={setNotEdit} taskId={taskId} workspaceId={workspaceId} />}
+            </div>
         </div>
     )
 }

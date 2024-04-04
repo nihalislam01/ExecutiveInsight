@@ -87,4 +87,13 @@ public class TaskService {
         }
         taskRepository.saveAll(tasks);
     }
+    public List<Task> getAllTaskByUserAndWorkspace(String email, Long id) {
+        return taskRepository.findAllByUser_emailAndWorkspace_workspaceId(email, id);
+    }
+    public void updateTask(Task task) {
+        taskRepository.save(task);
+    }
+    public Long getWorkspaceId(Long taskId) {
+        return taskRepository.findById(taskId).orElseThrow(EntityNotFoundException::new).getWorkspace().getWorkspaceId();
+    }
 }

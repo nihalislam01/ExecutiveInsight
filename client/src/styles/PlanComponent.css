@@ -39,8 +39,26 @@
     margin: 10px;
     border-radius: 10px;
     height: 100px;
+    transition: background-color 0.5s ease;
 }
 
 .plan-button:hover {
     cursor: pointer;
+    background-color: rgb(124, 174, 255, 0.5);
+}
+
+.primary-background {
+    background-image: url('../assets/executive-insight-background-3.png');
+    background-position: center;
+    background-size: contain;
+    height: 75vh;
+    width: 100%;
+}
+
+.secondary-background {
+    background-image: url('../assets/executive-insight-background-2.png');
+    background-position: center;
+    background-size: cover;
+    height: 75vh;
+    width: 100%;
 }

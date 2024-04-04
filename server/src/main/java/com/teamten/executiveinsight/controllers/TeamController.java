@@ -53,6 +53,11 @@ public class TeamController {
         List<Users> users = userJoinTeamService.getAllUser(teamId);
         return ResponseEntity.ok(users);
     }
+    @GetMapping("/get-team-by-workspace-user/{id}/{email}")
+    public  ResponseEntity<?> getAllTeamByWorkspaceAndUser(@PathVariable Long id, @PathVariable String email) {
+        List<Team> teams = teamService.getAllTeam(email, id);
+        return ResponseEntity.ok(teams);
+    }
     @DeleteMapping("/remove-team-user/{email}/{teamId}")
     public ResponseEntity<String> removeUserFromTeam(@PathVariable String email, @PathVariable Long teamId) {
         userJoinTeamService.removeUserFromTeam(email, teamId);

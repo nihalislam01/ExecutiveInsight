@@ -10,9 +10,10 @@ import java.util.Optional;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findAllByWorkspace_workspaceId(Long id);
-    List<Task> findAllByUser_userId(Long id);
     List<Task> findAllByTeam_teamId(Long id);
     List<Task> findAllByProduct_productId(Long id);
     @Query("select sum(t.money) from Task t where t.workspace.workspaceId= :id and t.status= :status")
     Optional<Integer> findTotalRevenue(@Param("id") Long id, @Param("status") String status);
+    List<Task> findAllByUser_emailAndWorkspace_workspaceId(String email, Long id);
+    List<Task> findAllByUser_userId(Long id);
 }

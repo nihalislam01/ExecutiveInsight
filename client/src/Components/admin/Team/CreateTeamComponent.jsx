@@ -1,13 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
 import { createTeamApi } from "../../../api/ExecutiveInsightApiService";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function CreateTeamComponent(props) {
 
     const [name, setName] = useState('');
-    const [message, setMessage] = useState('');
-    const [alertColor, setAlertColor] = useState('success');
-    const [showAlert, setShowAlert] = useState(false);
 
     const formRef = useRef(null);
 
@@ -28,7 +26,6 @@ export default function CreateTeamComponent(props) {
     }
 
     const setNotShow = () => {
-        setShowAlert(false);
         props.setShow(false);
         setName('');
     }
@@ -40,33 +37,31 @@ export default function CreateTeamComponent(props) {
             email: props.email
         }
         createTeamApi(team)
-            .then((response) => window.location.href = `/teams/${props.id}`)
-            .catch((error) => {
-                setAlertColor('danger');
-                setMessage(error.response.data);
-                setShowAlert(true)
-            })
+            .then((response) => props.setSuccess())
+            .catch((error) => toast.error(error.response.data))
     }
 
     return (
-        <div className='row justify-content-center position-relative' ref={formRef}>
-            <div className='col-md-6 position-absolute'>
-                {showAlert && <div className={`alert alert-${alertColor} shadow`}>{message}</div>}
-                <div className="card shadow">
-                    <div className="card-header text-center p-3">
-                        <h5>Add Team</h5>
-                    </div>
-                    <div className="card-body text-start">
-                        <form>
-                            <div className="form-group">
-                                <label className="col-form-label m-0">Team Name</label>
-                                <input type="text" className="form-control" value={name} onChange={handleNameChange} />
+        <div>
+            <Toaster />
+            <div className='row justify-content-center position-relative' ref={formRef}>
+                <div className='col-md-6 position-absolute'>
+                    <div className="card shadow">
+                        <div className="card-header text-center p-3">
+                            <h5>Add Team</h5>
+                        </div>
+                        <div className="card-body text-start">
+                            <form>
+                                <div className="form-group">
+                                    <label className="col-form-label m-0">Team Name</label>
+                                    <input type="text" className="form-control" value={name} onChange={handleNameChange} />
+                                </div>
+                            </form>
+                            <hr />
+                            <div className="text-end">
+                                <button type="button" className="btn btn-secondary mx-2" onClick={setNotShow}>Close</button>
+                                <button type="button" className="btn btn-primary" onClick={addTeam}>Add</button>
                             </div>
-                        </form>
-                        <hr />
-                        <div className="text-end">
-                            <button type="button" className="btn btn-secondary mx-2" onClick={setNotShow}>Close</button>
-                            <button type="button" className="btn btn-primary" onClick={addTeam}>Add</button>
                         </div>
                     </div>
                 </div>

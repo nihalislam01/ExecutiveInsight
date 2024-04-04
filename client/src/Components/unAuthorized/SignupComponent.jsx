@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import { userSignupApi } from '../../api/ExecutiveInsightApiService';
+import '../../styles/SignComponent.css'
 
 export default function SignupComponent() {
 
@@ -81,31 +82,27 @@ export default function SignupComponent() {
     }
 
     return (
-        <div className="container mt-5 Login">
+        <div className="container my-5 Login sign">
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     {showError && <div className={alertColor}>{message}</div>}
                     <div className='card'>
                         <div className="card-header">
-                            <h3 className="card-title">Signup</h3>
+                            <h3 className="card-title">Sign up</h3>
                         </div>
                         <div className="card-body">
                             <div>
                                 <div className="mb-3">
-                                    <label className="form-label">Name</label>
-                                    <input type="text" className="form-control" name="name" value={name} onChange={handleNameChange} required />
+                                    <input type="text" className="form-control" placeholder='Full Name' name="name" value={name} onChange={handleNameChange} required />
                                 </div>
                                 <div className="mb-3">
-                                    <label className="form-label">Email</label>
-                                    <input type="email" className="form-control" name="username" value={username} onChange={handleUsernameChange} required />
+                                    <input type="email" className="form-control" name="username" placeholder='Email' value={username} onChange={handleUsernameChange} required />
                                 </div>
                                 <div className="mb-3">
-                                    <label className="form-label">Password</label>
-                                    <input type="password" className="form-control" name="password" value={password} onChange={handlePasswordChange} required />
+                                    <input type="password" className="form-control" name="password" placeholder='Password' value={password} onChange={handlePasswordChange} required />
                                 </div>
                                 <div className="mb-3">
-                                    <label className="form-label">Enter Password Again</label>
-                                    <input type="password" className="form-control" name="matchPassword" value={matchPassword} onChange={handleMatchPasswordChange} required />
+                                    <input type="password" className="form-control" name="matchPassword" placeholder='Enter Password Again' value={matchPassword} onChange={handleMatchPasswordChange} required />
                                 </div>
                                 <button type="button" className="btn btn-success form-control" onClick={handleSubmit}>Signup</button>
                             </div>

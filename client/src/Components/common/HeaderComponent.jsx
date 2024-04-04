@@ -2,13 +2,16 @@ import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faBriefcase, faHouse, faPlus, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faBell, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { useAuth } from '../../security/AuthContext';
 import { joinWorkspaceApi, updateNotificationApi } from '../../api/ExecutiveInsightApiService';
 
 import NotificationComponent from '../authorized/NotificationComponent';
 import CodeFormComponent from '../authorized/CodeFormComponent';
+import OptionsComponent from '../authorized/OptionsComponent';
+import { Image } from 'react-bootstrap';
+import Logo from '../../assets/executive-insight-logo.png'
 
 export default function HeaderComponent() {
 
@@ -19,19 +22,24 @@ export default function HeaderComponent() {
     const addRef = useRef(null);
     const [showNotification, setShowNotification] = useState(false);
     const [showCodeForm, setShowCodeForm] = useState(false);
-
-    const logout = () => {
-        authContext.logout();
-    }
+    const [showOptions, setShowOptions] = useState(false);
 
     const handleShowNotification = () => {
         setShowNotification(!showNotification);
         setShowCodeForm(false);
+        setShowOptions(false);
     }
 
     const handleShowCodeForm = () => {
         setShowCodeForm(!showCodeForm);
         setShowNotification(false);
+        setShowOptions(false);
+    }
+
+    const handleShowOptions = () => {
+        setShowOptions(true);
+        setShowNotification(false);
+        setShowCodeForm(false);
     }
 
     const handleReject = (id, email) => {
@@ -94,43 +102,40 @@ export default function HeaderComponent() {
             })
     }
 
+    const sendRequest = () => {
+        setShowCodeForm(false);
+        toast.success("Request sent")
+    }
+
     return (
         <div>
             <Toaster />
-            {showCodeForm && <CodeFormComponent addRef={addRef} setShowCodeForm={setShowCodeForm} />}
-            <header className='border-bottom border-light border-5 mb-3 p-2'>
+            {showCodeForm && <CodeFormComponent addRef={addRef} setShowCodeForm={setShowCodeForm} sendRequest={sendRequest} />}
+            {showOptions && <OptionsComponent setShowOptions={setShowOptions} />}
+            <header className='border-bottom border-5 p-2' style={{ backgroundColor: "#b4b4b4" }}>
                 <div className='container'>
                     <div className='row'>
                         <nav className='navbar navbar-expand-lg'>
-                            <a className='navbar-brand ms2 fs-2 fw-bold text-black' href="/home">Executive Insight</a>
+                            <a className='navbar-brand' href="/home"><Image src={Logo} alt='logo' style={{width: "300px", height: "60px"}} /></a>
                             <div className='collapse navbar-collapse'>
                                 <ul className='navbar-nav'>
-                                    <li className='nav-item'>
-                                        {isAuthenticated && <Link className='nav-link mx-2' to="/home"><FontAwesomeIcon icon={faHouse} /></Link>}
-                                    </li>
-                                    <li className='nav-item'>
-                                        {isAuthenticated && <a className='nav-link mx-2' href="/my-workspace"><FontAwesomeIcon icon={faBriefcase} /></a>}
-                                    </li>
                                 </ul>
                             </div>
                             <ul className='navbar-nav'>
                                 <li className='nav-item'>
-                                    {!isAuthenticated && <Link className='nav-link' to="/login">Login</Link>}
+                                    {!isAuthenticated && <Link className='nav-link' style={{ color: "white", marginRight: "20px" }} to="/login">Sign in</Link>}
                                 </li>
                                 <li className='nav-item'>
-                                    {!isAuthenticated && <Link className='nav-link' to="/plan">Signup</Link>}
+                                    {!isAuthenticated && <Link className='nav-link' style={{ color: "white", border: "solid 1px" }} to="/plan">Sign up</Link>}
                                 </li>
                                 <li className='nav-item'>
-                                    {isAuthenticated && <Link className='nav-link mx-2' onClick={handleShowCodeForm} ref={addRef} ><FontAwesomeIcon icon={faPlus} /></Link>}
+                                    {isAuthenticated && <Link className='nav-link mx-2' style={{ color: "white" }} onClick={handleShowCodeForm} ref={addRef} ><FontAwesomeIcon icon={faPlus} /></Link>}
                                 </li>
                                 <li className='nav-item'>
-                                    {isAuthenticated && <Link className='nav-link mx-2' onClick={handleShowNotification} ref={notifyRef}><FontAwesomeIcon icon={faBell} /></Link>}
+                                    {isAuthenticated && <Link className='nav-link mx-2' style={{ color: "white" }} onClick={handleShowNotification} ref={notifyRef}><FontAwesomeIcon icon={faBell} /></Link>}
                                 </li>
                                 <li className='nav-item'>
-                                    {isAuthenticated && <a className='nav-link mx-2' href="/user-profile"><FontAwesomeIcon icon={faUser} /></a>}
-                                </li>
-                                <li className='nav-item'>
-                                    {isAuthenticated && <a className='nav-link mx-2' href="/logout" onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>}
+                                    {isAuthenticated && <Link className='nav-link mx-2' style={{ color: "white" }} onClick={handleShowOptions}><FontAwesomeIcon icon={faBars} /></Link>}
                                 </li>
                             </ul>
                         </nav>

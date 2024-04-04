@@ -29,8 +29,8 @@ export default function HomeComponent() {
       }
 
     const selectColor = (id) => {
-        const colors = ["info", "success", "primary", "secondary"]
-        return colors[id%4];
+        const customColors = ["3a5a40", "7f5539", "588157", "30638e", "3c6e71", "ad2831", "495057", "b5838d", "6a4c93", "ee6c4d"];
+        return customColors[id%10];
     }
 
     const goToWorkspace = (id) => {
@@ -38,32 +38,32 @@ export default function HomeComponent() {
     }
 
     return (
-        <div className="HomeComponent">
-            <div className='container'>
-                {hasWorkspaces && <h2 className='text-start mb-4'>Workspaces</h2>}
-                {hasWorkspaces && <hr />}
-                {!hasWorkspaces && <h5 className='mt-4'>You Haven't Joined Any Workspace Yet</h5>}
-                <table className='table'>
-                    <tbody>
-                        {
-                            hasWorkspaces &&
-                                workspaces.map(
-                                    workspace => (
-                                        <tr key={workspace.workspaceId}>
-                                            <td><button className={`btn btn-${selectColor(workspace.workspaceId)} form-control text-start pb-5`}
-                                                        onClick={() => goToWorkspace(workspace.workspaceId)}
-                                                >
-                                                <p style={{fontSize: "50px"}}>{workspace.name}</p>
-                                                <span style={newLine}></span>
-                                                {workspace.businessTitle.title}
-                                            </button></td>
-                                        </tr>
-                                    )
+        <div className='container mt-4 secondary-background'>
+            {hasWorkspaces && <h2 className='text-start mb-4'>Workspaces</h2>}
+            {hasWorkspaces && <hr />}
+            {!hasWorkspaces && <h5 className='mt-4'>You Haven't Joined Any Workspace Yet</h5>}
+            <table className='table'>
+                <tbody>
+                    {
+                        hasWorkspaces &&
+                            workspaces.map(
+                                workspace => (
+                                    <tr key={workspace.workspaceId}>
+                                        <td style={{background: "none"}}>
+                                            <button className={`btn form-control text-start pb-5`}
+                                                    onClick={() => goToWorkspace(workspace.workspaceId)}
+                                                    style={{ backgroundColor: `#${selectColor(workspace.workspaceId)}`, color: "white" }}
+                                            >
+                                            <p style={{fontSize: "50px"}}>{workspace.name}</p>
+                                            <span style={newLine}></span>
+                                            {workspace.businessTitle.title}
+                                        </button></td>
+                                    </tr>
                                 )
-                            }
-                    </tbody>
-                </table>
-            </div>
+                            )
+                        }
+                </tbody>
+            </table>
         </div>
     )
 }

@@ -4,7 +4,7 @@ insert into workspace(workspace_id, name, code, business_title_id) values
 (2004, 'BrainStand', 'FMcNw4', 3);
 
 insert into users(user_id, email, name, password, role, bio, is_enable, workspace_id) values
-(1001, 'nihalislam2@gmail.com', 'Nihal Islam', '$2a$10$T16zWLV3ZfFKiwMw8y/9POiRhIXPCOhtujhCegTeXkg2rBGyM5H9O', 'USER', 'Im a web dev student', true, null),
+(1001, 'nihalislam2@gmail.com', 'Nihal Islam', '$2a$10$T16zWLV3ZfFKiwMw8y/9POiRhIXPCOhtujhCegTeXkg2rBGyM5H9O', 'CONSUMER', 'Im a web dev student', true, null),
 (1002, 'nihal.islam@g.bracu.ac.bd', 'Nihal', '$2a$10$T16zWLV3ZfFKiwMw8y/9POiRhIXPCOhtujhCegTeXkg2rBGyM5H9O', 'ADMIN', 'Im a Student', true, 2004),
 (1003, 'shsakin2002@gmail.com', 'Sakin', '$2a$10$T16zWLV3ZfFKiwMw8y/9POiRhIXPCOhtujhCegTeXkg2rBGyM5H9O', 'ADMIN', 'Im a DBA', true, 2002),
 (1004, 'shahrin.sultana@g.bracu.ac.bd', 'Shahrin Sultana', '$2a$10$T16zWLV3ZfFKiwMw8y/9POiRhIXPCOhtujhCegTeXkg2rBGyM5H9O', 'ADMIN', 'I cook sometimes', true, 2003);

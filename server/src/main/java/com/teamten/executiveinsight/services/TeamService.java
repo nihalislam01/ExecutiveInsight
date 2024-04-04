@@ -6,6 +6,7 @@ import com.teamten.executiveinsight.repositories.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,5 +29,9 @@ public class TeamService {
     }
     public void removeTeam(Long teamId) {
         teamRepository.deleteById(teamId);
+    }
+
+    public List<Team> getAllTeam(String email, Long id) {
+        return teamRepository.findAllByWorkspaceAndUser(email, id);
     }
 }

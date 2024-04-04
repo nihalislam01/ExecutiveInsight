@@ -19,6 +19,7 @@ export default function TeamMembersComponent(props) {
 
     const authContext = useAuth();
     const navigate = useNavigate();
+    const isMine = authContext.isMine(props.wId);
 
     useEffect(()=>{
         authContext.refresh();
@@ -65,7 +66,7 @@ export default function TeamMembersComponent(props) {
                                 {member.image!==null && <Image src={member.image} alt="Profile" roundedCircle style={{ width: '40px', height: '40px' }} className='mx-2' />}
                                 <p className="m-0">{member.name}</p>
                             </div>
-                            <div className="px-3 create" style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0", paddingTop: "16px", paddingBottom: "16px" }} onClick={() => removeUser(member.email)}><FontAwesomeIcon icon={faUserMinus} /></div>
+                            {isMine && <div className="px-3 create" style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0", paddingTop: "16px", paddingBottom: "16px" }} onClick={() => removeUser(member.email)}><FontAwesomeIcon icon={faUserMinus} /></div>}
                         </div>
                     )
                 )

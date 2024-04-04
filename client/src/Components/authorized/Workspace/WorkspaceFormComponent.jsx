@@ -1,11 +1,10 @@
-import Cookies from 'js-cookie';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { createWorkspaceApi, retrieveBusinessTitlesApi } from '../../../api/ExecutiveInsightApiService';
 import { useAuth } from "../../../security/AuthContext";
 
-export default function WorkspaceFormComponent({ setShow }) {
+export default function WorkspaceFormComponent({ setShow, setSuccess, setError }) {
 
     const [workspaceName, setWorkspaceName] = useState('');
     const [titles, setTitles] = useState(null);
@@ -20,13 +19,19 @@ export default function WorkspaceFormComponent({ setShow }) {
 
     useEffect(() => {
         authContext.refresh()
-        retrieveBusinessTitlesApi()
+
+        const getTitles = async () => {
+            await retrieveBusinessTitlesApi()
             .then((response) => {
                 setTitles(response.data)
                 setHasTitles(response.data.length > 0)
             })
             .catch((error) => navigate("/error"))
-        function handleClickOutside(event) {
+        }
+
+        getTitles();
+
+        const handleClickOutside = (event) => {
             if (formRef.current && !formRef.current.contains(event.target)) {
                 setShow(false);
             }
@@ -35,32 +40,30 @@ export default function WorkspaceFormComponent({ setShow }) {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
+
     }, [authContext, navigate, setShow])
 
-    async function handleSubmit() {
+    const handleSubmit = async () => {
         const workspace = {
             name: workspaceName,
             email: username,
             title: businessTitle
         }
         await createWorkspaceApi(workspace)
-            .then((response) => handleResponse(response))
+            .then((response) => {
+                authContext.setAdmin()
+                setSuccess();
+            })
             .catch((error) => {
-                navigate("/error")
+                setError();
             })
     }
 
-    function handleResponse(response) {
-        Cookies.set('hasWorkspace', true, {expires: 1});
-        var newMessage = "You have successfully created your own workspace";
-        navigate("/message", { state: { newMessage } });
-    }
-
-    function handleNameChange(event) {
+    const handleNameChange = (event) => {
         setWorkspaceName(event.target.value);
     }
 
-    function handleTitle(event) {
+    const handleTitle = (event) => {
         setBusinessTitle(event.target.value);
     }
 

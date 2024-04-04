@@ -12,7 +12,7 @@ export default function PaymentForm() {
   const authContext = useAuth();
   const username = authContext.username();
 
-  const [usd, setUsd] = useState('199.99');
+  const [usd, setUsd] = useState('119.99');
   const [plan, setPlan] = useState('Annual');
   const [planId, setPlanId] = useState('price_1P0rA1EAoji8m5XPq5b5b7dO');
 
@@ -88,8 +88,10 @@ export default function PaymentForm() {
           </div>
           <div className='container text-start'>
             <h5>Payment Information</h5>
-            <label className='m-0'>Card Number</label>
-            <input type='text' className="form-control input" placeholder={`xxxx xxxx xxxx xxxx`} />
+            <p className='m-0'>Check your plan before paying</p>
+            <hr />
+            <p className='m-0'>Card Number</p>
+            <input type='text' className="form-control input" placeholder="&#xf09d; xxxx xxxx xxxx xxxx"style={{ fontFamily: 'Arial, FontAwesome' }} />
             <div className='d-flex'>
               <div className='p-1'>
               <label className='m-0'>Expiration Month</label>
@@ -104,7 +106,7 @@ export default function PaymentForm() {
               <input type='text' className="form-control input" placeholder='3 digits' />
               </div>
             </div>
-            <button className='btn form-control my-4' style={{backgroundColor: "#669bbc", color: "white"}} onClick={handlePayment}>Continue</button>
+            <button className='btn form-control my-4' style={{backgroundColor: "#669bbc", color: "white"}} onClick={handlePayment}>Pay</button>
           </div>
         </div>
       </div>

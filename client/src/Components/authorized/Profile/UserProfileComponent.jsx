@@ -50,7 +50,7 @@ export default function UserProfileComponent() {
     }, [authContext, navigate, username])
 
     return (
-        <div className="container">
+        <div className="container mt-4">
             <Row>
                 <Col xs={3} className="text-start">
                     <ProfilePhotoComponent image={image} userName={userName} bio={bio} />

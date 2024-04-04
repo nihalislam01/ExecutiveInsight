@@ -12,3 +12,7 @@
 .button:hover {
     cursor: pointer;
 }
+
+.ellipsis:hover {
+    cursor: pointer;
+}

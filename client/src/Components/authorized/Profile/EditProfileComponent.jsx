@@ -134,7 +134,7 @@ export default function EditProfileComponent() {
     }
 
     return (
-        <div className="EditProfileComponent container">
+        <div className="container mt-4">
             <Row>
                 <Col xs={3}>
                     {image==='' && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '250px', height: '250px' }} className="mb-4"  />}

@@ -23,6 +23,8 @@ public class DeliveryController {
     @PostMapping("/create-delivery")
     public ResponseEntity<String> addDelivery(@RequestBody DeliveryRequest deliveryRequest) {
         Task task = taskService.getTask(deliveryRequest.taskId()).orElseThrow(EntityNotFoundException::new);
+        task.setStatus("Pending");
+        taskService.updateTask(task);
         Workspace workspace = workspaceService.getWorkspace(deliveryRequest.workspaceId()).orElseThrow(EntityNotFoundException::new);
         deliveryService.addDelivery(deliveryRequest, task, workspace);
         return ResponseEntity.ok("Delivery Created successfully");
@@ -32,9 +34,29 @@ public class DeliveryController {
         List<Delivery> deliveries = deliveryService.getAllDelivery(id);
         return ResponseEntity.ok(deliveries);
     }
-    @PatchMapping("/update-delivery/{id}")
-    public ResponseEntity<String> updateDelivery(@PathVariable Long id) {
-        deliveryService.updateDelivery(id);
+    @GetMapping("/get-delivery/{id}")
+    public ResponseEntity<Delivery> getDelivery(@PathVariable Long id) {
+        Delivery delivery = deliveryService.getDelivery(id);
+        return ResponseEntity.ok(delivery);
+    }
+    @PatchMapping("/accept-delivery/{id}")
+    public ResponseEntity<String> acceptDelivery(@PathVariable Long id) {
+        Delivery delivery = deliveryService.getDelivery(id);
+        Task task = delivery.getTask();
+        delivery.setSubmitted(true);
+        task.setStatus("Delivered");
+        taskService.updateTask(task);
+        deliveryService.updateDelivery(delivery);
         return ResponseEntity.ok("Delivery Updated Successfully");
+    }
+    @PatchMapping("/reject-delivery/{id}")
+    public ResponseEntity<String> rejectDelivery(@PathVariable Long id) {
+        Delivery delivery = deliveryService.getDelivery(id);
+        Task task = delivery.getTask();
+        task.setStatus("Not Delivered Yet");
+        taskService.updateTask(task);
+        delivery.setTask(null);
+        deliveryService.removeDelivery(delivery);
+        return ResponseEntity.ok("Delivery Not Accepted");
     }
 }

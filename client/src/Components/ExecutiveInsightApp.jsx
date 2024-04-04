@@ -22,15 +22,18 @@ import EditProfileComponent from './authorized/Profile/EditProfileComponent';
 import ChangePhotoComponent from './authorized/Profile/ChangePhotoComponent';
 import ProfileViewComponent from './authorized/Profile/ProfileViewComponent';
 import WorkspaceProfileComponent from './authorized/workspaceProfile/WorkspaceProfileComponent';
+import MyTaskComponent from './authorized/MyTaskComponent';
 
 //Admin Components
-import WorkspaceComponent from './admin/Workspace/WorkspaceComponent';
-import SidebarComponent from './admin/Workspace/SidebarComponent';
-import ListMemberComponent from './admin/Member/ListMemberComponent';
-import ListPostComponent from './admin/Post/ListPostComponent';
-import ListTeamComponent from './admin/Team/ListTeamComponent';
-import ListProductComponent from './admin/Product/ListProductComponent';
-import ListTaskComponent from './admin/Task/ListTaskComponent';
+import WorkspaceComponent from './authorized/Workspace/WorkspaceComponent';
+import DashboardComponent from './admin/Dashboard/DashboardComponent';
+import TeamComponent from './admin/Team/TeamComponent';
+import MemberComponent from './admin/Member/MemberComponent';
+import PostComponent from './admin/Post/PostComponent';
+import SaleComponent from './admin/Sale/SaleComponent';
+import DeliveryDetails from './admin/Sale/DeliveryDetails';
+import ProductComponent from './admin/Product/ProductComponent';
+import TaskComponent from './admin/Task/TaskComponent';
 import TaskProfileComponent from './admin/Task/TaskProfileComponent';
 import TeamProfileComponent from './admin/Team/TeamProfileComponent';
 
@@ -51,6 +54,7 @@ function AdminRoute({children}) {
 }
 
 export default function ExecutiveInsightApp() {
+
     return (
         <div className="ExecutiveInsightApp">
             <AuthProvider>
@@ -59,12 +63,12 @@ export default function ExecutiveInsightApp() {
                     <Routes>
                         <Route path='/' element={<PlanComponent />} />
                         <Route path='/plan' element={<PlanComponent />} />
-                        <Route path='/login' element={<LoginComponent />} />
-                        <Route path='/signup' element={<SignupComponent />} />
-                        <Route path='/forgot-password' element={<ForgotPasswordComponent />} />
-                        <Route path='/reset-password' element={<ResetPasswordComponent />} />
                         <Route path='/verify-email/:token/:isForgotPassword' element={<EmailVerifiedComponent />} />
                         <Route path='/message' element={<MessageComponent />} />
+                        <Route path='/login' element={<LoginComponent />} />
+                        <Route path='/signup' element={ <SignupComponent />} />
+                        <Route path='/forgot-password' element={<ForgotPasswordComponent />} />
+                        <Route path='/reset-password' element={<ResetPasswordComponent />} />
 
                         <Route path='/home' element={
                             <AuthenticatedRoute>
@@ -72,23 +76,41 @@ export default function ExecutiveInsightApp() {
                             </AuthenticatedRoute>
                         } />
 
+                        <Route path='/workspace-profile/:id' element={
+                            <AuthenticatedRoute>
+                                <WorkspaceProfileComponent />
+                            </AuthenticatedRoute>
+                        } />
+
                         <Route path='/my-workspace' element={
                             <AuthenticatedRoute>
-                                <SidebarComponent />
                                 <WorkspaceComponent />
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/my-tasks/:id' element={
+                            <AuthenticatedRoute>
+                                <MyTaskComponent />
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/dashboard' element={
+                            <AuthenticatedRoute>
+                                <AdminRoute>
+                                    <DashboardComponent />
+                                </AdminRoute>
                             </AuthenticatedRoute>
                         } />
 
                         <Route path='/teams/:id' element={
                             <AuthenticatedRoute>
                                 <AdminRoute>
-                                    <SidebarComponent />
-                                    <ListTeamComponent />
+                                    <TeamComponent />
                                 </AdminRoute>
                             </AuthenticatedRoute>
                         } />
 
-                        <Route path='/team/:id' element={
+                        <Route path='/team/:id/:wId' element={
                             <AuthenticatedRoute>
                                     <TeamProfileComponent />
                             </AuthenticatedRoute>
@@ -97,8 +119,7 @@ export default function ExecutiveInsightApp() {
                         <Route path='/members/:id' element={
                             <AuthenticatedRoute>
                                 <AdminRoute>
-                                    <SidebarComponent />
-                                    <ListMemberComponent />
+                                    <MemberComponent />
                                 </AdminRoute>
                             </AuthenticatedRoute>
                         } />
@@ -106,8 +127,24 @@ export default function ExecutiveInsightApp() {
                         <Route path='/posts/:id' element={
                             <AuthenticatedRoute>
                                 <AdminRoute>
-                                    <SidebarComponent />
-                                    <ListPostComponent />
+                                    <PostComponent />
+                                </AdminRoute>
+                            </AuthenticatedRoute>
+                        } />
+
+                        
+                        <Route path='/sales/:id' element={
+                            <AuthenticatedRoute>
+                                <AdminRoute>
+                                    <SaleComponent/>
+                                </AdminRoute>
+                            </AuthenticatedRoute>
+                        } />
+
+                    <Route path='/delivery/:id' element={
+                            <AuthenticatedRoute>
+                                <AdminRoute>
+                                    <DeliveryDetails />
                                 </AdminRoute>
                             </AuthenticatedRoute>
                         } />
@@ -115,8 +152,7 @@ export default function ExecutiveInsightApp() {
                         <Route path='/products/:id' element={
                             <AuthenticatedRoute>
                                 <AdminRoute>
-                                    <SidebarComponent />
-                                    <ListProductComponent />
+                                    <ProductComponent />
                                 </AdminRoute>
                             </AuthenticatedRoute>
                         } />
@@ -124,8 +160,7 @@ export default function ExecutiveInsightApp() {
                         <Route path='/tasks/:id' element={
                             <AuthenticatedRoute>
                                 <AdminRoute>
-                                    <SidebarComponent />
-                                    <ListTaskComponent />
+                                    <TaskComponent />
                                 </AdminRoute>
                             </AuthenticatedRoute>
                         } />
@@ -133,15 +168,8 @@ export default function ExecutiveInsightApp() {
                         <Route path='/task/:workspaceId/:taskId' element={
                             <AuthenticatedRoute>
                                 <AdminRoute>
-                                    <SidebarComponent />
                                     <TaskProfileComponent />
                                 </AdminRoute>
-                            </AuthenticatedRoute>
-                        } />
-
-                        <Route path='/workspace-profile/:id' element={
-                            <AuthenticatedRoute>
-                                <WorkspaceProfileComponent />
                             </AuthenticatedRoute>
                         } />
 

@@ -51,7 +51,7 @@ export default function ProfileViewComponent() {
     }, [authContext, id, navigate])
 
     return (
-        <div className="container">
+        <div className="container mt-4">
             <Row>
                 <Col xs={3} className="text-start">
                     <ProfilePhotoComponent image={image} userName={name} bio={bio} />

@@ -39,6 +39,7 @@ export const createTeamApi = (team) => apiClient.post("/create-team", team);
 export const assignUserToTeamApi = (email, teamId) => apiClient.patch(`/join-team/${email}/${teamId}`);
 export const retrieveTeamUserApi = (id) => apiClient.get(`/get-team-users/${id}`);
 export const removeUserFromTeamApi = (email, teamId) => apiClient.delete(`/remove-team-user/${email}/${teamId}`)
+export const retrieveTeamsByWorkspaceAndUserApi = (id, email) => apiClient.get(`/get-team-by-workspace-user/${id}/${email}`);
 
 //Product API
 export const retrieveProductsApi = (id) => apiClient.get(`/get-products/${id}`);
@@ -49,8 +50,18 @@ export const deleteProductApi = (id) => apiClient.delete(`/delete-product/${id}`
 //Task API
 export const retrieveTasksApi = (id) => apiClient.get(`/get-tasks/${id}`);
 export const retrieveTaskByTeamApi = (id) => apiClient.get(`/get-tasks-by-team/${id}`);
+export const retrieveTaskByUserApi = (id) => apiClient.get(`/get-task-by-user/${id}`);
+export const retrieveTaskByUserAndWorkspaceApi = (email, id) => apiClient.get(`/get-task-by-user-workspace/${email}/${id}`);
 export const retrieveTaskApi = (id) => apiClient.get(`get-task/${id}`);
 export const createTaskApi = (task) => apiClient.post("/create-task", task);
 export const editTaskApi = (task) => apiClient.patch("/update-task", task);
 export const assignTaskToMemberApi = (userId, taskId) => apiClient.put(`/assign-task-to-user/${userId}/${taskId}`);
 export const assignTaskToTeamApi = (teamId, taskId) => apiClient.put(`/assign-task-to-team/${teamId}/${taskId}`);
+export const retrieveWorkspaceIdApi = (taskId) => apiClient.get(`/get-workspaceId/${taskId}`);
+
+//Delivery API
+export const createDeliveryApi = (delivery) => apiClient.post("/create-delivery", delivery);
+export const retrieveDeliveriesApi = (id) => apiClient.get(`/get-deliveries/${id}`);
+export const retrieveDeliveryApi = (id) => apiClient.get(`/get-delivery/${id}`);
+export const acceptDeliveryApi = (id) => apiClient.patch(`/accept-delivery/${id}`);
+export const rejectDeliveryApi = (id) => apiClient.patch(`/reject-delivery/${id}`);
