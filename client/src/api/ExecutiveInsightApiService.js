@@ -65,3 +65,7 @@ export const retrieveDeliveriesApi = (id) => apiClient.get(`/get-deliveries/${id
 export const retrieveDeliveryApi = (id) => apiClient.get(`/get-delivery/${id}`);
 export const acceptDeliveryApi = (id) => apiClient.patch(`/accept-delivery/${id}`);
 export const rejectDeliveryApi = (id) => apiClient.patch(`/reject-delivery/${id}`);
+
+//Dashboard API
+export const retrieveDashboardDetailsApi = (id) => apiClient.get(`/get-dashboard-details/${id}`);
+export const retrieveDistinctDashboardDetailsApi = (id) => apiClient.get(`/get-distinct-dashboard-details/${id}`);

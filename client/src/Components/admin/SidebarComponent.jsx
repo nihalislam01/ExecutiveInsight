@@ -31,7 +31,7 @@ export default function SidebarComponent() {
 
     return (
                 <div className="border-end border-5 sidebar px-0 text-start">
-                    <Link className="nav-link my-2 mx-2 link" to="/dashboard"><FontAwesomeIcon icon={faGauge} className="mx-2" />Dashboard</Link>
+                    <Link className="nav-link my-2 mx-2 link" to={`/dashboard/${workspaceId}`}><FontAwesomeIcon icon={faGauge} className="mx-2" />Dashboard</Link>
                     <hr className="my-0" />
                     <Link className="nav-link my-2 mx-2 link" to={`/teams/${workspaceId}`}><FontAwesomeIcon icon={faPeopleGroup} className="mx-2" />Teams</Link>
                     <Link className="nav-link mb-2 mx-2 link" to={`/members/${workspaceId}`}><FontAwesomeIcon icon={faUsers} className="mx-2" />Members</Link>
@@ -41,7 +41,7 @@ export default function SidebarComponent() {
                     <Link className="nav-link mb-2 mx-2 link" to={`/products/${workspaceId}`}><FontAwesomeIcon icon={faFile} className="mx-2" />Products</Link>
                     <Link className="nav-link mb-2 mx-2 link" to={`/tasks/${workspaceId}`}><FontAwesomeIcon icon={faTruckFast} className="mx-2" />Task Allocation</Link>
                     <hr className="my-0" />
-                    <Link className="nav-link my-2 mx-2 link" to="/dashboard"><FontAwesomeIcon icon={faCalendarDays} className="mx-2" />Calender</Link>
+                    <Link className="nav-link my-2 mx-2 link" to={`/dashboard/${workspaceId}`}><FontAwesomeIcon icon={faCalendarDays} className="mx-2" />Calender</Link>
                 </div>
     )
 }

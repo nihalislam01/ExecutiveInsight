@@ -56,11 +56,6 @@ public class TaskController {
         List<Task> tasks = taskService.getAllTaskByTeamId(id);
         return ResponseEntity.ok(tasks);
     }
-    @GetMapping("/get-total-revenue/{id}")
-    private ResponseEntity<?> getTotalRevenue(@PathVariable Long id) {
-        int totalRevenue = taskService.getTotalRevenue(id);
-        return ResponseEntity.ok(totalRevenue);
-    }
     @GetMapping("/get-workspaceId/{taskId}")
     private ResponseEntity<Long> getWorkspaceId(@PathVariable Long taskId) {
         Long workspaceId = taskService.getWorkspaceId(taskId);

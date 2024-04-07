@@ -94,7 +94,7 @@ export default function ExecutiveInsightApp() {
                             </AuthenticatedRoute>
                         } />
 
-                        <Route path='/dashboard' element={
+                        <Route path='/dashboard/:id' element={
                             <AuthenticatedRoute>
                                 <AdminRoute>
                                     <DashboardComponent />

@@ -9,3 +9,24 @@ footer {
     width: 90%;
     height: 40px;
 }
+
+.dashboard-box{
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    width: 25%;
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    height: 150px;
+}
+
+.chart-box {
+    background-color: #e9ecef;
+    width: 50%;
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    height: 280px;
+    overflow: auto;
+}

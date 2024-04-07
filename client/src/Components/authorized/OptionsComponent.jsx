@@ -16,13 +16,19 @@ export default function OptionsComponent(props) {
     const isConsumer = authContext.isConsumer();
     const isAdmin = authContext.isAdmin();
     const [user, setUser] = useState([]);
+    const [id, setId] = useState(0);
     const optionRef = useRef(null);
 
     useEffect(()=>{
         authContext.refresh()
         const getUser = async () => {
             await retrieveUserApi(email)
-                .then((response)=>setUser(response.data))
+                .then((response)=>{
+                    setUser(response.data)
+                    if (response.data.workspace!=null) {
+                        setId(response.data.workspace.workspaceId)
+                    }
+                })
                 .catch((error)=>{
                     console.log(error)
                     toast.error("Error fetching user")
@@ -62,7 +68,7 @@ export default function OptionsComponent(props) {
                 </div>
                 <hr />
                 <Link className="nav-link my-2 mx-2 link" to="/user-profile" onClick={() => props.setShowOptions(false)}><FontAwesomeIcon icon={faUser} className="mx-2" />Your Profile</Link>
-                {isAdmin && <Link className="nav-link my-2 mx-2 link" to="/dashboard/" onClick={() => props.setShowOptions(false)}><FontAwesomeIcon icon={faBriefcase} className="mx-2" />Your Workspace</Link>}
+                {isAdmin && <Link className="nav-link my-2 mx-2 link" to={`/dashboard/${id}`} onClick={() => props.setShowOptions(false)}><FontAwesomeIcon icon={faBriefcase} className="mx-2" />Your Workspace</Link>}
                 {!isAdmin && <Link className="nav-link my-2 mx-2 link" to="/my-workspace" onClick={() => props.setShowOptions(false)}><FontAwesomeIcon icon={faBriefcase} className="mx-2" />Your Workspace</Link>}
                 <hr />
                 <Link className="nav-link my-2 mx-2 link" to={`/my-tasks/${user.userId}`} onClick={() => props.setShowOptions(false)}><FontAwesomeIcon icon={faBarsProgress} className="mx-2" />Your Tasks</Link>
