@@ -13,6 +13,13 @@ update workspace set user_id = 1003 where workspace_id = 2002;
 update workspace set user_id = 1004 where workspace_id = 2003;
 update workspace set user_id = 1002 where workspace_id = 2004;
 
+insert into badge(badge_id, points, point_limit, badge_level, user_id) values(7001, 0, 3, 1, 1001), (7002, 0, 3, 1, 1002), (7003, 0, 3, 1, 1003), (7004, 0, 3, 1, 1004);
+
+update users set badge_id = 7001 where user_id = 1001;
+update users set badge_id = 7002 where user_id = 1002;
+update users set badge_id = 7003 where user_id = 1003;
+update users set badge_id = 7004 where user_id = 1004;
+
 insert into user_join_workspace(user_join_workspace_id, user_id, workspace_id, post_id) values(4001, 1003, 2003, null),
 (4002, 1002, 2003, null), (4003, 1001, 2004, null), (4004, 1003, 2004, null), (4005, 1004, 2004, null);
 

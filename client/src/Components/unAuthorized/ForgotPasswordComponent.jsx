@@ -7,7 +7,7 @@ export default function ForgotPasswordComponent() {
 
     const [username, setUsername] = useState('');
 
-    function sendEmail() {
+    const sendEmail = () => {
         const email = {
             email: username
         }
@@ -21,7 +21,7 @@ export default function ForgotPasswordComponent() {
             );
     }
 
-    function handleUsernameChange(event) {
+    const handleUsernameChange = (event) => {
         setUsername(event.target.value);
     }
 

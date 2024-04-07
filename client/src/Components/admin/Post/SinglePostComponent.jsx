@@ -74,9 +74,17 @@ export default function SinglePostComponent({ post, id }) {
                         users.map(
                             user => (
                                 <div key={user.userId} className="d-flex align-items-center p-2 m-2 user" onClick={() => viewProfile(user.userId)}>
-                                    {user.image===null && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
-                                    {user.image!==null && <Image src={user.image} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
-                                    <p className="m-0">{user.name}</p>
+                                    <div className="d-flex" style={{width: "300px"}} >
+                                        {user.image===null && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
+                                        {user.image!==null && <Image src={user.image} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
+                                        <p className="m-0">{user.name}</p>
+                                    </div>
+                                    <div style={{width: "600px"}}>
+                                        <div style={{ width: '100%', height: '5px', backgroundColor: '#ced4da', position: 'relative', borderRadius: "5px" }}>
+                                        <div style={{ width: `${(100*user.badge.points)/user.badge.pointLimit}%`, height: '100%', backgroundColor: '#8da9c4', transition: 'width 0.5s ease-in-out', borderRadius: "5px" }} ></div>
+                                        </div>
+                                    </div>
+                                    <div className='mx-4'><p className='m-0'>level {user.badge.badgeLevel}</p></div>
                                 </div>
                             )
                         )

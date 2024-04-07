@@ -16,7 +16,7 @@ export default function UserProfileComponent() {
     const [hasWorkspaces, setHasWorkspaces] = useState(false)
     const [userName, setUserName] = useState('');
     const [bio, setBio] = useState('');
-    const [points, setPoints] = useState(0);
+    const [badge, setBadge] = useState([]);
     const [image, setImage] = useState('');
     const [location, setLocation] = useState('');
 
@@ -38,6 +38,7 @@ export default function UserProfileComponent() {
                 if (response.data.image!==null) {
                     setImage(response.data.image);
                 }
+                setBadge(response.data.badge)
             })
             .catch((error) => navigate('/error'));
 
@@ -58,7 +59,7 @@ export default function UserProfileComponent() {
                     <ProfileInfoComponent username={username} location={location} />
                 </Col>
                 <Col xs={9}>
-                    <ProfileBadgeComponent points={points} />
+                    <ProfileBadgeComponent badge={badge} />
                     <hr />
                     <h5 className="text-start my-4">Workspaces I have joined</h5>
                     <div className="row g-3">

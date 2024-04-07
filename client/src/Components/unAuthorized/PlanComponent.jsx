@@ -23,8 +23,7 @@ export default function PlanComponent() {
                         <h6>Included in Free:</h6>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Join multiple workspaces</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Collaborate on individual tasks</p>
-                        <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Collaborate wth team</p>
-                        <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Real Time Chatting with members</p>
+                        <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Collaborate with team</p>
                     </div>
                 </div>
                 <div className="plan" style={{ borderLeft: "0px", borderRight: "0px" }}>
@@ -42,12 +41,15 @@ export default function PlanComponent() {
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Join multiple workspaces</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Collaborate on individual tasks</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Collaborate with team</p>
-                        <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Real Time Chatting with members</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Create your own workspace</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Manage your teams</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Manage your tasks</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Manage members</p>
+                        <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Manage your proucts</p>
+                        <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Manage your tasks</p>
+                        <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Manage your sales</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Monitor Company revenue</p>
+                        <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Monitor member progress</p>
                     </div>
                 </div>
                 <div className="plan">
@@ -65,12 +67,15 @@ export default function PlanComponent() {
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Join multiple workspaces</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Collaborate on individual tasks</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Collaborate with team</p>
-                        <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Real Time Chatting with members</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Create your own workspace</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Manage your teams</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Manage your tasks</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Manage members</p>
+                        <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Manage your proucts</p>
+                        <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Manage your tasks</p>
+                        <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Manage your sales</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Monitor Company revenue</p>
+                        <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Monitor member progress</p>
                         <p><FontAwesomeIcon icon={faCheck} style={{color: "#548c2f", paddingRight: "5px"}} />Get exciting discount</p>
                     </div>
                 </div>

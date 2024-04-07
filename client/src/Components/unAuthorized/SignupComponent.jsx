@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import toast, {Toaster} from 'react-hot-toast';
 
 import { userSignupApi } from '../../api/ExecutiveInsightApiService';
 import '../../styles/SignComponent.css'
@@ -13,18 +13,17 @@ export default function SignupComponent() {
     const [message, setMessage] = useState('');
     const [alertColor, setAlertColor] = useState('');
     const [showError, setError] = useState(false);
-    const navigate = useNavigate();  
 
 
-    function handleNameChange(event) {
+    const handleNameChange = (event) => {
         setName(event.target.value);
     }
 
-    function handleUsernameChange(event) {
+    const handleUsernameChange = (event) => {
         setUsername(event.target.value);
     }
 
-    function handlePasswordChange(event) {
+    const handlePasswordChange = (event) => {
         setPassword(event.target.value);
         if (event.target.value!==matchPassword) {
             setAlertColor('alert alert-warning');
@@ -35,7 +34,7 @@ export default function SignupComponent() {
         }
     }
 
-    function handleMatchPasswordChange(event) {
+    const handleMatchPasswordChange = (event) => {
         setError(true);
         setMatchPassword(event.target.value)
         if (event.target.value!==password) {
@@ -47,7 +46,7 @@ export default function SignupComponent() {
         }
     }
 
-    async function handleSubmit() {
+    const handleSubmit = () => {
         if (password===matchPassword) {
             const user = {
                 name: name,
@@ -56,33 +55,23 @@ export default function SignupComponent() {
                 bio: '',
                 location: ''
             }
-            await userSignupApi(user)
-                .then((response) => setStatus(response))
-                .catch((error) => setStatus(error))
+            toast.promise(
+                userSignupApi(user),
+                 {
+                   loading: 'Sending...',
+                   success: <b>Email Sent. Check to verify</b>,
+                   error: <b>Email already exists</b>,
+                 }
+            );
+            setError(false)
         } else {
-            setError(true);
-            setAlertColor('alert alert-danger');
-            setMessage('Password did not match');
-        }
-    }
-
-    function setStatus(response) {
-        if (response.status===200) {
-            var newMessage = "Register successful. Check your email to verify.";
-            navigate('/message', { state: { newMessage } });
-        } else if (response.response.status===409) {
-            setError(true);
-            setAlertColor('alert alert-warning');
-            setMessage('Email already exists');
-        } else {
-            setError(true);
-            setAlertColor('alert alert-warning');
-            setMessage('Something went wrong. Please try again.');
+            toast.error("Password did not match")
         }
     }
 
     return (
         <div className="container my-5 Login sign">
+            <Toaster />
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     {showError && <div className={alertColor}>{message}</div>}

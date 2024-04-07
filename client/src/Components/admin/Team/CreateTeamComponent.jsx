@@ -37,7 +37,7 @@ export default function CreateTeamComponent(props) {
             email: props.email
         }
         createTeamApi(team)
-            .then((response) => props.setSuccess())
+            .then((response) => props.setSuccess(response.data))
             .catch((error) => toast.error(error.response.data))
     }
 

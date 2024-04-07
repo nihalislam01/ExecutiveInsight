@@ -33,7 +33,7 @@ public class SignupController {
         try {
             Optional<Users> user = userService.getUser(userRequest.email());
             if (user.isPresent()) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
             }
             // Signup step02: Saving information to database
             Users theUser = userService.createUser(userRequest);
@@ -43,7 +43,7 @@ public class SignupController {
             userService.updateUser(theUser);
             // Signup step03: Sending verification email
             publisher.publishEvent(new EmailCompleteEvent(theUser, "http://localhost:3000", false));
-            return ResponseEntity.ok("User sign up successful. Please check you email.");
+            return ResponseEntity.ok("Register successful. Check your email to verify.");
         }
         catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Something went wrong");
@@ -69,6 +69,6 @@ public class SignupController {
         }
         theUser.setEnable(true);
         userService.updateUser(theUser);
-        return ResponseEntity.ok("User been verified. Please login");
+        return ResponseEntity.ok("User been verified. Please Sign in");
     }
 }

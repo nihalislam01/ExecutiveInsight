@@ -16,7 +16,7 @@ export default function ProfileViewComponent() {
     const [location, setLocation] = useState('');
     const [image, setImage] = useState('');
     const [email, setEmail] = useState('');
-    const [points, setPoints] = useState(0);
+    const [badge, setBadge] = useState([]);
     const [workspaces, setWorkspaces] = useState([{}]);
     const [hasWorkspaces, setHasWorkspaces] = useState(false)
 
@@ -39,6 +39,7 @@ export default function ProfileViewComponent() {
                 if (response.data.image!==null) {
                     setImage(response.data.image);
                 }
+                setBadge(response.data.badge)
             })
             .catch((error) => navigate('/error'))
         retrieveWorkspacesByUserForViewApi(id)
@@ -58,7 +59,7 @@ export default function ProfileViewComponent() {
                     <ProfileInfoComponent username={email} location={location} />
                 </Col>
                 <Col xs={9}>
-                    <ProfileBadgeComponent points={points} />
+                    <ProfileBadgeComponent badge={badge} />
                     <hr />
                     {hasWorkspaces &&
                         <div>

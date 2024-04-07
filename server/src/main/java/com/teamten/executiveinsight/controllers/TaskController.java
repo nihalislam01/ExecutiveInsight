@@ -22,15 +22,13 @@ public class TaskController {
     private final WorkspaceService workspaceService;
     @PostMapping("create-task")
     private ResponseEntity<String> addTask(@RequestBody TaskRequest taskRequest) {
-        if (taskRequest.name().equalsIgnoreCase("") || taskRequest.name().equalsIgnoreCase(" ")) {
+        if (taskRequest.name().strip().equalsIgnoreCase("")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter task name");
-        } else if (taskRequest.productId()==0) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter a product name");
         } else if (LocalDate.parse(taskRequest.endDate()).isBefore(LocalDate.now()) || taskRequest.endDate().equalsIgnoreCase("")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter valid delivery date");
         }
         Workspace workspace = workspaceService.getWorkspace(taskRequest.workspaceId()).orElseThrow(EntityNotFoundException::new);
-        Product product = productService.getProduct(taskRequest.productId()).orElseThrow(EntityNotFoundException::new);
+        Product product = productService.getProduct(taskRequest.productId()).orElse(null);
         taskService.createTask(workspace, product, taskRequest);
         return ResponseEntity.ok("Task has been created");
     }
@@ -86,11 +84,9 @@ public class TaskController {
     }
     @PatchMapping("/update-task")
     private ResponseEntity<String> updateTask(@RequestBody TaskRequest taskRequest) {
-        if (taskRequest.name().equalsIgnoreCase("") || taskRequest.name().equalsIgnoreCase(" ")) {
+        if (taskRequest.name().strip().equalsIgnoreCase("")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter task name");
-        } else if (taskRequest.productId() == 0) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter a product name");
-        } else if (LocalDate.parse(taskRequest.endDate()).isBefore(LocalDate.now()) || taskRequest.endDate().equalsIgnoreCase("")) {
+        }  else if (LocalDate.parse(taskRequest.endDate()).isBefore(LocalDate.now()) || taskRequest.endDate().equalsIgnoreCase("")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter valid delivery date");
         }
         Product product = productService.getProduct(taskRequest.productId()).orElseThrow(EntityNotFoundException::new);

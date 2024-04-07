@@ -28,16 +28,16 @@ export default function CreateWorkspaceComponent() {
             </div>
             <div className='d-flex' style={{marginTop: "230px", marginLeft: "100px"}}>
                 <div className='text-start'>
-                    <h6>Manage members</h6>
-                    <h6>Manage Teams</h6>
-                    <h6>Manage Posts</h6>
                     <h6>Manage Tasks</h6>
+                    <h6>Manage Posts</h6>
+                    <h6>Manage Teams</h6>
+                    <h6>Manage members</h6>
                 </div>
                 <div className='text-start mx-5'>
+                    <h6>Manage Sales</h6>
                     <h6>Manage Products</h6>
-                    <h6>Manage Deliveries</h6>
-                    <h6>Monitor Company Revenue</h6>
                     <h6>Monitor Member Progress</h6>
+                    <h6>Monitor Company Revenue</h6>
                 </div>
             </div>
         </div>

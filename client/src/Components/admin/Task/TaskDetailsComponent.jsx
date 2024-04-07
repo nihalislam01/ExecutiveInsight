@@ -53,9 +53,17 @@ export default function TaskDetailsComponent(props) {
                         <h5>Task Assigned to</h5>
                         <hr />
                         <div className="btn btn-light form-control d-flex align-items-center border-0 shadow" onClick={goToProfile}>
-                            {props.task.user.image===null && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
-                            {props.task.user.image!==null && <Image src={props.task.user.image} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
-                            <p className="m-0">{props.task.user.name}</p>
+                            <div className="d-flex" style={{width: "200px"}}>
+                                {props.task.user.image===null && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
+                                {props.task.user.image!==null && <Image src={props.task.user.image} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
+                                <p className="m-0">{props.task.user.name}</p>
+                            </div>
+                            <div style={{width: "300px"}}>
+                                <div style={{ width: '100%', height: '5px', backgroundColor: '#ced4da', position: 'relative', borderRadius: "5px" }}>
+                                    <div style={{ width: `${(100*props.task.user.badge.points)/props.task.user.badge.pointLimit}%`, height: '100%', backgroundColor: '#8da9c4', transition: 'width 0.5s ease-in-out', borderRadius: "5px" }} ></div>
+                                </div>
+                            </div>
+                            <div className='mx-4'><p className='m-0'>level {props.task.user.badge.badgeLevel}</p></div>
                         </div>
                         </div>
                     }

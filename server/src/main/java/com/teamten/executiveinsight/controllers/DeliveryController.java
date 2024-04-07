@@ -1,18 +1,16 @@
 package com.teamten.executiveinsight.controllers;
 
-import com.teamten.executiveinsight.model.entity.Delivery;
-import com.teamten.executiveinsight.model.entity.Task;
-import com.teamten.executiveinsight.model.entity.Workspace;
+import com.teamten.executiveinsight.model.entity.*;
 import com.teamten.executiveinsight.model.request.DeliveryRequest;
-import com.teamten.executiveinsight.services.DeliveryService;
-import com.teamten.executiveinsight.services.TaskService;
-import com.teamten.executiveinsight.services.WorkspaceService;
+import com.teamten.executiveinsight.services.*;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,6 +18,8 @@ public class DeliveryController {
     private final TaskService taskService;
     private final DeliveryService deliveryService;
     private final WorkspaceService workspaceService;
+    private final BadgeService badgeService;
+    private final UserJoinTeamService userJoinTeamService;
     @PostMapping("/create-delivery")
     public ResponseEntity<String> addDelivery(@RequestBody DeliveryRequest deliveryRequest) {
         Task task = taskService.getTask(deliveryRequest.taskId()).orElseThrow(EntityNotFoundException::new);
@@ -45,6 +45,13 @@ public class DeliveryController {
         Task task = delivery.getTask();
         delivery.setSubmitted(true);
         task.setStatus("Delivered");
+        if (task.getUser()!=null) {
+            badgeService.increaseUserPoint(task.getUser().getBadge());
+        } else if (task.getTeam()!=null) {
+            List<Users> users = userJoinTeamService.getAllUser(task.getTeam().getTeamId());
+            List<Badge> badges = users.stream().map(Users::getBadge).toList();
+            badgeService.increaseAllUserPoint(badges);
+        }
         taskService.updateTask(task);
         deliveryService.updateDelivery(delivery);
         return ResponseEntity.ok("Delivery Updated Successfully");

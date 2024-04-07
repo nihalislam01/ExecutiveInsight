@@ -11,7 +11,7 @@ export default function AddTaskComponent(props) {
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [quantity, setQuantity] = useState('1');
+    const [quantity, setQuantity] = useState(0);
     const [hasProducts, setHasProducts] = useState(false);
     const [products, setProducts] = useState([{}]);
     const [productId, setProductId] = useState(0);
@@ -29,9 +29,6 @@ export default function AddTaskComponent(props) {
                 .then((response) => {
                     setHasProducts(response.data.length > 0)
                     setProducts(response.data)
-                    if (response.data.length > 0) {
-                        setProductId(response.data[0].productId)
-                    }
                 })
                 .catch((error) => {
                     console.log("Error fetching products: " + error)
@@ -73,16 +70,12 @@ export default function AddTaskComponent(props) {
     }
 
     const handlePlus = () => {
-        let n = parseInt(quantity);
-        n += 1;
-        setQuantity(n.toString());
+        setQuantity(quantity + 1);
     }
 
     const handleMinus = () => {
-        let n = parseInt(quantity);
-        if (n>1) {
-            n -= 1;
-            setQuantity(n.toString());
+        if (quantity >= 1) {
+            setQuantity(quantity - 1);
         }
     }
 
@@ -131,6 +124,7 @@ export default function AddTaskComponent(props) {
                                     <div className="w-100">
                                     <label className="col-form-label m-0">Select Product</label>
                                     <select className="form-select" onChange={handleProduct}>
+                                        <option value={0}>None</option>
                                         { hasProducts &&
                                             products.map(
                                                 product => (

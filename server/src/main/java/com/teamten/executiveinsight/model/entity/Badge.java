@@ -12,13 +12,16 @@ public class Badge {
     private Long badgeId;
     private Long points;
     private Long pointLimit;
+    private Long badgeLevel;
 
     @JsonIgnore
     @OneToOne
+    @JoinColumn(name = "user_id")
     private Users user;
 
     public Badge() {
         this.points = 0L;
-        this.pointLimit = 0L;
+        this.pointLimit = 3L;
+        this.badgeLevel = 1L;
     }
 }
