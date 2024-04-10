@@ -26,16 +26,17 @@ public class Users {
     private String location;
     private boolean isEnable;
 
-    @Column(columnDefinition = "TEXT")
-    private String image;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] image;
 
     @OneToOne
     @JoinColumn(name = "badge_id")
     private Badge badge;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Task> tasks;
+    @OneToOne
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
 
     @OneToOne
     @JoinColumn(name = "workspace_id")
@@ -45,14 +46,18 @@ public class Users {
     @JoinColumn(name = "post_id")
     private Post post;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks = new ArrayList<>();
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Notification> notifications = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserJoinWorkspace> userJoinWorkspaces = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserJoinTeam> userJoinTeams = new ArrayList<>();
 }

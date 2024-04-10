@@ -11,12 +11,8 @@ import ProfileBadgeComponent from "./ProfileBadgeComponent";
 
 export default function ProfileViewComponent() {
 
-    const [name, setName] = useState('');
-    const [bio, setBio] = useState('');
-    const [location, setLocation] = useState('');
-    const [image, setImage] = useState('');
-    const [email, setEmail] = useState('');
-    const [points, setPoints] = useState(0);
+    const [user, setUser] = useState([]);
+    const [badge, setBadge] = useState([]);
     const [workspaces, setWorkspaces] = useState([{}]);
     const [hasWorkspaces, setHasWorkspaces] = useState(false)
 
@@ -28,17 +24,8 @@ export default function ProfileViewComponent() {
         authContext.refresh()
         retrieveUserByIdApi(id)
             .then((response) => {
-                setName(response.data.name)
-                setEmail(response.data.email)
-                if (response.data.bio!==null) {
-                    setBio(response.data.bio);
-                }
-                if (response.data.location!==null) {
-                    setLocation(response.data.location);
-                }
-                if (response.data.image!==null) {
-                    setImage(response.data.image);
-                }
+                setUser(response.data)
+                setBadge(response.data.badge)
             })
             .catch((error) => navigate('/error'))
         retrieveWorkspacesByUserForViewApi(id)
@@ -51,14 +38,14 @@ export default function ProfileViewComponent() {
     }, [authContext, id, navigate])
 
     return (
-        <div className="container">
+        <div className="container mt-4">
             <Row>
                 <Col xs={3} className="text-start">
-                    <ProfilePhotoComponent image={image} userName={name} bio={bio} />
-                    <ProfileInfoComponent username={email} location={location} />
+                    <ProfilePhotoComponent user={user} />
+                    <ProfileInfoComponent user={user} />
                 </Col>
                 <Col xs={9}>
-                    <ProfileBadgeComponent points={points} />
+                    <ProfileBadgeComponent badge={badge} />
                     <hr />
                     {hasWorkspaces &&
                         <div>

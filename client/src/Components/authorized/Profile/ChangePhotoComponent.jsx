@@ -25,7 +25,14 @@ export default function ChangePhotoComponent() {
           aspectRatio: 1,
           crop(event) {
             const canvas = cropper.getCroppedCanvas();
-            setCroppedImage(canvas.toDataURL());
+            canvas.toBlob((blob) => {
+              if (!blob) {
+                console.error('Failed to convert canvas to blob');
+                return;
+              }
+              const file = new File([blob], 'cropped-image.png', { type: 'image/png' });
+              setCroppedImage(file);
+            });
           }
         });
       }
@@ -47,11 +54,9 @@ export default function ChangePhotoComponent() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const imageData = {
-        image: croppedImage,
-        email: username
-    }
-    uploadPhotoApi(imageData)
+    const formData = new FormData();
+    formData.append('file', croppedImage)
+    uploadPhotoApi(username, formData)
         .then((response) => navigate('/user-profile'))
         .catch((error) => navigate('/error'))
   };

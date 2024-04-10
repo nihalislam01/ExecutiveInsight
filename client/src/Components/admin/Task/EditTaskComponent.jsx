@@ -24,33 +24,40 @@ export default function EditTaskComponent(props) {
 
     useEffect(()=>{
         authContext.refresh()
-        retrieveTaskApi(props.taskId)
-            .then((response) => {
-                setName(response.data.name)
-                setDescription(response.data.description)
-                if (response.data.product!==null) {
-                    setProductId(response.data.product.productId)
-                }
-                setQuantity(response.data.quantity)
-                setMoney(response.data.money)
-                setStartDate(response.data.startDate)
-                setEndDate(response.data.endDate)
-            })
-            .catch((error) => {
-                console.log(error)
-                navigate('/error')})
-        retrieveProductsApi(props.workspaceId)
-            .then((response) => {
-                setHasProducts(response.data.length > 0)
-                setProducts(response.data)
-                if (response.data.length > 0 && productId===0) {
-                    setProductId(response.data[0].productId)
-                }
-            })
-            .catch((error) => {
-                console.log(error)
-                navigate('/error')})
-    },[authContext, props, navigate, productId])
+        const getTask = async () => {
+            await retrieveTaskApi(props.taskId)
+                .then((response) => {
+                    setName(response.data.name)
+                    setDescription(response.data.description)
+                    if (response.data.product!==null) {
+                        setProductId(response.data.product.productId)
+                    }
+                    setQuantity(response.data.quantity)
+                    setMoney(response.data.money)
+                    setStartDate(response.data.startDate)
+                    setEndDate(response.data.endDate)
+                })
+                .catch((error) => {
+                    console.log("Error fetching task: " + error)
+                    navigate('/error')})
+        }
+
+        getTask()
+
+        const getProducts = async () => {
+            await retrieveProductsApi(props.workspaceId)
+                .then((response) => {
+                    setHasProducts(response.data.length > 0)
+                    setProducts(response.data)
+                })
+                .catch((error) => {
+                    console.log("Error fetching products: " + error)
+                    navigate('/error')})
+        }
+
+        getProducts()
+
+    },[authContext, props, navigate])
 
     const handleNameChange = (event) => {
         setName(event.target.value)
@@ -62,6 +69,7 @@ export default function EditTaskComponent(props) {
 
     const handleProductChange = (event) => {
         setProductId(event.target.value)
+        console.log(event.target.value)
     }
 
     const handlePlus = () => {
@@ -94,7 +102,7 @@ export default function EditTaskComponent(props) {
         setEndDate(event.target.value)
     }
 
-    const saveChanges = () => {
+    const saveChanges = async () => {
         const theTask = {
             productId: productId,
             taskId: props.taskId,
@@ -105,8 +113,11 @@ export default function EditTaskComponent(props) {
             quantity: quantity,
             value: money
         }
-        editTaskApi(theTask)
-            .then((response) => props.setNotEdit())
+        await editTaskApi(theTask)
+            .then((response) => {
+                props.setNotEdit()
+                toast.success("Task updated")
+            })
             .catch((error) => toast.error(error.response.data))
     }
 
@@ -114,8 +125,7 @@ export default function EditTaskComponent(props) {
         <div>
             <Toaster />
             <div className="row">
-                <div className="col-md-2"></div>
-                <div className="col-md-5 text-start" style={{marginLeft: "20px"}}>
+                <div className="col-md-6 text-start">
                     <label className="m-0">Task Name</label>
                     <div className="d-flex align-items-center">
                         <input type="text" className="form-control" value={name} onChange={handleNameChange} />
@@ -127,6 +137,7 @@ export default function EditTaskComponent(props) {
                         <div className="w-100">
                             <label className="m-0">Select Product</label>
                             <select className="form-select" onChange={handleProductChange}>
+                                <option value={0}>None</option>
                                 { hasProducts &&
                                     products.map(
                                         product => (
@@ -145,7 +156,7 @@ export default function EditTaskComponent(props) {
                     <label className="m-0">Value</label>
                     <input type="text" className="form-control" value={money} onChange={handleMoneyChange} />
                 </div>
-                <div style={{marginLeft: "60px"}} className="col-md-4 text-start">
+                <div className="col-md-6">
                     <label className="m-0">Set Dates</label>
                     <div className="d-flex">
                         <input type="date" className="form-control" value={startDate} onChange={handleStartDateChange} />

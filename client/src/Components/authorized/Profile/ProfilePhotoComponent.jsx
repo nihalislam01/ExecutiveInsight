@@ -2,14 +2,14 @@ import { Image } from "react-bootstrap";
 
 import profileImage from "../../../assets/executive-insight-blank-user.png";
 
-export default function ProfilePhotoComponent(props) {
+export default function ProfilePhotoComponent({user}) {
     return (
         <div>
-            {props.image==='' && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '250px', height: '250px' }} className="mb-4"  />}
-            {props.image!=='' && <Image src={props.image} alt="Profile" roundedCircle style={{ width: '250px', height: '250px' }} className="mb-4"  />}
-            <h2 className="mb-2">{props.userName}</h2>
-            {props.bio!=='' &&
-                <p>{props.bio}</p>
+            {user.image===null && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '250px', height: '250px' }} className="mb-4"  />}
+            {user.image!==null && <Image src={`data:image/png;base64,${user.image}`} alt="Profile" roundedCircle style={{ width: '250px', height: '250px' }} className="mb-4"  />}
+            <h2 className="mb-2">{user.name}</h2>
+            {user.bio!==null &&
+                <p>{user.bio}</p>
             }
         </div>
     )

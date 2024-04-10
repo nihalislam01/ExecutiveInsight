@@ -20,17 +20,16 @@ public class TaskController {
     private final TeamService teamService;
     private final ProductService productService;
     private final WorkspaceService workspaceService;
+    private final NotificationService notificationService;
     @PostMapping("create-task")
     private ResponseEntity<String> addTask(@RequestBody TaskRequest taskRequest) {
-        if (taskRequest.name().equalsIgnoreCase("") || taskRequest.name().equalsIgnoreCase(" ")) {
+        if (taskRequest.name().strip().equalsIgnoreCase("")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter task name");
-        } else if (taskRequest.productId()==0) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter a product name");
         } else if (LocalDate.parse(taskRequest.endDate()).isBefore(LocalDate.now()) || taskRequest.endDate().equalsIgnoreCase("")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter valid delivery date");
         }
         Workspace workspace = workspaceService.getWorkspace(taskRequest.workspaceId()).orElseThrow(EntityNotFoundException::new);
-        Product product = productService.getProduct(taskRequest.productId()).orElseThrow(EntityNotFoundException::new);
+        Product product = productService.getProduct(taskRequest.productId()).orElse(null);
         taskService.createTask(workspace, product, taskRequest);
         return ResponseEntity.ok("Task has been created");
     }
@@ -44,9 +43,13 @@ public class TaskController {
         Task task = taskService.getTask(id).orElseThrow(EntityNotFoundException::new);
         return ResponseEntity.ok(task);
     }
-    @GetMapping("/get-tasks-by-user/{id}")
-    private ResponseEntity<?> getAllTaskByUserId(@PathVariable Long id) {
-        List<Task> tasks = taskService.getAllTaskByUserId(id);
+    @GetMapping("/get-task-by-user/{id}")
+    private ResponseEntity<?> getMyTasks(@PathVariable Long id) {
+        return ResponseEntity.ok(taskService.getAllTaskByUserId(id));
+    }
+    @GetMapping("/get-task-by-user-workspace/{email}/{id}")
+    private ResponseEntity<?> getAllTaskByUserAndWorkspace(@PathVariable String email, @PathVariable Long id) {
+        List<Task> tasks = taskService.getAllTaskByUserAndWorkspace(email, id);
         return ResponseEntity.ok(tasks);
     }
     @GetMapping("/get-tasks-by-team/{id}")
@@ -54,16 +57,17 @@ public class TaskController {
         List<Task> tasks = taskService.getAllTaskByTeamId(id);
         return ResponseEntity.ok(tasks);
     }
-    @GetMapping("/get-total-revenue/{id}")
-    private ResponseEntity<?> getTotalRevenue(@PathVariable Long id) {
-        int totalRevenue = taskService.getTotalRevenue(id);
-        return ResponseEntity.ok(totalRevenue);
+    @GetMapping("/get-workspaceId/{taskId}")
+    private ResponseEntity<Long> getWorkspaceId(@PathVariable Long taskId) {
+        Long workspaceId = taskService.getWorkspaceId(taskId);
+        return ResponseEntity.ok(workspaceId);
     }
-
     @PutMapping("/assign-task-to-user/{userId}/{taskId}")
     private ResponseEntity<String> assignTaskToUser(@PathVariable Long userId, @PathVariable Long taskId) {
         Users user = userService.getUser(userId).orElseThrow(EntityNotFoundException::new);
         if(taskService.updateTask(user, taskId)) {
+            Task task = taskService.getTask(taskId).orElseThrow(EntityNotFoundException::new);
+            notificationService.sendNotification(user, "A new task " + task.getName() + " has been assigned to you");
             return ResponseEntity.ok("User assigned successful");
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Task already has been assigned");
@@ -78,14 +82,12 @@ public class TaskController {
     }
     @PatchMapping("/update-task")
     private ResponseEntity<String> updateTask(@RequestBody TaskRequest taskRequest) {
-        if (taskRequest.name().equalsIgnoreCase("") || taskRequest.name().equalsIgnoreCase(" ")) {
+        if (taskRequest.name().strip().equalsIgnoreCase("")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter task name");
-        } else if (taskRequest.productId() == 0) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter a product name");
-        } else if (LocalDate.parse(taskRequest.endDate()).isBefore(LocalDate.now()) || taskRequest.endDate().equalsIgnoreCase("")) {
+        }  else if (LocalDate.parse(taskRequest.endDate()).isBefore(LocalDate.now()) || taskRequest.endDate().equalsIgnoreCase("")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Please enter valid delivery date");
         }
-        Product product = productService.getProduct(taskRequest.productId()).orElseThrow(EntityNotFoundException::new);
+        Product product = productService.getProduct(taskRequest.productId()).orElse(null);
         taskService.updateTask(taskRequest, product);
         return ResponseEntity.ok("task updated successfully");
     }

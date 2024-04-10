@@ -1,0 +1,21 @@
+.plan {
+    width: 250px;
+    padding: 10px;
+    border: solid 1px rgb(206, 206, 206);
+}
+
+.plan-value {
+    padding-top: 24px;
+    font-size: 12px;
+}
+
+.info {
+    height: 150px;
+}
+
+.pay {
+    width: 1000px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(182, 203, 237);
+}

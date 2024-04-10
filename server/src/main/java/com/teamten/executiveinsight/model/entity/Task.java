@@ -18,7 +18,7 @@ public class Task {
     private String name;
     private String description;
     private String status;
-    private String quantity;
+    private int quantity;
     private int money;
     private LocalDate startDate;
     private LocalDate endDate;

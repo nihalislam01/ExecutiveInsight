@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { toast, Toaster } from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { resetPasswordApi } from '../../api/ExecutiveInsightApiService';
@@ -22,7 +23,7 @@ export default function ResetPasswordComponent() {
         }
     }, [location.state, navigate])
 
-    function handleSubmit() {
+    const handleSubmit = async () => {
         if (password===matchPassword) {
             const user = {
                 name: '',
@@ -31,20 +32,15 @@ export default function ResetPasswordComponent() {
                 bio: '',
                 location: ''
             }
-            resetPasswordApi(user)
-                .then((response) => handleResponse(response))
-                .catch((error) => navigate("/error"))
+            await resetPasswordApi(user)
+                .then((response) => toast.success("Password reset successful"))
+                .catch((error) => toast.success("Error resetting password"))
         } else {
             setAlertColor('alert alert-danger');
         }
     }
 
-    function handleResponse(response) {
-        var newMessage = "Password Reset Successful";
-        navigate("/message", { state: { newMessage } });
-    }
-
-    function handlePasswordChange(event) {
+    const handlePasswordChange = (event) => {
         setPassword(event.target.value);
         if (event.target.value!==matchPassword) {
             setAlertColor('alert alert-warning');
@@ -55,7 +51,7 @@ export default function ResetPasswordComponent() {
         }
     }
 
-    function handleMatchPasswordChange(event) {
+    const handleMatchPasswordChange = (event) => {
         setAlert(true);
         setMatchPassword(event.target.value)
         if (event.target.value!==password) {
@@ -68,23 +64,22 @@ export default function ResetPasswordComponent() {
     }
 
     return (
-        <div className="FormComponent">
-            <div className='row justify-content-center'>
-                <div className='col-md-6'>
+        <div className="background-01">
+            <Toaster />
+            <div className='d-flex justify-content-center mt-5'>
+                <div style={{ width: "600px" }}>
                     {showAlert && <div className={alertColor}>{message}</div>}
                     <div className="card">
                         <div className="card-header">Reset Password</div>
                         <div className="card-body">
                             <div>
                                 <div className="mb-3">
-                                    <label className="form-label">Password</label>
-                                    <input type="password" className="form-control" name="password" value={password} onChange={handlePasswordChange} required />
+                                    <input type="password" className="form-control" name="password" placeholder='Password' value={password} onChange={handlePasswordChange} required />
                                 </div>
                                 <div className="mb-3">
-                                    <label className="form-label">Enter Password Again</label>
-                                    <input type="password" className="form-control" name="matchPassword" value={matchPassword} onChange={handleMatchPasswordChange} required />
+                                    <input type="password" className="form-control" name="matchPassword" placeholder='Enter Password Again' value={matchPassword} onChange={handleMatchPasswordChange} required />
                                 </div>
-                                <button type="button" className="btn btn-success form-control" onClick={handleSubmit}>Reset Password</button>
+                                <button type="button" className="button-02" onClick={handleSubmit}>Reset Password</button>
                             </div>
                         </div>
                     </div>

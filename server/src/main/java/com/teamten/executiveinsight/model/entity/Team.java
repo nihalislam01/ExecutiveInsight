@@ -18,16 +18,16 @@ public class Team {
     private String name;
 
     @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "workspace_id")
+    private Workspace workspace;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;
 
     @JsonIgnore
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserJoinTeam> userJoinTeams = new ArrayList<>();
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "workspace_id")
-    private Workspace workspace;
 }
 

@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
 import { addCustomPostApi } from "../../../api/ExecutiveInsightApiService";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function PostFormComponent(props) {
 
-    const [showAlert, setShowAlert] = useState(false);
-    const [alertColor, setAlertColor] = useState('success');
-    const [message, setMessage] = useState('');
     const [postTitle, setPostTitle] = useState('');
     
     const formRef = useRef(null);
@@ -29,44 +27,49 @@ export default function PostFormComponent(props) {
 
     const setNotShow = () => {
         props.setShow(false);
-        setShowAlert(false);
     }
 
-    const addPost = () => {
-        const post = {
-            workspaceId: props.id,
-            title: postTitle
+    const addPost = async () => {
+        if (postTitle.trim() === '') {
+            toast("Please add a post title")
+        } else {
+            const post = {
+                workspaceId: props.id,
+                title: postTitle
+            }
+            await addCustomPostApi(post)
+                .then((response) => {
+                    setNotShow();
+                    toast.success("Post successfully added");
+                })
+                .catch((error) => {
+                    console.log("Error creating post: " + error)
+                    toast.error(error.response.data)
+                })
         }
-        addCustomPostApi(post)
-            .then((response) => {
-                window.location.href = `/posts/${props.id}`;
-            })
-            .catch((error) => {
-                setAlertColor('danger');
-                setMessage(error.response.data);
-                setShowAlert(true)
-            })
     }
 
     return (
-        <div className='row justify-content-center position-relative' ref={formRef}>
-            <div className='col-md-6 position-fixed z-1'>
-                {showAlert && <div className={`alert alert-${alertColor} shadow`}>{message}</div>}
-                <div className="card shadow">
-                    <div className="card-header text-center p-3">
-                        <h5>Add custom post into your workspace</h5>
-                    </div>
-                    <div className="card-body text-start">
-                        <form>
-                            <div className="form-group">
-                                <label className="col-form-label m-0">Post Title</label>
-                                <input type="text" className="form-control" value={postTitle} onChange={handleTitleChange} />
+        <div>
+            <Toaster />
+            <div className='d-flex justify-content-center position-fixed z-1' style={{top: "50%", left: "50%", transform: "translate(-50%, -50%)"}} ref={formRef}>
+                <div style={{width: "600px"}}>
+                    <div className="card shadow">
+                        <div className="card-header text-center p-3">
+                            <h5>Add custom post into your workspace</h5>
+                        </div>
+                        <div className="card-body text-start">
+                            <form>
+                                <div className="form-group">
+                                    <label className="col-form-label m-0">Post Title</label>
+                                    <input type="text" className="form-control" value={postTitle} onChange={handleTitleChange} />
+                                </div>
+                            </form>
+                            <hr />
+                            <div className="text-end">
+                                <button type="button" className="button-06 mx-2" onClick={setNotShow}>Close</button>
+                                <button type="button" className="button-08 px-3" onClick={addPost}>Add</button>
                             </div>
-                        </form>
-                        <hr />
-                        <div className="text-end">
-                            <button type="button" className="btn btn-secondary mx-2" onClick={setNotShow}>Close</button>
-                            <button type="button" className="btn btn-primary" onClick={addPost}>Add</button>
                         </div>
                     </div>
                 </div>

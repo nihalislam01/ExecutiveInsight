@@ -10,7 +10,11 @@ export const retrieveUserByIdApi = (id) => apiClient.get(`/get-user-by-id/${id}`
 export const forgotPasswordApi = (email) => apiClient.post("/forgot-password", email);
 export const resetPasswordApi = (user) => apiClient.patch("/reset-password", user);
 export const updateProfileInfoApi = (user) => apiClient.patch("/update-profile", user);
-export const uploadPhotoApi = (imageData) => apiClient.patch("/upload-photo", imageData);
+export const uploadPhotoApi = (email, image) => apiClient.patch(`/upload-photo/${email}`, image, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
 export const changePasswordApi = (password) => apiClient.patch("/change-password", password);
 export const retrieveWorkspacesByUserForViewApi = (id) => apiClient.get(`/get-workspaces-for-view/${id}`);
 
@@ -21,6 +25,7 @@ export const joinWorkspaceApi = (code, email) => apiClient.post(`/join-workspace
 export const retrieveWorkspaceByIdApi = (id) => apiClient.get(`/get-workspace/${id}`);
 export const retrieveWorkspacesByUserApi = (email) => apiClient.get(`/get-workspaces/${email}`);
 export const retrieveUsersByWorkspaceIdApi = (id) => apiClient.get(`/get-users/${id}`);
+export const cancelPremiumApi = (email) => apiClient.delete(`/subscription/${email}`);
 
 //Notification API
 export const retrieveNotificationByUserApi = (email) => apiClient(`/get-notifications/${email}`);
@@ -39,6 +44,8 @@ export const createTeamApi = (team) => apiClient.post("/create-team", team);
 export const assignUserToTeamApi = (email, teamId) => apiClient.patch(`/join-team/${email}/${teamId}`);
 export const retrieveTeamUserApi = (id) => apiClient.get(`/get-team-users/${id}`);
 export const removeUserFromTeamApi = (email, teamId) => apiClient.delete(`/remove-team-user/${email}/${teamId}`)
+export const removeTeamApi = (teamId, workspaceId) => apiClient.delete(`/delete-team/${teamId}/${workspaceId}`)
+export const retrieveTeamsByWorkspaceAndUserApi = (id, email) => apiClient.get(`/get-team-by-workspace-user/${id}/${email}`);
 
 //Product API
 export const retrieveProductsApi = (id) => apiClient.get(`/get-products/${id}`);
@@ -49,8 +56,22 @@ export const deleteProductApi = (id) => apiClient.delete(`/delete-product/${id}`
 //Task API
 export const retrieveTasksApi = (id) => apiClient.get(`/get-tasks/${id}`);
 export const retrieveTaskByTeamApi = (id) => apiClient.get(`/get-tasks-by-team/${id}`);
+export const retrieveTaskByUserApi = (id) => apiClient.get(`/get-task-by-user/${id}`);
+export const retrieveTaskByUserAndWorkspaceApi = (email, id) => apiClient.get(`/get-task-by-user-workspace/${email}/${id}`);
 export const retrieveTaskApi = (id) => apiClient.get(`get-task/${id}`);
 export const createTaskApi = (task) => apiClient.post("/create-task", task);
 export const editTaskApi = (task) => apiClient.patch("/update-task", task);
 export const assignTaskToMemberApi = (userId, taskId) => apiClient.put(`/assign-task-to-user/${userId}/${taskId}`);
 export const assignTaskToTeamApi = (teamId, taskId) => apiClient.put(`/assign-task-to-team/${teamId}/${taskId}`);
+export const retrieveWorkspaceIdApi = (taskId) => apiClient.get(`/get-workspaceId/${taskId}`);
+
+//Delivery API
+export const createDeliveryApi = (delivery) => apiClient.post("/create-delivery", delivery);
+export const retrieveDeliveriesApi = (id) => apiClient.get(`/get-deliveries/${id}`);
+export const retrieveDeliveryApi = (id) => apiClient.get(`/get-delivery/${id}`);
+export const acceptDeliveryApi = (id) => apiClient.patch(`/accept-delivery/${id}`);
+export const rejectDeliveryApi = (id) => apiClient.patch(`/reject-delivery/${id}`);
+
+//Dashboard API
+export const retrieveDashboardDetailsApi = (id) => apiClient.get(`/get-dashboard-details/${id}`);
+export const retrieveDistinctDashboardDetailsApi = (id) => apiClient.get(`/get-distinct-dashboard-details/${id}`);

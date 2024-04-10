@@ -23,7 +23,7 @@ export default function TeamTaskDetailsComponent(props) {
             .catch((error)=>navigate('/error'))
     },[authContext, props.id, navigate])
     return (
-        <div className="container">
+        <div className="p-4">
             <h5 className="text-start">{task.name}</h5>
             <hr />
             <div className="row">

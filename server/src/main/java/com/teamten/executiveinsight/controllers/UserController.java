@@ -4,7 +4,6 @@ import com.teamten.executiveinsight.events.email.EmailCompleteEvent;
 import com.teamten.executiveinsight.events.email.EmailRequest;
 import com.teamten.executiveinsight.model.entity.UserJoinWorkspace;
 import com.teamten.executiveinsight.model.entity.Users;
-import com.teamten.executiveinsight.model.request.ImageDataRequest;
 import com.teamten.executiveinsight.model.request.PasswordRequest;
 import com.teamten.executiveinsight.model.request.UserRequest;
 import com.teamten.executiveinsight.services.NotificationService;
@@ -17,7 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,10 +92,10 @@ public class UserController {
         notificationService.sendNotification(user, "You have just updated your profile");
         return ResponseEntity.ok("User profile updated");
     }
-    @PatchMapping("/upload-photo")
-    public ResponseEntity<String> uploadPhoto(@RequestBody ImageDataRequest imageDataRequest) {
-        Users user = userService.getUser(imageDataRequest.email()).orElseThrow(EntityNotFoundException::new);
-        user.setImage(imageDataRequest.image());
+    @PatchMapping("/upload-photo/{email}")
+    public ResponseEntity<String> uploadPhoto(@PathVariable String email, @RequestParam("file") MultipartFile file) throws IOException {
+        Users user = userService.getUser(email).orElseThrow(EntityNotFoundException::new);
+        user.setImage(file.getBytes());
         userService.updateUser(user);
         return ResponseEntity.ok("Your profile photo has been uploaded successfully");
     }

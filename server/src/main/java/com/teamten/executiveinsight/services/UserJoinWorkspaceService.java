@@ -46,4 +46,9 @@ public class UserJoinWorkspaceService {
     public List<UserJoinWorkspace> getAllUserJoinWorkspaceByUser(Long id) {
         return userJoinWorkspaceRepository.findAllByUser_userId(id);
     }
+
+    public Long getTotalUser(Long id) {
+        Optional<Long> totalUsers =  userJoinWorkspaceRepository.findTotalUser(id);
+        return totalUsers.orElse(0L);
+    }
 }

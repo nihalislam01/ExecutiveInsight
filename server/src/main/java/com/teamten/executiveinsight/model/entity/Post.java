@@ -23,7 +23,7 @@ public class Post {
     private BusinessTitle businessTitle;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserJoinWorkspace> userJoinWorkspaces = new ArrayList<>();
 
     @JsonIgnore

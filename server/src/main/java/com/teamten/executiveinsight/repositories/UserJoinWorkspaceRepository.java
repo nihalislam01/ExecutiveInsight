@@ -19,4 +19,6 @@ public interface UserJoinWorkspaceRepository extends JpaRepository<UserJoinWorks
     List<Users> findAllUserByWorkspaceIdAndPostId(Long workspaceId, Long postId);
     @Query("SELECT u.workspace FROM UserJoinWorkspace u WHERE u.user.email = :email")
     List<Workspace> findAllWorkspaceByUserEmail(@Param("email") String email);
+    @Query("SELECT COUNT(*) FROM UserJoinWorkspace u WHERE u.workspace.workspaceId = :id")
+    Optional<Long> findTotalUser(Long id);
 }

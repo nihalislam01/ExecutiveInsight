@@ -14,11 +14,8 @@ export default function UserProfileComponent() {
 
     const [workspaces, setWorkspaces] = useState([{}]);
     const [hasWorkspaces, setHasWorkspaces] = useState(false)
-    const [userName, setUserName] = useState('');
-    const [bio, setBio] = useState('');
-    const [points, setPoints] = useState(0);
-    const [image, setImage] = useState('');
-    const [location, setLocation] = useState('');
+    const [badge, setBadge] = useState([]);
+    const [user, setUser] = useState('');
 
     const navigate = useNavigate();
     const authContext = useAuth();
@@ -26,39 +23,36 @@ export default function UserProfileComponent() {
 
     useEffect(() => {
         authContext.refresh()
-        retrieveUserApi(username)
-            .then((response) => {
-                setUserName(response.data.name)
-                if (response.data.bio!==null) {
-                    setBio(response.data.bio);
-                }
-                if (response.data.location!==null) {
-                    setLocation(response.data.location);
-                }
-                if (response.data.image!==null) {
-                    setImage(response.data.image);
-                }
-            })
-            .catch((error) => navigate('/error'));
+        const getInfo = async () => {
+            await retrieveUserApi(username)
+                .then((response) => {
+                    setUser(response.data)
+                    setBadge(response.data.badge)
+                })
+                .catch((error) => navigate('/error'));
 
-        retrieveWorkspacesByUserApi(username)
-            .then((response) => {
-                setWorkspaces(response.data)
-                setHasWorkspaces(response.data.length > 0)
-            })
-            .catch((error) => navigate('/error'))
+            await retrieveWorkspacesByUserApi(username)
+                .then((response) => {
+                    setWorkspaces(response.data)
+                    setHasWorkspaces(response.data.length > 0)
+                })
+                .catch((error) => navigate('/error'))
+        }
+
+        getInfo();
+        
     }, [authContext, navigate, username])
 
     return (
-        <div className="container">
+        <div className="container mt-4">
             <Row>
                 <Col xs={3} className="text-start">
-                    <ProfilePhotoComponent image={image} userName={userName} bio={bio} />
+                    <ProfilePhotoComponent user={user} />
                     <Link className="btn btn-outline-secondary form-control mb-4 mt-2" to={'/user-profile/edit'}>Edit Profile</Link>
-                    <ProfileInfoComponent username={username} location={location} />
+                    <ProfileInfoComponent user={user} />
                 </Col>
                 <Col xs={9}>
-                    <ProfileBadgeComponent points={points} />
+                    <ProfileBadgeComponent badge={badge} />
                     <hr />
                     <h5 className="text-start my-4">Workspaces I have joined</h5>
                     <div className="row g-3">

@@ -2,6 +2,7 @@ package com.teamten.executiveinsight.services;
 
 import com.teamten.executiveinsight.model.entity.*;
 import com.teamten.executiveinsight.model.request.TaskRequest;
+import com.teamten.executiveinsight.model.response.DistinctDashboardResponse;
 import com.teamten.executiveinsight.repositories.TaskRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -40,9 +41,9 @@ public class TaskService {
     public List<Task> getAllTaskByTeamId(Long id) { return taskRepository.findAllByTeam_teamId(id); }
     public List<Task> getAllTaskByProductId(Long id) { return taskRepository.findAllByProduct_productId(id); }
     public Optional<Task> getTask(Long id) { return taskRepository.findById(id); }
-    public int getTotalRevenue(Long id) {
-        Optional<Integer> totalRevenue =  taskRepository.findTotalRevenue(id, "Delivered");
-        return totalRevenue.orElse(0);
+    public Long getTotalRevenue(Long id) {
+        Optional<Long> totalRevenue =  taskRepository.findTotalRevenue(id, "Delivered");
+        return totalRevenue.orElse(0L);
     }
     public boolean updateTask(Users user, Long taskId) {
         Task task = this.getTask(taskId).orElseThrow(EntityNotFoundException::new);
@@ -86,5 +87,22 @@ public class TaskService {
             task.setProduct(null);
         }
         taskRepository.saveAll(tasks);
+    }
+    public List<Task> getAllTaskByUserAndWorkspace(String email, Long id) {
+        return taskRepository.findAllByUser_emailAndWorkspace_workspaceId(email, id);
+    }
+    public void updateTask(Task task) {
+        taskRepository.save(task);
+    }
+    public Long getWorkspaceId(Long taskId) {
+        return taskRepository.findById(taskId).orElseThrow(EntityNotFoundException::new).getWorkspace().getWorkspaceId();
+    }
+
+    public Long getTotalQuantity(Long workspaceId) {
+        Optional<Long> totalQuantity = taskRepository.findTotalQuantity(workspaceId, "Delivered");
+        return totalQuantity.orElse(0L);
+    }
+    public List<DistinctDashboardResponse> getDistinctValues(Long id) {
+        return taskRepository.findTotalDistinctRevenueAndQuantity(id, "Delivered");
     }
 }

@@ -4,6 +4,7 @@ import com.teamten.executiveinsight.model.entity.BusinessTitle;
 import com.teamten.executiveinsight.model.entity.Users;
 import com.teamten.executiveinsight.model.entity.Workspace;
 import com.teamten.executiveinsight.model.request.WorkspaceRequest;
+import com.teamten.executiveinsight.model.response.DashboardResponse;
 import com.teamten.executiveinsight.services.*;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
@@ -21,6 +22,7 @@ public class WorkspaceController {
     //Service
     private final UserService userService;
     private final WorkspaceService workspaceService;
+    private final TaskService taskService;
     private final NotificationService notificationService;
     private final BusinessTitleService businessTitleService;
     private final UserJoinWorkspaceService userJoinWorkspaceService;
@@ -61,5 +63,16 @@ public class WorkspaceController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Something went wrong");
         }
+    }
+    @GetMapping("/get-dashboard-details/{workspaceId}")
+    public ResponseEntity<DashboardResponse> getDashboardDetails(@PathVariable Long workspaceId) {
+        Long totalUser = userJoinWorkspaceService.getTotalUser(workspaceId);
+        Long totalValue = taskService.getTotalRevenue(workspaceId);
+        Long totalQuantity = taskService.getTotalQuantity(workspaceId);
+        return ResponseEntity.ok(new DashboardResponse(totalUser, totalValue, totalQuantity));
+    }
+    @GetMapping("/get-distinct-dashboard-details/{workspaceId}")
+    public ResponseEntity<?> getDistinctValues(@PathVariable Long workspaceId) {
+        return ResponseEntity.ok(taskService.getDistinctValues(workspaceId));
     }
 }

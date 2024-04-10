@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import toast, {Toaster} from 'react-hot-toast';
 
 import { userSignupApi } from '../../api/ExecutiveInsightApiService';
 
@@ -12,18 +12,17 @@ export default function SignupComponent() {
     const [message, setMessage] = useState('');
     const [alertColor, setAlertColor] = useState('');
     const [showError, setError] = useState(false);
-    const navigate = useNavigate();  
 
 
-    function handleNameChange(event) {
+    const handleNameChange = (event) => {
         setName(event.target.value);
     }
 
-    function handleUsernameChange(event) {
+    const handleUsernameChange = (event) => {
         setUsername(event.target.value);
     }
 
-    function handlePasswordChange(event) {
+    const handlePasswordChange = (event) => {
         setPassword(event.target.value);
         if (event.target.value!==matchPassword) {
             setAlertColor('alert alert-warning');
@@ -34,7 +33,7 @@ export default function SignupComponent() {
         }
     }
 
-    function handleMatchPasswordChange(event) {
+    const handleMatchPasswordChange = (event) => {
         setError(true);
         setMatchPassword(event.target.value)
         if (event.target.value!==password) {
@@ -46,7 +45,7 @@ export default function SignupComponent() {
         }
     }
 
-    async function handleSubmit() {
+    const handleSubmit = () => {
         if (password===matchPassword) {
             const user = {
                 name: name,
@@ -55,59 +54,45 @@ export default function SignupComponent() {
                 bio: '',
                 location: ''
             }
-            await userSignupApi(user)
-                .then((response) => setStatus(response))
-                .catch((error) => setStatus(error))
+            toast.promise(
+                userSignupApi(user),
+                 {
+                   loading: 'Sending...',
+                   success: <b>Email Sent. Check to verify</b>,
+                   error: <b>Email already exists</b>,
+                 }
+            );
+            setError(false)
         } else {
-            setError(true);
-            setAlertColor('alert alert-danger');
-            setMessage('Password did not match');
-        }
-    }
-
-    function setStatus(response) {
-        if (response.status===200) {
-            var newMessage = "Register successful. Check your email to verify.";
-            navigate('/message', { state: { newMessage } });
-        } else if (response.response.status===409) {
-            setError(true);
-            setAlertColor('alert alert-warning');
-            setMessage('Email already exists');
-        } else {
-            setError(true);
-            setAlertColor('alert alert-warning');
-            setMessage('Something went wrong. Please try again.');
+            toast.error("Password did not match")
         }
     }
 
     return (
-        <div className="container mt-5 Login">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
+        <div className='background-01'>
+            <Toaster />
+            <div className="d-flex justify-content-center">
+                <div className="mt-5" style={{width: "600px"}}>
                     {showError && <div className={alertColor}>{message}</div>}
                     <div className='card'>
                         <div className="card-header">
-                            <h3 className="card-title">Signup</h3>
+                            <h3 className="card-title">Sign up</h3>
                         </div>
                         <div className="card-body">
                             <div>
                                 <div className="mb-3">
-                                    <label className="form-label">Name</label>
-                                    <input type="text" className="form-control" name="name" value={name} onChange={handleNameChange} required />
+                                    <input type="text" className="form-control" placeholder='Full Name' name="name" value={name} onChange={handleNameChange} required />
                                 </div>
                                 <div className="mb-3">
-                                    <label className="form-label">Email</label>
-                                    <input type="email" className="form-control" name="username" value={username} onChange={handleUsernameChange} required />
+                                    <input type="email" className="form-control" name="username" placeholder='Email' value={username} onChange={handleUsernameChange} required />
                                 </div>
                                 <div className="mb-3">
-                                    <label className="form-label">Password</label>
-                                    <input type="password" className="form-control" name="password" value={password} onChange={handlePasswordChange} required />
+                                    <input type="password" className="form-control" name="password" placeholder='Password' value={password} onChange={handlePasswordChange} required />
                                 </div>
                                 <div className="mb-3">
-                                    <label className="form-label">Enter Password Again</label>
-                                    <input type="password" className="form-control" name="matchPassword" value={matchPassword} onChange={handleMatchPasswordChange} required />
+                                    <input type="password" className="form-control" name="matchPassword" placeholder='Enter Password Again' value={matchPassword} onChange={handleMatchPasswordChange} required />
                                 </div>
-                                <button type="button" className="btn btn-success form-control" onClick={handleSubmit}>Signup</button>
+                                <button className="button-02" onClick={handleSubmit}>Signup</button>
                             </div>
                         </div>
                     </div>

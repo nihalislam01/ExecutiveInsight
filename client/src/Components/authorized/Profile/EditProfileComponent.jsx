@@ -16,7 +16,7 @@ export default function EditProfileComponent() {
     const [name, setName] = useState('');
     const [bio, setBio] = useState('');
     const [location, setLocation] = useState('');
-    const [image, setImage] = useState('');
+    const [user, setUser] = useState([]);
     const [showChangePassword, setShowChangePassword] = useState(false);
     const [oldPassword, setOldPassword] = useState('');
     const [password, setPassword] = useState('');
@@ -29,20 +29,23 @@ export default function EditProfileComponent() {
 
     useEffect(() => {
         authContext.refresh()
-        retrieveUserApi(username)
-        .then((response) => {
-            setName(response.data.name);
-            if (response.data.bio!==null) {
-                setBio(response.data.bio);
-            }
-            if (response.data.location!==null) {
-                setLocation(response.data.location);
-            }
-            if (response.data.image!==null) {
-                setImage(response.data.image);
-            }
-        })
-        .catch((error) => navigate('/error'))
+        const getInfo = async () => {
+            await retrieveUserApi(username)
+                .then((response) => {
+                    setUser(response.data)
+                    setName(response.data.name);
+                    if (response.data.bio!==null) {
+                        setBio(response.data.bio);
+                    }
+                    if (response.data.location!==null) {
+                        setLocation(response.data.location);
+                    }
+                })
+                .catch((error) => navigate('/error'))
+        }
+
+        getInfo();
+        
     }, [authContext, username, navigate])
 
     function handleNameChange(event) {
@@ -134,11 +137,11 @@ export default function EditProfileComponent() {
     }
 
     return (
-        <div className="EditProfileComponent container">
+        <div className="container mt-4">
             <Row>
                 <Col xs={3}>
-                    {image==='' && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '250px', height: '250px' }} className="mb-4"  />}
-                    {image!=='' && <Image src={image} alt="Profile" roundedCircle style={{ width: '250px', height: '250px' }} className="mb-4"  />}
+                    {user.image===null && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '250px', height: '250px' }} className="mb-4"  />}
+                    {user.image!==null && <Image src={`data:image/png;base64,${user.image}`} alt="Profile" roundedCircle style={{ width: '250px', height: '250px' }} className="mb-4"  />}
                     <Link className="btn btn-outline-secondary form-control mb-4 mt-2" to={'/user-profile/edit/photo'}>Change Photo</Link>
                 </Col>
                 <Col xs={6}>

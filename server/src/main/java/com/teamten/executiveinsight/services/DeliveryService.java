@@ -27,9 +27,15 @@ public class DeliveryService {
     public List<Delivery> getAllDelivery(Long id) {
         return deliveryRepository.findAllByWorkspace_workspaceId(id);
     }
-    public void updateDelivery(Long id) {
-        Delivery delivery = deliveryRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        delivery.setSubmitted(true);
+    public Delivery getDelivery(Long id) {
+        return deliveryRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    public void updateDelivery(Delivery delivery) {
         deliveryRepository.save(delivery);
+    }
+
+    public void removeDelivery(Delivery delivery) {
+        deliveryRepository.delete(delivery);
     }
 }

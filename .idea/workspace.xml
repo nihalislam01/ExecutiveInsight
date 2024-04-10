@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b5882cd2-5a8a-4bf9-94a9-01c4932c55c9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/server/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/server/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/server">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/server/src">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/server">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="executive-insight" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Record" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2cis5FigvVf5uusmdXOXQzDYIlm" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ExecutiveInsightApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build server.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ExecutiveInsight [:ExecutiveInsightApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.server [:ExecutiveInsightApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.server.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;20&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/nihalislam/Downloads/MyProjects/ExecutiveInsight&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.teamten.executiveinsight.model" />
+      <recent name="com.teamten.executiveinsight.services" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/server/src/main/java/com/teamten/executiveinsight/controllers" />
+      <recent name="$PROJECT_DIR$/server/src/main/java/com/teamten/executiveinsight/services" />
+      <recent name="$PROJECT_DIR$/server/src/main/java/com/teamten/executiveinsight/model" />
+      <recent name="$PROJECT_DIR$/server/src/main/java/com/teamten/executiveinsight/events" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.teamten.executiveinsight.event" />
+      <recent name="com.teamten.executiveinsight.model" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ExecutiveInsightApplication (3)">
+    <configuration name="ExecutiveInsightApplication (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.teamten.executiveinsight.ExecutiveInsightApplication" />
+      <module name="ExecutiveInsight" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.teamten.executiveinsight.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ExecutiveInsightApplication (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.teamten.executiveinsight.ExecutiveInsightApplication" />
+      <module name="ExecutiveInsight" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.teamten.executiveinsight.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ExecutiveInsightApplication (3)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.teamten.executiveinsight.ExecutiveInsightApplication" />
+      <module name="executive-insight.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.teamten.executiveinsight.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ExecutiveInsightApplication" type="Application" factoryName="Application" temporary="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="20" />
+      <option name="MAIN_CLASS_NAME" value="com.teamten.executiveinsight.ExecutiveInsightApplication" />
+      <module name="ExecutiveInsight" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.teamten.executiveinsight.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="server" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/server" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.ExecutiveInsightApplication (3)" />
+      <item itemvalue="Application.ExecutiveInsightApplication" />
+      <item itemvalue="Application.ExecutiveInsightApplication (1)" />
+      <item itemvalue="Application.ExecutiveInsightApplication (2)" />
+      <item itemvalue="Gradle.server" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.server" />
+        <item itemvalue="Application.ExecutiveInsightApplication (3)" />
+        <item itemvalue="Application.ExecutiveInsightApplication" />
+        <item itemvalue="Application.ExecutiveInsightApplication (2)" />
+        <item itemvalue="Application.ExecutiveInsightApplication (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-20.0.2-corretto-20.0.2.1-4caba194b151-d89c1816" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b5882cd2-5a8a-4bf9-94a9-01c4932c55c9" name="Changes" comment="" />
+      <created>1708605549535</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1708605549535</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ExecutiveInsight$ExecutiveInsightApplication.ic" NAME="ExecutiveInsightApplication Coverage Results" MODIFIED="1708838410334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.teamten.executiveinsight.*</FILTER>
+    </SUITE>
+  </component>
+</project>

@@ -7,7 +7,7 @@ export default function ForgotPasswordComponent() {
 
     const [username, setUsername] = useState('');
 
-    function sendEmail() {
+    const sendEmail = () => {
         const email = {
             email: username
         }
@@ -21,22 +21,21 @@ export default function ForgotPasswordComponent() {
             );
     }
 
-    function handleUsernameChange(event) {
+    const handleUsernameChange = (event) => {
         setUsername(event.target.value);
     }
 
     return (
-        <div className="FormComponent">
+        <div className="background-01">
             <Toaster />
-            <div className='row justify-content-center'>
-                <div className='col-md-6'>
+            <div className='d-flex justify-content-center mt-5'>
+                <div style={{width: "600px"}}>
                     <div className="card">
                         <div className="card-header">Forgot Password</div>
                         <div className='card-body'>
-                            <label className='m-0'>Enter your email</label>
-                            <input type="email" className="form-control" value={username} onChange={handleUsernameChange} required />
+                            <input type="email" className="form-control" value={username} placeholder="Enter your email" onChange={handleUsernameChange} required />
                             <hr />
-                            <button className='btn btn-success form-control' onClick={sendEmail}>Send verification email</button>
+                            <button className='button-05' onClick={sendEmail}>Send verification email</button>
                         </div>
                     </div>
                 </div>

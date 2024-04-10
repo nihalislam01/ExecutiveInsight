@@ -18,13 +18,18 @@ export default function AuthProvider({ children }) {
             if(response.status===200) {
                 const jwtToken = 'Bearer ' + (response.data.token)
                 Cookies.set('jwtToken', jwtToken, {expires: 1});
-                Cookies.set('username', username, {expires: 1})
+                Cookies.set('username', username, {expires: 1});
                 apiClient.interceptors.request.use((config) =>{
                     config.headers.Authorization = jwtToken
                     return config
                 })
                 if (response.data.user.role==='ADMIN') {
-                    Cookies.set('hasWorkspace', true, {expires: 1});
+                    Cookies.set('isAdmin', true, {expires: 1});
+                } else if (response.data.user.role==='CONSUMER') {
+                    Cookies.set('isConsumer', true, {expires: 1});
+                }
+                if (response.data.user.workspace!==null) {
+                    Cookies.set("workspace", response.data.user.workspace.workspaceId, {expires: 1});
                 }
                 return true;
             }else{
@@ -39,8 +44,24 @@ export default function AuthProvider({ children }) {
 
     function logout() {
         Cookies.remove('jwtToken');
-        Cookies.remove('hasWorkspace');
+        Cookies.remove('isAdmin');
         Cookies.remove('username');
+        Cookies.remove('isConsumer');
+        Cookies.remove("workspace");
+    }
+
+    const setConsumer = () => {
+        Cookies.set('isConsumer', true, {expires: 1});
+    }
+
+    const setAdmin = () => {
+        Cookies.remove('isConsumer');
+        Cookies.set('isAdmin', true, {expires: 1});
+    }
+
+    const setUser = () => {
+        Cookies.remove('isConsumer');
+        Cookies.remove('isAdmin');
     }
 
     function username() {
@@ -57,8 +78,15 @@ export default function AuthProvider({ children }) {
         return true;
     }
 
-    function hasWorkspace() {
-        if (Cookies.get('hasWorkspace')===undefined) {
+    function isAdmin() {
+        if (Cookies.get('isAdmin')===undefined) {
+            return false;
+        }
+        return true;
+    }
+
+    function isConsumer() {
+        if (Cookies.get('isConsumer')===undefined) {
             return false;
         }
         return true;
@@ -75,8 +103,18 @@ export default function AuthProvider({ children }) {
         }
     }
 
+    const isMine = (id) => {
+        if (Cookies.get("workspace")===undefined) {
+            return false;
+        } else if (Cookies.get("workspace")===id) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     return (
-        <AuthConext.Provider value={ {login, logout, username, isAuthenticated, hasWorkspace, refresh} } >
+        <AuthConext.Provider value={ {login, logout, username, isAuthenticated, isAdmin, refresh, isConsumer, setAdmin, setConsumer, isMine, setUser} } >
             {children}
         </AuthConext.Provider>
     )
