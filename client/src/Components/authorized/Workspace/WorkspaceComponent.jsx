@@ -16,11 +16,12 @@ export default function WorkspaceComponent() {
 
     useEffect(()=>{
         if(isAdmin) {
+            authContext.refresh()
             retrieveUserApi(email)
                 .then((response)=>navigate(`/dashboard/${response.data.workspace.workspaceId}`))
                 .catch((error)=>navigate('/error'))
         }
-    },[isAdmin, email, navigate])
+    },[isAdmin, email, navigate, authContext])
 
     return (
         <div className="WorkspaceComponent">

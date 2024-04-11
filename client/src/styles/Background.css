@@ -137,3 +137,12 @@
     max-height: 100%;
     overflow: auto;
 }
+
+.background-15 {
+    background-image: url('../assets/executive-insight-background-15.png');
+    background-position: center;
+    background-size: cover;
+    height: 180vh;
+    max-height: 100%;
+    overflow: auto;
+}

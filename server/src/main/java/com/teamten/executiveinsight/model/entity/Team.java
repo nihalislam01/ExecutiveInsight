@@ -24,7 +24,7 @@ public class Team {
 
     @JsonIgnore
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Task> tasks;
+    private List<Task> tasks = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)

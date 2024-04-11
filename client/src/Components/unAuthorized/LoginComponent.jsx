@@ -22,11 +22,7 @@ export default function LoginComponent() {
 
     const handleSubmit = async () => {
         if(await authContext.login(username, password)) {
-            if (authContext.isAdmin()) {
-                window.location.href = '/home';
-            } else {
-                window.location.href = '/my-workspace';
-            }
+            window.location.href = '/my-workspace';
         }else{
             toast.error("Authentication failed")
         }

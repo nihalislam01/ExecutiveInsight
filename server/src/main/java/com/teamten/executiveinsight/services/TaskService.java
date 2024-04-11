@@ -105,4 +105,10 @@ public class TaskService {
     public List<DistinctDashboardResponse> getDistinctValues(Long id) {
         return taskRepository.findTotalDistinctRevenueAndQuantity(id, "Delivered");
     }
+
+    public void removeTeamFromTask(Long teamId) {
+        List<Task> tasks = taskRepository.findAllByTeam_teamId(teamId);
+        tasks.stream().forEach(task -> task.setTeam(null));
+        taskRepository.saveAll(tasks);
+    }
 }

@@ -34,4 +34,7 @@ public class TeamService {
     public List<Team> getAllTeam(String email, Long id) {
         return teamRepository.findAllByWorkspaceAndUser(email, id);
     }
+    public void updateTeam(Team team) {
+        teamRepository.save(team);
+    }
 }

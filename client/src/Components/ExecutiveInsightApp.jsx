@@ -16,6 +16,7 @@ import LoginComponent from './unAuthorized/LoginComponent';
 import ForgotPasswordComponent from './unAuthorized/ForgotPasswordComponent';
 import ResetPasswordComponent from './unAuthorized/ResetPasswordComponent';
 import PlanComponent from './unAuthorized/PlanComponent';
+import Opening from './unAuthorized/Opening';
 
 //Authorized Components
 import HomeComponent from './authorized/HomeComponent';
@@ -63,7 +64,7 @@ export default function ExecutiveInsightApp() {
                 <BrowserRouter>
                     <HeaderComponent />
                     <Routes>
-                        <Route path='/' element={<PlanComponent />} />
+                        <Route path='/' element={<Opening />} />
                         <Route path='/plan' element={<PlanComponent />} />
                         <Route path='/verify-email/:token/:isForgotPassword' element={<EmailVerifiedComponent />} />
                         <Route path='/message' element={<MessageComponent />} />

@@ -17,6 +17,7 @@ export default function OptionsComponent(props) {
     const [user, setUser] = useState([]);
     const [id, setId] = useState(0);
     const optionRef = useRef(null);
+    const [image, setImage] = useState('');
 
     useEffect(()=>{
         authContext.refresh()
@@ -24,6 +25,7 @@ export default function OptionsComponent(props) {
             await retrieveUserApi(email)
                 .then((response)=>{
                     setUser(response.data)
+                    setImage(response.data.image)
                     if (response.data.workspace!=null) {
                         setId(response.data.workspace.workspaceId)
                     }
@@ -62,7 +64,7 @@ export default function OptionsComponent(props) {
                     <div className="d-flex justify-content-between">
                         <div className="d-flex">
                         {user.image===null && <Image src={ProfileImage} alt="Profile" roundedCircle style={{ width: '40px', height: '40px' }} className='mx-2' />}
-                        {user.image!==null && <Image src={`data:image/png;base64,${user.image}`} alt="Profile" roundedCircle style={{ width: '40px', height: '40px' }} className='mx-2' />}
+                        {user.image!==null && <Image src={`data:image/png;base64,${image}`} alt="Profile" roundedCircle style={{ width: '40px', height: '40px' }} className='mx-2' />}
                         <h6 className="pt-2">{user.name}</h6>
                         </div>
                         <button className="btn" onClick={() => props.setShowOptions(false)}><FontAwesomeIcon icon={faXmark} /></button>

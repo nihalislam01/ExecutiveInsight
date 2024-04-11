@@ -36,22 +36,24 @@ export default function DeliveryDetails() {
     return (
         <div className="d-flex">
             <SidebarComponent />
-            <div className="container w-50 mt-4 text-start" style={{ marginLeft: "20px" }}>
-                <h6>Task Name</h6>
-                <div className="form-control">{task.name}</div>
-                <h6>Product</h6>
-                {product!==null && <div className="form-control">{product.name}</div>}
-                {product===null && <div className="form-control">Produt Unavailable</div>}
-                <h6>Quantity</h6>
-                <div className="form-control">{task.quantity}</div>
-                <h6>Description</h6>
-                <div className="form-control">{delivery.description}</div>
-                <h6>Reference/Receipt</h6>
-                <div className="form-control">{delivery.receipt}</div>
-                <h6>Value</h6>
-                <div className="form-control">{task.money}</div>
-                <h6>Status</h6>
-                <div className="form-control">{task.status}</div>
+            <div className="background-10 w-100 p-4">
+                <div className="w-50 text-start" style={{ marginLeft: "20px" }}>
+                    <h6>Task Name</h6>
+                    <div className="form-control">{task.name}</div>
+                    <h6>Product</h6>
+                    {product!==null && <div className="form-control">{product.name}</div>}
+                    {product===null && <div className="form-control">Produt Unavailable</div>}
+                    <h6>Quantity</h6>
+                    <div className="form-control">{task.quantity}</div>
+                    <h6>Description</h6>
+                    <div className="form-control">{delivery.description}</div>
+                    <h6>Reference/Receipt</h6>
+                    <div className="form-control">{delivery.receipt}</div>
+                    <h6>Value</h6>
+                    <div className="form-control">{task.money}</div>
+                    <h6>Status</h6>
+                    <div className="form-control">{task.status}</div>
+                </div>
             </div>
         </div>
     )

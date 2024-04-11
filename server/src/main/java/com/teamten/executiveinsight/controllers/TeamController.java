@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,6 +20,7 @@ import java.util.List;
 public class TeamController {
     private final UserService userService;
     private final TeamService teamService;
+    private final TaskService taskService;
     private final WorkspaceService workspaceService;
     private final NotificationService notificationService;
     private final UserJoinTeamService userJoinTeamService;
@@ -68,6 +70,7 @@ public class TeamController {
         Workspace workspace = workspaceService.getWorkspace(workspaceId).orElseThrow(EntityNotFoundException::new);
         Team team = teamService.getTeam(teamId).orElseThrow(EntityNotFoundException::new);
         userJoinTeamService.removeAll(teamId);
+        taskService.removeTeamFromTask(teamId);
         workspaceService.updateWorkspace(workspace, team);
         teamService.removeTeam(teamId);
         return ResponseEntity.ok("Team deleted successfully");
