@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import '../styles/ExecutiveInsightApp.css'
 import '../styles/Background.css'
 import '../styles/Button.css'
+import '../styles/Animation.css'
 
 //Unauthorized Components
 import HeaderComponent from './common/HeaderComponent';

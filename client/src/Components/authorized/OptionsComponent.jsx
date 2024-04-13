@@ -35,6 +35,19 @@ export default function OptionsComponent(props) {
 
         getUser();
 
+        const observer = new IntersectionObserver((entries)=> {
+            entries.forEach((entry)=>{
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('sidebar-show')
+                } else {
+                    entry.target.classList.remove('sidebar-show')
+                }
+            })
+        })
+    
+        const hiddenElement = document.querySelectorAll('.sidebar-hidden')
+        hiddenElement.forEach((element) => observer.observe(element))
+
         const handleClickOutside = (event) => {
             if (optionRef.current && !optionRef.current.contains(event.target)) {
                 props.setShowOptions(false);
@@ -60,7 +73,7 @@ export default function OptionsComponent(props) {
     return (
         <div>
             <div ref={optionRef}>
-                <div className="position-fixed shadow z-2 p-4 text-start" style={{ height: "100vh", width: "300px", right: "0px", borderTopLeftRadius: "10px", borderBottomLeftRadius: "10px", backgroundColor: "white" }}>
+                <div className="position-fixed shadow z-2 p-4 text-start sidebar-hidden" style={{ height: "100vh", width: "300px", right: "0px", borderTopLeftRadius: "10px", borderBottomLeftRadius: "10px", backgroundColor: "white" }}>
                     <div className="d-flex justify-content-between">
                         <div className="d-flex">
                         {user.image===null && <Image src={ProfileImage} alt="Profile" roundedCircle style={{ width: '40px', height: '40px' }} className='mx-2' />}

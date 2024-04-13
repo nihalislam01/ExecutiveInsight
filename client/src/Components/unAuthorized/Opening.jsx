@@ -1,8 +1,24 @@
+import { useEffect } from "react";
 import { Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Dashboard from '../../assets/executive-insight-background-16.jpg';
 
 export default function Opening() {
+
+    useEffect(()=>{
+        const observer = new IntersectionObserver((entries)=> {
+            entries.forEach((entry)=>{
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show')
+                } else {
+                    entry.target.classList.remove('show')
+                }
+            })
+        })
+    
+        const hiddenElement = document.querySelectorAll('.hidden')
+        hiddenElement.forEach((element) => observer.observe(element))
+    },[])
 
     const workflow = [
         {color: "#3a5a40", name: "Workspace Management", description: "You can create your own workspace and manage your business with our comprehensive management solutions."},
@@ -24,9 +40,10 @@ export default function Opening() {
                     <Link to="/signup"><button className="button-03" style={{width: "25%"}}>Sign up - it's free!</button></Link>
                     <Link to="/plan"><button className="button-08 mx-4" style={{width: "25%", color: "white"}}>See our plans</button></Link>
                 </div>
-                <Image src={Dashboard} style={{height: "300px", width: "50%", borderRadius: "10px"}}/>
+                <Image src={Dashboard} style={{height: "300px", width: "50%", borderRadius: "10px"}} className="hidden"/>
             </div>
-            <div className="d-flex" style={{marginTop: "200px", padding: "50px 100px", overflow: "auto"}}>
+            <h1 className="text-start" style={{marginTop: "200px", marginLeft: "100px"}}>What We Offer</h1>
+            <div className="d-flex hidden" style={{padding: "50px 100px", overflow: "auto"}}>
                 {workflow.map((work, index) => (
                     <div className="shadow mx-2 workflow">
                         <div className="workflow-header" style={{backgroundColor: `${work.color}`}}></div>

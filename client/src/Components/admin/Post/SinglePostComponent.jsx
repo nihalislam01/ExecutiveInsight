@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Image } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 import { faTrashCan, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +9,7 @@ import { useAuth } from "../../../security/AuthContext";
 
 import '../../../styles/PostComponent.css';
 import profileImage from '../../../assets/executive-insight-blank-user.png';
+import { Image } from "react-bootstrap";
 
 export default function SinglePostComponent({ post, id }) {
 
@@ -22,6 +22,7 @@ export default function SinglePostComponent({ post, id }) {
 
     useEffect(() => {
         authContext.refresh();
+
         const getUsers = async () => {
             await retrieveUsersByWorkspaceAndPostApi(id, post.postId)
                 .then((response) => {
@@ -33,7 +34,9 @@ export default function SinglePostComponent({ post, id }) {
                     navigate('/error')
                 })
         }
+
         getUsers();
+        
     }, [authContext, id, post.postId, navigate])
 
     const selectColor = (id) => {
@@ -68,32 +71,30 @@ export default function SinglePostComponent({ post, id }) {
                 </div>
                 <div className="m-0 post-button px-4 py-3" style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0", backgroundColor: `#${selectColor(post.postId)}` }} onClick={() => handleDelete(post.title)}><FontAwesomeIcon icon={faTrashCan} /></div>
             </div>
-            {isOpen &&
-                <div className="border border-2 shadow members-list bg-light">
-                    {hasUsers &&
-                        users.map(
-                            user => (
-                                <div key={user.userId} className="d-flex align-items-center p-2 m-2 user" onClick={() => viewProfile(user.userId)}>
-                                    <div className="d-flex" style={{width: "25%"}} >
-                                        {user.image===null && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
-                                        {user.image!==null && <Image src={`data:image/png;base64,${user.image}`} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
-                                        <p className="m-0">{user.name}</p>
-                                    </div>
-                                    <div style={{width: "45%"}}>
-                                        <div style={{ width: '100%', height: '5px', backgroundColor: '#ced4da', position: 'relative', borderRadius: "5px" }}>
-                                            <div style={{ width: `${(100*user.badge.points)/user.badge.pointLimit}%`, height: '100%', backgroundColor: '#8da9c4', transition: 'width 0.5s ease-in-out', borderRadius: "5px" }} ></div>
-                                        </div>
-                                    </div>
-                                    <div className='mx-4'><p className='m-0'>level {user.badge.badgeLevel}</p></div>
+            <div className={`shadow members-list bg-light post-hidden ${isOpen ? "post-show" : ""}`}>
+                {hasUsers &&
+                    users.map(
+                        user => (
+                            <div key={user.userId} className="d-flex align-items-center p-2 m-2 user" onClick={() => viewProfile(user.userId)}>
+                                <div className="d-flex" style={{width: "25%"}} >
+                                    {user.image===null && <Image src={profileImage} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
+                                    {user.image!==null && <Image src={`data:image/png;base64,${user.image}`} alt="Profile" roundedCircle style={{ width: '30px', height: '30px' }} className='mx-2' />}
+                                    <p className="m-0">{user.name}</p>
                                 </div>
-                            )
+                                <div style={{width: "45%"}}>
+                                    <div style={{ width: '100%', height: '5px', backgroundColor: '#ced4da', position: 'relative', borderRadius: "5px" }}>
+                                        <div style={{ width: `${(100*user.badge.points)/user.badge.pointLimit}%`, height: '100%', backgroundColor: '#8da9c4', transition: 'width 0.5s ease-in-out', borderRadius: "5px" }} ></div>
+                                    </div>
+                                </div>
+                                <div className='mx-4'><p className='m-0'>level {user.badge.badgeLevel}</p></div>
+                            </div>
                         )
-                    }
-                    {!hasUsers &&
-                        <div className="text-center p-3">No members yet</div>
-                    }
-                </div>
-            }
+                    )
+                }
+                {!hasUsers &&
+                    <div className="text-center p-3">No members yet</div>
+                }
+            </div>
         </div>
     )
 }
