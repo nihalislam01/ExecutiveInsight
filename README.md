@@ -4,4 +4,4 @@ A handful solution for a business startup or enterprenuers who are looking for m
 
 ## Documentation
 
-[Features] (https://docs.google.com/document/d/1dPgJW4mhbbzcaSpA103XLuqhHrAZLKgqPWNqKR2wMDo/edit?usp=sharing)
+[Features](https://docs.google.com/document/d/1dPgJW4mhbbzcaSpA103XLuqhHrAZLKgqPWNqKR2wMDo/edit?usp=sharing)
