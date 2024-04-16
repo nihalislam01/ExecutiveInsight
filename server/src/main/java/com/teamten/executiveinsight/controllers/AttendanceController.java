@@ -27,9 +27,9 @@ public class AttendanceController {
         List<Attendance> attendances = attendanceService.getAttendanceByWorkspace(workspaceId);
         return ResponseEntity.ok(attendances);
     }
-    @GetMapping("/get-attendance-by-user/{email}")
-    private ResponseEntity<Attendance> getAttendancesByUser(@PathVariable String email) {
-        Attendance attendance = attendanceService.getAttendanceByUser(email);
+    @GetMapping("/get-attendance-by-user/{email}/{id}")
+    private ResponseEntity<Attendance> getAttendancesByUser(@PathVariable String email, @PathVariable Long id) {
+        Attendance attendance = attendanceService.getAttendanceByUser(email, id);
         return ResponseEntity.ok(attendance);
     }
 }

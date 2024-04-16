@@ -36,8 +36,8 @@ public class AttendanceService {
         record.setCheckOutTime(LocalDateTime.now());
         attendanceRepository.save(record);
     }
-    public Attendance getAttendanceByUser(String email) {
-        return attendanceRepository.findTopByUser_emailOrderByAttendanceIdDesc(email);
+    public Attendance getAttendanceByUser(String email, Long id) {
+        return attendanceRepository.findTopByUser_emailAndWorkspace_workspaceIdOrderByAttendanceIdDesc(email, id);
     }
     public List<Attendance> getAttendanceByWorkspace(Long workspaceId) {
         return attendanceRepository.findByWorkspace_workspaceId(workspaceId);

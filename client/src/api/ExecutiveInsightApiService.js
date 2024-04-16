@@ -78,6 +78,6 @@ export const retrieveDistinctDashboardDetailsApi = (id) => apiClient.get(`/get-d
 
 //Attendance API
 export const retrieveAttendancesApi = (id) => apiClient.get(`/get-attendance-by-workspace/${id}`);
-export const retrieveAttendanceApi = (email) => apiClient.get(`/get-attendance-by-user/${email}`);
+export const retrieveAttendanceApi = (email, id) => apiClient.get(`/get-attendance-by-user/${email}/${id}`);
 export const checkInApi = (id) => apiClient.put(`/check-in/${id}`);
 export const checkOutApi = (id) => apiClient.put(`/check-out/${id}`);

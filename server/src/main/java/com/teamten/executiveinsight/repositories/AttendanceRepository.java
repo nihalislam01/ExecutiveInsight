@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
     List<Attendance> findByWorkspace_workspaceId(Long workspaceId);
-    Attendance findTopByUser_emailOrderByAttendanceIdDesc(String email);
+    Attendance findTopByUser_emailAndWorkspace_workspaceIdOrderByAttendanceIdDesc(String email, Long id);
 }

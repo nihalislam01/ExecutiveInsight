@@ -2,7 +2,7 @@ import '../../../styles/ProfileHeaderComponent.css';
 import {useAuth} from '../../../security/AuthContext';
 import { useEffect } from 'react';
 import { checkInApi, checkOutApi, retrieveAttendanceApi } from '../../../api/ExecutiveInsightApiService';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { toast, Toaster } from 'react-hot-toast';
 
@@ -10,7 +10,8 @@ export default function WorkspaceProfileHeaderComponent(props) {
 
     const [checkedIn, setCheckedIn] = useState(false);
     const [checkedOut, setCheckedOut] = useState(false);
-    const [id, setId] = useState(0);
+    const [userId, setId] = useState(0);
+    const {id} = useParams();
 
     const authContext = useAuth();
     const email = authContext.username();
@@ -20,7 +21,7 @@ export default function WorkspaceProfileHeaderComponent(props) {
         authContext.refresh();
 
         const getInfo = async () => {
-            await retrieveAttendanceApi(email)
+            await retrieveAttendanceApi(email, id)
                 .then((response)=>{
                     if(response.data.checkInTime!==null) {
                         setCheckedIn(true);
@@ -35,7 +36,7 @@ export default function WorkspaceProfileHeaderComponent(props) {
 
         getInfo();
 
-    },[authContext, email, navigate])
+    },[authContext, email, navigate, id])
 
     const showTeam = () => {
         props.setShowTeams(true);
@@ -48,13 +49,13 @@ export default function WorkspaceProfileHeaderComponent(props) {
     }
 
     const checkIn = async () => {
-        await checkInApi(id)
+        await checkInApi(userId)
             .then((response)=>toast.success("Checked In"))
             .catch((error)=>toast.error("Error checking in"))
     }
 
     const checkOut = async () => {
-        await checkOutApi(id)
+        await checkOutApi(userId)
             .then((response)=>toast.success("Checked out"))
             .catch((error)=>toast.error("Error checking out"))
     }
