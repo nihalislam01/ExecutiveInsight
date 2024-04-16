@@ -31,6 +31,9 @@ public class WorkspaceService {
     public Optional<Workspace> getWorkspace(Long id) {
         return workspaceRepository.findById(id);
     }
+    public List<Workspace> getAllWorkspace() {
+        return  workspaceRepository.findAll();
+    }
     public void updateWorkspace(Workspace workspace) {
         workspaceRepository.save(workspace);
     }

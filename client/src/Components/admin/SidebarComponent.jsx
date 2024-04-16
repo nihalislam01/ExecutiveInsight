@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAddressCard, faCalendarDays, faChartLine, faFile, faGauge, faPeopleGroup, faTruckFast, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faAddressCard, faCalendarDays, faChartLine, faClipboardUser, faFile, faGauge, faPeopleGroup, faTruckFast, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 import { retrieveUserApi } from "../../api/ExecutiveInsightApiService";
 import { useAuth } from "../../security/AuthContext";
@@ -41,7 +41,8 @@ export default function SidebarComponent() {
                     <Link className="nav-link mb-2 mx-2 link" to={`/products/${workspaceId}`}><FontAwesomeIcon icon={faFile} className="mx-2" />Products</Link>
                     <Link className="nav-link mb-2 mx-2 link" to={`/tasks/${workspaceId}`}><FontAwesomeIcon icon={faTruckFast} className="mx-2" />Task Allocation</Link>
                     <hr className="my-0" />
-                    <Link className="nav-link my-2 mx-2 link" to={`/dashboard/${workspaceId}`}><FontAwesomeIcon icon={faCalendarDays} className="mx-2" />Calender</Link>
+                    <Link className="nav-link my-2 mx-2 link" to={`/attendance/${workspaceId}`}><FontAwesomeIcon icon={faClipboardUser} className="mx-2" />Attendance</Link>
+                    <Link className="nav-link mb-2 mx-2 link" to={`/dashboard/${workspaceId}`}><FontAwesomeIcon icon={faCalendarDays} className="mx-2" />Calender</Link>
                 </div>
     )
 }

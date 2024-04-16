@@ -33,7 +33,7 @@ export default function LoginComponent() {
     }
 
     return (
-        <div className='background-08'>
+        <div className='background-03'>
             <Toaster />
                 <div className="d-flex justify-content-center">
                     <div className='mt-5' style={{width: "600px"}}>

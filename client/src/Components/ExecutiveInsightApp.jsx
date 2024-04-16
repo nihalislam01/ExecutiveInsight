@@ -40,6 +40,7 @@ import ProductComponent from './admin/Product/ProductComponent';
 import TaskComponent from './admin/Task/TaskComponent';
 import TaskProfileComponent from './admin/Task/TaskProfileComponent';
 import TeamProfileComponent from './admin/Team/TeamProfileComponent';
+import AttendanceComponent from './admin/Attendance/AttendanceComponent';
 
 import AuthProvider, { useAuth } from '../security/AuthContext';
 
@@ -173,6 +174,14 @@ export default function ExecutiveInsightApp() {
                             <AuthenticatedRoute>
                                 <AdminRoute>
                                     <TaskProfileComponent />
+                                </AdminRoute>
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/attendance/:id' element={
+                            <AuthenticatedRoute>
+                                <AdminRoute>
+                                    <AttendanceComponent />
                                 </AdminRoute>
                             </AuthenticatedRoute>
                         } />

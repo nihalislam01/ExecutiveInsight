@@ -75,3 +75,9 @@ export const rejectDeliveryApi = (id) => apiClient.patch(`/reject-delivery/${id}
 //Dashboard API
 export const retrieveDashboardDetailsApi = (id) => apiClient.get(`/get-dashboard-details/${id}`);
 export const retrieveDistinctDashboardDetailsApi = (id) => apiClient.get(`/get-distinct-dashboard-details/${id}`);
+
+//Attendance API
+export const retrieveAttendancesApi = (id) => apiClient.get(`/get-attendance-by-workspace/${id}`);
+export const retrieveAttendanceApi = (email) => apiClient.get(`/get-attendance-by-user/${email}`);
+export const checkInApi = (id) => apiClient.put(`/check-in/${id}`);
+export const checkOutApi = (id) => apiClient.put(`/check-out/${id}`);

@@ -36,19 +36,21 @@ public class UserJoinWorkspaceService {
     public List<Workspace> getAllWorkspace(String email) {
         return userJoinWorkspaceRepository.findAllWorkspaceByUserEmail(email);
     }
+    public List<UserJoinWorkspace> getAllUserJoinWorkspaceByUser(Long id) {
+        return userJoinWorkspaceRepository.findAllByUser_userId(id);
+    }
+    public Long getTotalUser(Long id) {
+        Optional<Long> totalUsers =  userJoinWorkspaceRepository.findTotalUser(id);
+        return totalUsers.orElse(0L);
+    }
+    public List<Users> getAllUserId(Long workspaceId) {
+        return userJoinWorkspaceRepository.findAllUser(workspaceId);
+    }
     public void updateAll(List<UserJoinWorkspace> userJoinWorkspaces) {
         userJoinWorkspaceRepository.saveAll(userJoinWorkspaces);
     }
     public void updateUserJoinWorkspace(UserJoinWorkspace userJoinWorkspace, Post post) {
         userJoinWorkspace.setPost(post);
         userJoinWorkspaceRepository.save(userJoinWorkspace);
-    }
-    public List<UserJoinWorkspace> getAllUserJoinWorkspaceByUser(Long id) {
-        return userJoinWorkspaceRepository.findAllByUser_userId(id);
-    }
-
-    public Long getTotalUser(Long id) {
-        Optional<Long> totalUsers =  userJoinWorkspaceRepository.findTotalUser(id);
-        return totalUsers.orElse(0L);
     }
 }

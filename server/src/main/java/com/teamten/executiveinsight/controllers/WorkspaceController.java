@@ -23,6 +23,7 @@ public class WorkspaceController {
     private final UserService userService;
     private final WorkspaceService workspaceService;
     private final TaskService taskService;
+    private final AttendanceService attendanceService;
     private final NotificationService notificationService;
     private final BusinessTitleService businessTitleService;
     private final UserJoinWorkspaceService userJoinWorkspaceService;
@@ -59,6 +60,7 @@ public class WorkspaceController {
         Workspace workspace = workspaceService.getWorkspace(code).orElseThrow(EntityNotFoundException::new);
         try {
             userJoinWorkspaceService.addUser(user, workspace);
+            attendanceService.add(user, workspace);
             return ResponseEntity.ok("User has been joined successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Something went wrong");
