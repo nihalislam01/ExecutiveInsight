@@ -48,7 +48,7 @@ public class CustomSecurityConfiguration {
 
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/signup","/verify-email/**","/forgot-password","/reset-password").permitAll()
+                        .requestMatchers("/signup","/verify-email/**","/forgot-password","/reset-password","/create-payment","/subscription/**").permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/authenticate")).permitAll()
                         .anyRequest()
                         .authenticated())

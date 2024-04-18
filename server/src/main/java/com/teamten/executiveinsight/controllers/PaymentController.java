@@ -33,6 +33,7 @@ public class PaymentController {
             userService.updateUser(user);
             return ResponseEntity.ok(user.getRole());
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error making payment");
         }
     }
