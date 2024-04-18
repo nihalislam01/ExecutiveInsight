@@ -81,3 +81,6 @@ export const retrieveAttendancesApi = (id) => apiClient.get(`/get-attendance-by-
 export const retrieveAttendanceApi = (email, id) => apiClient.get(`/get-attendance-by-user/${email}/${id}`);
 export const checkInApi = (id) => apiClient.put(`/check-in/${id}`);
 export const checkOutApi = (id) => apiClient.put(`/check-out/${id}`);
+
+//Calendar API
+export const createEventApi = (task) => apiClient.post("/create-event", task);

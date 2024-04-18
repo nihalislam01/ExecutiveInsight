@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { createTaskApi, retrieveProductsApi } from "../../../api/ExecutiveInsightApiService";
+import { createEventApi, createTaskApi, retrieveProductsApi } from "../../../api/ExecutiveInsightApiService";
 import { useAuth } from "../../../security/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -103,6 +103,7 @@ export default function AddTaskComponent(props) {
                 toast.success("Task added")
             })
             .catch((error) => toast.error(error.response.data))
+        await createEventApi(task)
     }
 
     return (

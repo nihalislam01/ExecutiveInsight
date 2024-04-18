@@ -41,6 +41,7 @@ import TaskComponent from './admin/Task/TaskComponent';
 import TaskProfileComponent from './admin/Task/TaskProfileComponent';
 import TeamProfileComponent from './admin/Team/TeamProfileComponent';
 import AttendanceComponent from './admin/Attendance/AttendanceComponent';
+import CalendarComponent from './admin/Calendar/CalendarComponent';
 
 import AuthProvider, { useAuth } from '../security/AuthContext';
 
@@ -183,6 +184,12 @@ export default function ExecutiveInsightApp() {
                                 <AdminRoute>
                                     <AttendanceComponent />
                                 </AdminRoute>
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/google-calendar/:id' element={
+                            <AuthenticatedRoute>
+                                <CalendarComponent />
                             </AuthenticatedRoute>
                         } />
 
