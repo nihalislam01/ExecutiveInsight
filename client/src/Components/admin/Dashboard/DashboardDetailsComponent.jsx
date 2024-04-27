@@ -99,7 +99,7 @@ export default function DashboardDetailsComponent() {
                     <h5>Sales Values</h5>
                     <div style={{ display: 'flex', alignItems: 'end' }}>
                     {distinct.map((item, index) => (
-                        <div key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',marginRight: '30px'}}>
+                        <div key={index} style={{ display: 'flex', flexShrink: "0", flexDirection: 'column', alignItems: 'center',marginRight: '30px'}}>
                             <div>{formatNumber(item.money)}</div>
                             <div style={{backgroundColor: '#8da9c4',width: '20px',height: `${(item.money / maxMoney) * 170}px`,marginBottom: '5px'}}></div>
                             <div>{item.name}</div>

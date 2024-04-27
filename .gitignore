@@ -2,3 +2,4 @@ server/src/main/resources/application.yml
 server/src/main/resources/executive-insight-418919-23f8d0f32ef1.json
 server/build/resources/main/executive-insight-418919-23f8d0f32ef1.json
 server/build/resources/main
+.DS_Store

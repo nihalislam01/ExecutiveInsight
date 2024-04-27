@@ -28,24 +28,26 @@ export default function Opening() {
         {color: "#3c6e71", name: "Product Management", description: "You can add your company products so that you can keep track of your sales and quantity."},
         {color: "#ad2831", name: "Task Management", description: "You can create and assign task to members of teams so that they can work on your task and give feedbacks."},
         {color: "#495057", name: "Delivery Management", description: "Once your workspace memebers are done with your task you can check and deliver the task to your clients."},
+        {color: "#6a4c93", name: "Attendance", description: "Workspace owner can keep track of member attendance."},
+        {color: "#ee6c4d", name: "Working progress", description: "Members working progress will be analyzed on our system and update their badges accordingly by their task solving skills."},
         {color: "#588157", name: "Dashboard", description: "Every workspace will have a dashboard page so that owners can check their company revenue and keep track of their products."}
     ]
 
     return (
         <div className="background-15">
-            <div className="d-flex align-items-center justify-content-between p-4" style={{marginTop: "100px"}}>
+            <div className="d-flex align-items-center p-4" style={{marginTop: "100px"}}>
                 <div className="text-start" style={{color: "white"}}>
                     <h1>Executive Insight</h1>
                     <h5 className="mb-4" style={{width: "70%"}}>Empower your enterprise with our comprehensive business management solutions</h5>
                     <Link to="/signup"><button className="button-03" style={{width: "25%"}}>Sign up - it's free!</button></Link>
                     <Link to="/plan"><button className="button-08 mx-4" style={{width: "25%", color: "white"}}>See our plans</button></Link>
                 </div>
-                <Image src={Dashboard} style={{height: "300px", width: "50%", borderRadius: "10px"}} className="hidden"/>
+                <Image src={Dashboard} style={{height: "300px", borderRadius: "10px"}} className="hidden"/>
             </div>
-            <h1 className="text-start" style={{marginTop: "200px", marginLeft: "100px"}}>What We Offer</h1>
+            <h1 className="text-start" style={{marginTop: "200px", paddingLeft: "100px"}}>What We Offer</h1>
             <div className="d-flex hidden" style={{padding: "50px 100px", overflow: "auto"}}>
                 {workflow.map((work, index) => (
-                    <div className="shadow mx-2 workflow">
+                    <div className="shadow mx-2 workflow" key={index}>
                         <div className="workflow-header" style={{backgroundColor: `${work.color}`}}></div>
                         <div className="workflow-body text-start">
                             <h5>{work.name}</h5>

@@ -6,6 +6,7 @@ import { faDollar } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { useAuth } from '../../../security/AuthContext';
 import { paymentServiceApi } from '../../../api/PaymentApiService';
+import { Link } from 'react-router-dom';
 
 export default function PaymentForm() {
 
@@ -116,6 +117,7 @@ export default function PaymentForm() {
               </div>
             </div>
             <button className='button-03 mt-4' onClick={handlePayment}>Pay</button>
+            <Link to="/home"><button className='button-link text-center w-100'>skip</button></Link>
           </div>
         </div>
       </div>

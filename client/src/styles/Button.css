@@ -104,6 +104,13 @@
     background-color: rgba(47, 138, 198, 0.7);
 }
 
+.button-link {
+    text-decoration: underline;
+    background: none;
+    border: none;
+    color:#707070;
+}
+
 .create {
     background-color: #f2f2f2;
     border-radius: 6px;
